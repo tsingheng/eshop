@@ -4,8 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-	<definition name="manager.template" template="/WEB-INF/page/commons/manager-template.jsp"></definition>
-	<definition name="manager.index" extends="manager.template">
-		<put-attribute name="content" value="/WEB-INF/page/manager-index.jsp"/>
+	<definition name="manager.division.index" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/basic/division/devision-index.jsp"/>
 	</definition>
 </tiles-definitions>
