@@ -1,8 +1,11 @@
 package net.shangtech.shop.basic.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.shangtech.framework.dao.support.BaseEntity;
 
@@ -25,6 +28,9 @@ public class DivisionProperty extends BaseEntity<Long> {
     private String defaultValue;
     
     private Integer sort;
+    
+    @Transient
+    private List<DivisionPropertyValue> values;
 
 	public Long getDivisionId() {
 		return divisionId;
@@ -64,6 +70,14 @@ public class DivisionProperty extends BaseEntity<Long> {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public List<DivisionPropertyValue> getValues() {
+		return values;
+	}
+
+	public void setValues(List<DivisionPropertyValue> values) {
+		this.values = values;
 	}
     
 }
