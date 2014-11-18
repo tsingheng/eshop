@@ -42,9 +42,9 @@
 			<ul>
 				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
 				<li class="submenu">
-					<a href="#"><i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>商店设置</span> <span class="label">3</span></a>
 					<ul>
-						<li><a href="form-common.html">Common elements</a></li>
+						<li><a href="${ctx}/division/index">基础分类</a></li>
 						<li><a href="form-validation.html">Validation</a></li>
 						<li><a href="form-wizard.html">Wizard</a></li>
 					</ul>

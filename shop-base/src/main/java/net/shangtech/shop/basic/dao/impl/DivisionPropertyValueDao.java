@@ -9,4 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DivisionPropertyValueDao extends BaseDao<DivisionPropertyValue> implements IDivisionPropertyValueDao {
 
+	@Override
+    public void deleteByDivisionPropertyId(Long divisionPropertyId) {
+	    exec("delete o from " + DivisionPropertyValue.class.getSimpleName() + " o where divisionPropertyId=?", divisionPropertyId);
+    }
+
 }

@@ -4,5 +4,5 @@ import net.shangtech.framework.dao.IBaseDao;
 import net.shangtech.shop.basic.entity.DivisionPropertyValue;
 
 public interface IDivisionPropertyValueDao extends IBaseDao<DivisionPropertyValue> {
-	
+	void deleteByDivisionPropertyId(Long divisionPropertyId);
 }

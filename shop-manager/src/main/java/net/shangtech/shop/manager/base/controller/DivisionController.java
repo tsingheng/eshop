@@ -2,6 +2,7 @@ package net.shangtech.shop.manager.base.controller;
 
 import java.util.List;
 
+import net.shangtech.framework.controller.AjaxResponse;
 import net.shangtech.shop.basic.entity.Division;
 import net.shangtech.shop.basic.entity.DivisionProperty;
 import net.shangtech.shop.basic.service.IDivisionService;
@@ -9,19 +10,21 @@ import net.shangtech.shop.basic.service.IDivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/devision")
+@RequestMapping("/division")
 public class DivisionController {
 	
 	@Autowired private IDivisionService divisionService;
 	
 	@RequestMapping("/index")
-	public String index(){
+	public String index(Model model){
+		List<Division> list = divisionService.findByParentId(Division.DEFAULT_PARENT_ID);
+		model.addAttribute("list", list);
 		return "manager.division.index";
 	}
 	
@@ -50,13 +53,21 @@ public class DivisionController {
 		return "manager.division.form";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/save")
-	public void saveDivision(Division division){
-		divisionService.update(division);
+	public AjaxResponse saveDivision(Division division){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		divisionService.save(division);
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/properties/save")
-	public void saveDivisionProperties(List<DivisionProperty> properties, Division division){
-		
+	public AjaxResponse saveDivisionProperties(List<DivisionProperty> properties, Division division){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		divisionService.save(properties, division);
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
 	}
 }

@@ -18,6 +18,7 @@ import net.shangtech.shop.basic.service.IDivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 @Service
 @Transactional
@@ -29,7 +30,7 @@ public class DivisionService extends BaseService<Division> implements IDivisionS
 	@Override
     public List<Division> findByParentId(Long parentId) {
 		if(parentId == null){
-			parentId = 0L;
+			parentId = Division.DEFAULT_PARENT_ID;
 		}
 	    return dao.findByProperties(MapHolder.instance("parentId", parentId));
     }
@@ -50,6 +51,9 @@ public class DivisionService extends BaseService<Division> implements IDivisionS
 	public void save(Division division){
 		Assert.notNull(division, "can not save null");
 		if(division.getId() == null) {
+			if(division.getParentId() == null){
+				division.setParentId(Division.DEFAULT_PARENT_ID);
+			}
 			dao.save(division);
 		}
 		else {
@@ -60,4 +64,41 @@ public class DivisionService extends BaseService<Division> implements IDivisionS
 			}
 		}
 	}
+
+	@Override
+    public void save(List<DivisionProperty> properties, Division division) {
+	    Assert.notNull(division, "division can not be null");
+	    if(division.getId() == null){
+	    	if(division.getParentId() == null){
+				division.setParentId(Division.DEFAULT_PARENT_ID);
+			}
+	    	dao.save(division);
+	    }
+	    else{
+	    	Division old = dao.find(division.getId());
+	    	if(old != null){
+	    		old.setDivisionName(division.getDivisionName());
+	    		dao.update(old);
+	    		
+	    		// clear old properties and values
+	    		List<DivisionProperty> oldProperties = propertyDao.findByDivisionId(division.getId());
+	    		for(DivisionProperty property : oldProperties){
+	    			propertyValueDao.deleteByDivisionPropertyId(property.getId());
+	    		}
+	    		propertyDao.deleteByDivisionId(division.getId());
+	    	}
+	    }
+	    if(!CollectionUtils.isEmpty(properties)){
+    		for(DivisionProperty property : properties){
+    			property.setDivisionId(division.getId());
+    			propertyDao.save(property);
+    			if(!CollectionUtils.isEmpty(property.getValues())){
+    				for(DivisionPropertyValue value : property.getValues()){
+    					value.setPropertyId(property.getId());
+    					propertyValueDao.save(value);
+    				}
+    			}
+    		}
+    	}
+    }
 }

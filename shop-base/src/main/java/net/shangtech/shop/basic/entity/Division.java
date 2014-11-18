@@ -17,6 +17,8 @@ public class Division extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 680752908651058912L;
     
+    public static final Long DEFAULT_PARENT_ID = 0L;
+    
     @Column(name = "division_name")
     private String divisionName;
     

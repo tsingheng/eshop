@@ -5,6 +5,12 @@
 
 <tiles-definitions>
 	<definition name="manager.division.index" extends="manager.template">
-		<put-attribute name="content" value="/WEB-INF/page/basic/division/devision-index.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/page/basic/division/division-index.jsp"/>
+	</definition>
+	
+	<definition name="manager.division.list" template="/WEB-INF/page/basic/division/division-list.jsp"/>
+	
+	<definition name="manager.division.form" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/basic/division/division-list.jsp"/>
 	</definition>
 </tiles-definitions>
