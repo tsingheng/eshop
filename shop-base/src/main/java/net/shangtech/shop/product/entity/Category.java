@@ -12,6 +12,8 @@ public class Category extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 3136298768139532432L;
 	
+	public static final Long DEFAULT_PARENT_ID = 0L;
+	
 	@Column(name = "cate_name")
 	private String categoryName;
 	
