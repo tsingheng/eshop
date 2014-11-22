@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/page/commons/tags.jsp" %>
+<link rel="stylesheet" href="${ctx}/javascript/zTree_v3/css/zTreeStyle/zTreeStyle.css"/>
 <div id="content-header"></div>
 <div id="breadcrumb">
 	<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
@@ -17,13 +18,7 @@
 				</div>
 				<div class="widget-content">
 					<c:if test="${not empty list}">
-					<table class="table">
-						<c:forEach items="${list}" var="item">
-						<tr>
-							<td data-id="${item.id}">${item.categoryName}</td>
-						</tr>
-						</c:forEach>
-					</table>
+					<ul id="category-tree" class="ztree"></ul>
 					</c:if>
 					<c:if test="${empty list}">
 					还没有分类数据,请在右侧填写添加
@@ -41,28 +36,26 @@
 				</div>
 				<div class="widget-content nopadding">
 					<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
-						<div class="control-group">
+						<div class="control-group" id="parent-group" style="display:none;">
 							<label class="control-label">上级分类</label>
 							<div class="controls">
-								<select name="parentId">
-									<option value="division1">division1</option>
-									<option value="division2">division2</option>
-									<option value="division3">division3</option>
-									<option value="division4">division4</option>
-								</select>
+								<input type="hidden" name="parentId" id="parentId"/>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">分类名称</label>
 							<div class="controls">
-								<input type="text" name="divisionName"/>
+								<input type="text" name="categoryName"/>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">属性名称</label>
+							<label class="control-label">分类编码</label>
 							<div class="controls">
-								<input type="text" name="divisionName"/>
+								<input type="text" name="categoryCode"/>
 							</div>
+						</div>
+						<div class="form-actions">
+							<input class="btn btn-primary ui-wizard-content ui-formwizard-button submit" type="button" value="保存">
 						</div>
                 	</form>
             	</div>
@@ -70,3 +63,6 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="${ctx}/javascript/jquery.form.js"></script>
+<script type="text/javascript" src="${ctx}/javascript/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="${ctx}/javascript/product/category.js"></script>
