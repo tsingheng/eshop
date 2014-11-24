@@ -3,11 +3,9 @@ package net.shangtech.shop.manager.product.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import net.shangtech.shop.manager.product.vo.CategoryTreeNode;
 import net.shangtech.shop.product.entity.Category;
 import net.shangtech.shop.product.service.ICategoryService;
-
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

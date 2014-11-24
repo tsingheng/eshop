@@ -85,8 +85,6 @@
 		<div id="content">
 			<t:insertAttribute name="content"/>
 		</div>
-		<script src="${ctx}/js/excanvas.min.js"></script>
-       
         <script src="${ctx}/js/jquery.ui.custom.js"></script>
         <script src="${ctx}/js/bootstrap.min.js"></script>
 	</body>
