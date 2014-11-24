@@ -6,7 +6,7 @@ $(document).ready(function(){
 		async: {
 			enable: true,
 			url: ctx + '/category/list',
-			autoParam: ['id', 'categoryName']
+			autoParam: ['id']
 		}
 	});
 	

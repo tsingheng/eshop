@@ -12,6 +12,11 @@ public class CategoryTreeNode implements Serializable {
 	
 	private Object id;
 	
+	@SuppressWarnings("unused")
+    private String name;
+	
+	private Boolean isParent;
+	
 	private String categoryName;
 	
 	private String categoryCode;
@@ -50,6 +55,22 @@ public class CategoryTreeNode implements Serializable {
 		this.priority = priority;
 	}
 	
+	public String getName() {
+		return categoryName;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Boolean getIsParent() {
+		return isParent;
+	}
+
+	public void setIsParent(Boolean isParent) {
+		this.isParent = isParent;
+	}
+
 	public static void main(String[] args){
 		Category category = new Category();
 		category.setId(1L);

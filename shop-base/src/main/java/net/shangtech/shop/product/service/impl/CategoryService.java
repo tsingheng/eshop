@@ -69,5 +69,11 @@ public class CategoryService extends BaseService<Category> implements ICategoryS
 			}
 		}
 	}
+
+	@Override
+    public boolean hasChildren(Long id) {
+		List<Category> children = dao.findByParentId(id);
+	    return children.size() > 0;
+    }
 	
 }

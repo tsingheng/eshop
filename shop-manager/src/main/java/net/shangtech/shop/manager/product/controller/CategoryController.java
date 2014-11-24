@@ -34,6 +34,7 @@ public class CategoryController {
 		list.forEach(category -> {
 			CategoryTreeNode node = new CategoryTreeNode();
 			BeanUtils.copyProperties(category, node);
+			node.setIsParent(service.hasChildren(category.getId()));
 			nodes.add(node);
 		});
 		return nodes;

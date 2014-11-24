@@ -9,4 +9,6 @@ public interface ICategoryService extends IBaseService<Category> {
 	
 	List<Category> findByParentId(Long parentId);
 	
+	boolean hasChildren(Long id);
+	
 }
