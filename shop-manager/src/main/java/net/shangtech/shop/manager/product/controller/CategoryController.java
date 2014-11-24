@@ -34,7 +34,6 @@ public class CategoryController {
 		list.forEach(category -> {
 			CategoryTreeNode node = new CategoryTreeNode();
 			BeanUtils.copyProperties(category, node);
-			node.setId(category.getId());
 			nodes.add(node);
 		});
 		return nodes;
@@ -51,7 +50,6 @@ public class CategoryController {
 		}
 		CategoryTreeNode node = new CategoryTreeNode();
 		BeanUtils.copyProperties(category, node);
-		node.setId(category.getId());
 		return node;
 	}
 }

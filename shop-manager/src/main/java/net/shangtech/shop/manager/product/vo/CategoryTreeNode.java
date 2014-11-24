@@ -2,11 +2,15 @@ package net.shangtech.shop.manager.product.vo;
 
 import java.io.Serializable;
 
+import org.springframework.beans.BeanUtils;
+
+import net.shangtech.shop.product.entity.Category;
+
 public class CategoryTreeNode implements Serializable {
 
 	private static final long serialVersionUID = 1599631242195884450L;
 	
-	private Long id;
+	private Object id;
 	
 	private String categoryName;
 	
@@ -14,11 +18,11 @@ public class CategoryTreeNode implements Serializable {
 	
 	private Integer priority;
 
-	public Long getId() {
+	public Object getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Object id) {
 		this.id = id;
 	}
 
@@ -44,6 +48,18 @@ public class CategoryTreeNode implements Serializable {
 
 	public void setPriority(Integer priority) {
 		this.priority = priority;
+	}
+	
+	public static void main(String[] args){
+		Category category = new Category();
+		category.setId(1L);
+		category.setCategoryName("aa");
+		
+		CategoryTreeNode node = new CategoryTreeNode();
+		BeanUtils.copyProperties(category, node);
+		System.out.println(node.getId());
+		System.out.println(node.getCategoryName());
+		
 	}
 	
 }
