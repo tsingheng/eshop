@@ -12,6 +12,8 @@
 		<link rel="stylesheet" href="${ctx}/css/unicorn.main.css" />
 		<link rel="stylesheet" href="${ctx}/css/unicorn.grey.css" class="skin-color" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="${ctx}/js/jquery.min.js"></script>
+		<script type="text/javascript">var ctx = '${ctx}';</script>
 	</head>
 	<body>
 		<div id="header">
@@ -84,14 +86,8 @@
 			<t:insertAttribute name="content"/>
 		</div>
 		<script src="${ctx}/js/excanvas.min.js"></script>
-        <script src="${ctx}/js/jquery.min.js"></script>
+       
         <script src="${ctx}/js/jquery.ui.custom.js"></script>
         <script src="${ctx}/js/bootstrap.min.js"></script>
-        <script src="${ctx}/js/jquery.flot.min.js"></script>
-        <script src="${ctx}/js/jquery.flot.resize.min.js"></script>
-        <script src="${ctx}/js/jquery.peity.min.js"></script>
-        <script src="${ctx}/js/fullcalendar.min.js"></script>
-        <script src="${ctx}/js/unicorn.js"></script>
-        <script src="${ctx}/js/unicorn.dashboard.js"></script>
 	</body>
 </html>

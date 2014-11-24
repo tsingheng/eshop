@@ -29,13 +29,14 @@ public class CategoryController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = {"/list", "/list/{parentId}"})
+	@RequestMapping(value = {"/list{parentId}", "/list/{parentId}"})
 	public List<CategoryTreeNode> list(Model model, @PathVariable Long parentId){
 		List<Category> list = service.findByParentId(parentId);
 		List<CategoryTreeNode> nodes = new ArrayList<>();
 		list.forEach(category -> {
 			CategoryTreeNode node = new CategoryTreeNode();
 			BeanUtils.copyProperties(category, node);
+			node.setId(category.getId());
 			nodes.add(node);
 		});
 		return nodes;
@@ -52,6 +53,7 @@ public class CategoryController {
 		}
 		CategoryTreeNode node = new CategoryTreeNode();
 		BeanUtils.copyProperties(category, node);
+		node.setId(category.getId());
 		return node;
 	}
 }

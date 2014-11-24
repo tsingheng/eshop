@@ -21,6 +21,9 @@ public class CategoryService extends BaseService<Category> implements ICategoryS
 	
 	@Override
 	public List<Category> findByParentId(Long parentId) {
+		if(parentId == null){
+			parentId = Category.DEFAULT_PARENT_ID;
+		}
 		return dao.findByParentId(parentId);
 	}
 	

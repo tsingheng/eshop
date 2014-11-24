@@ -2,11 +2,11 @@
  * 
  */
 $(document).ready(function(){
-	$.fn.zTree.init($('#treeDemo'), {
+	$.fn.zTree.init($('#category-tree'), {
 		async: {
 			enable: true,
 			url: ctx + '/category/list',
-			autoParam: ['id', 'name=categoryName']
+			autoParam: ['id', 'categoryName']
 		}
 	});
 	

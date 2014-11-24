@@ -17,12 +17,7 @@
 					<h5>分类树</h5>
 				</div>
 				<div class="widget-content">
-					<c:if test="${not empty list}">
 					<ul id="category-tree" class="ztree"></ul>
-					</c:if>
-					<c:if test="${empty list}">
-					还没有分类数据,请在右侧填写添加
-					</c:if>
 				</div>
 			</div>
 		</div>
@@ -35,7 +30,7 @@
 					<h5>分类编辑</h5>
 				</div>
 				<div class="widget-content nopadding">
-					<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+					<form class="form-horizontal" method="post" action="${ctx}/category/save" name="basic_validate" id="category-form" novalidate="novalidate">
 						<div class="control-group" id="parent-group" style="display:none;">
 							<label class="control-label">上级分类</label>
 							<div class="controls">
