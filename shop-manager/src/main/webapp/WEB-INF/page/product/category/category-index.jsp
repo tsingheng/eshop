@@ -17,7 +17,9 @@
 					<h5>分类树</h5>
 				</div>
 				<div class="widget-content">
-					<ul id="category-tree" class="ztree"></ul>
+					<ul id="category-tree" class="ztree">
+						
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -31,10 +33,12 @@
 				</div>
 				<div class="widget-content nopadding">
 					<form class="form-horizontal" method="post" action="${ctx}/category/save" name="basic_validate" id="category-form" novalidate="novalidate">
-						<div class="control-group" id="parent-group" style="display:none;">
+						<div class="control-group" id="parent-group">
 							<label class="control-label">上级分类</label>
 							<div class="controls">
+								<input type="hidden" name="id" id="id"/>
 								<input type="hidden" name="parentId" id="parentId"/>
+								<span class="uneditable-input" id="parent-category-name">ROOT</span>
 							</div>
 						</div>
 						<div class="control-group">

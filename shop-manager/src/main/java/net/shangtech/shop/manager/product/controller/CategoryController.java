@@ -11,8 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,8 +27,8 @@ public class CategoryController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = {"/list{parentId}", "/list/{parentId}"})
-	public List<CategoryTreeNode> list(Model model, @PathVariable Long parentId){
+	@RequestMapping(value = "/list")
+	public List<CategoryTreeNode> list(Model model, @RequestParam(required = false) Long parentId){
 		List<Category> list = service.findByParentId(parentId);
 		List<CategoryTreeNode> nodes = new ArrayList<>();
 		list.forEach(category -> {

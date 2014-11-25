@@ -1,10 +1,11 @@
 package net.shangtech.shop.manager.product.vo;
 
 import java.io.Serializable;
-
-import org.springframework.beans.BeanUtils;
+import java.util.List;
 
 import net.shangtech.shop.product.entity.Category;
+
+import org.springframework.beans.BeanUtils;
 
 public class CategoryTreeNode implements Serializable {
 
@@ -22,6 +23,10 @@ public class CategoryTreeNode implements Serializable {
 	private String categoryCode;
 	
 	private Integer priority;
+	
+	private List<CategoryTreeNode> children;
+	
+	private Long parentId;
 
 	public Object getId() {
 		return id;
@@ -69,6 +74,22 @@ public class CategoryTreeNode implements Serializable {
 
 	public void setIsParent(Boolean isParent) {
 		this.isParent = isParent;
+	}
+
+	public List<CategoryTreeNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<CategoryTreeNode> children) {
+		this.children = children;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	public static void main(String[] args){

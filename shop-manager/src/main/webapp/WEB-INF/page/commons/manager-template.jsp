@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="${ctx}/css/fullcalendar.css" />	
 		<link rel="stylesheet" href="${ctx}/css/unicorn.main.css" />
 		<link rel="stylesheet" href="${ctx}/css/unicorn.grey.css" class="skin-color" />
+		<link rel="stylesheet" href="${ctx}/css/style.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script src="${ctx}/js/jquery.min.js"></script>
 		<script type="text/javascript">var ctx = '${ctx}';</script>
