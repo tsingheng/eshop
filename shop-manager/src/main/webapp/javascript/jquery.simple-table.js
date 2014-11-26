@@ -17,9 +17,16 @@
 		}
 		return this.each(function(){
 			init(this);
-			var opts = $(this).data('opts');
+			var opts = $(this).data('options');
 			if(!opts){
-				
+				var columns = [];
+				$(this).find('colgroup').children().each(function(){
+					columns.push({
+						dataIndex: $(this).attr('data-index')
+					});
+				});
+				opts.columns = columns;
+				$(this).data('options', opts);
 			}
 		});
 	};

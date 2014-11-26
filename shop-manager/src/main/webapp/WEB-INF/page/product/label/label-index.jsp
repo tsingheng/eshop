@@ -19,9 +19,9 @@
 				<div class="widget-content">
 					<table id="label-list" class="table table-bordered">
 						<colgroup>
-							<col column-name="rowNumber" width="80"/>
-							<col column-name="labelName"/>
-							<col column-name="labelCode"/>
+							<col width="80"/>
+							<col data-index="labelName"/>
+							<col data-index="labelCode"/>
 						</colgroup>
 						<thead>
 							<tr>
