@@ -29,15 +29,10 @@ public class CategoryService extends BaseService<Category> implements ICategoryS
 	
 	@Override
 	public void save(Category category){
-		if(category.getId() != null){
-			update(category);
+		if(category.getParentId() == null){
+			category.setParentId(Category.DEFAULT_PARENT_ID);
 		}
-		else {
-			if(category.getParentId() == null){
-				category.setParentId(Category.DEFAULT_PARENT_ID);
-			}
-			dao.save(category);
-		}
+		super.save(category);
 	}
 	
 	@Override

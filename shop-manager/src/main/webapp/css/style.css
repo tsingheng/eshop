@@ -5,3 +5,13 @@
 .input{
 	
 }
+.pager{
+	margin: 0px;
+}
+.pager .page-to-jump{
+	width: 20px;
+	padding: 2px 4px;
+}
+.pager .page-to-jump.add-on{
+	width: auto;
+}

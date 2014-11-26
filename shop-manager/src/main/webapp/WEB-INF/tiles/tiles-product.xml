@@ -7,5 +7,7 @@
 	<definition name="manager.category.index" extends="manager.template">
 		<put-attribute name="content" value="/WEB-INF/page/product/category/category-index.jsp"/>
 	</definition>
-	<definition name="manager.category.list" template="/WEB-INF/page/product/category/category-list.jsp"/>
+	<definition name="manager.label.index" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/product/label/label-index.jsp"/>
+	</definition>
 </tiles-definitions>

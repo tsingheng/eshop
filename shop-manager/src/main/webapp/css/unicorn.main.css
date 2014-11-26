@@ -708,7 +708,15 @@ a:hover {
 .widget-calendar .widget-title .label {
 	margin-right: 190px;
 }
-
+.widget-foot{
+	border-bottom: 1px solid #cdcdcd;
+	padding:5px 15px 0px 15px;
+}
+.widget-foot:after{
+	content: '';
+	display: block;
+	clear: both;
+}
 .widget-content {
 	padding: 12px 15px;
     border-bottom: 1px solid #cdcdcd;
