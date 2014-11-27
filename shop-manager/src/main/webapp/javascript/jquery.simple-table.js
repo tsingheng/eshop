@@ -16,6 +16,10 @@
 		if(!opts.url){
 			return;
 		}
+		param = $.extend({}, opts.queryParam, {
+			page: opts.page,
+			limit: opts.limit
+		});
 		$(jq).table('loading');
 		setTimeout(function(){
 			doRequest();
@@ -23,10 +27,12 @@
 		function doRequest(){
 			$.ajax({
 				url: opts.url,
-				data: opts.queryParams,
+				data: param,
 				dataType: 'json',
 				success: function(data){
 					renderTable(jq, data);
+					renderPager(jq, data);
+					opts.page = data.pageNo;
 					setTimeout(function(){
 						$(jq).table('loaded');
 					});
@@ -58,19 +64,49 @@
 			var row = rows[i];
 			for(var j = 0; j < opts.columns.length; j++){
 				html.push('<td>');
-				if(opts.columns.dataIndex){
-					html.push(row[opts.columns.dataIndex]);
+				if(opts.columns[j].dataIndex){
+					html.push(row[opts.columns[j].dataIndex]);
 				}
 				html.push('</td>');
 			}
 			html.push('</tr>');
 		}
-		$(jq).children('tbody').html(html);
+		$(jq).children('tbody').html(html.join(''));
 	};
 	function renderPager(jq, data){
+		var pageNo = data.pageNo;
+		var totalPage = data.totalPage;
 		var pager = $('#' + $(jq).attr('id') + '-pager');
-		pager.find('.page-info').html('共' + data.totalCount + '条数据,当前显示' + data.start + '-' + (data.start+data.limit) + '条');
-		
+		pager.find('.page-info').html('共 ' + data.totalCount + ' 条数据,当前显示 ' + (data.start+1) + ' - ' + (data.start+data.limit) + ' 条');
+		pager.find('.page-no').val(data.pageNo);
+		if(pageNo <= 1){
+			pager.find('.firt,.prev').each(function(){
+				if(!$(this).parent().hasClass('disabled')){
+					$(this).parent().addClass('disabled');
+				}
+			});
+		}
+		else {
+			pager.find('.firt,.prev').each(function(){
+				if($(this).parent().hasClass('disabled')){
+					$(this).parent().removeClass('disabled');
+				}
+			});
+		}
+		if(pageNo >= totalPage){
+			pager.find('.last,.next').each(function(){
+				if(!$(this).parent().hasClass('disabled')){
+					$(this).parent().addClass('disabled');
+				}
+			});
+		}
+		else {
+			pager.find('.last,.next').each(function(){
+				if($(this).parent().hasClass('disabled')){
+					$(this).parent().removeClass('disabled');
+				}
+			});
+		}
 	};
 	$.fn.table = function(option, param){
 		if(typeof option == 'string'){
@@ -89,9 +125,7 @@
 				$.extend(opts, {
 					columns: columns
 				});
-				$(this).data('table', {
-					options: opts
-				});
+				$(this).data('table', opts);
 			}
 			
 			init(this);

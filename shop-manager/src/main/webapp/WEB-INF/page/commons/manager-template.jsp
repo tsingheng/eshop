@@ -258,7 +258,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="./${ctx}/image/avatar3.jpg" alt="" /></span>
+								<span class="photo"><img src="${ctx}/image/avatar3.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -284,7 +284,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="./${ctx}/image/avatar1.jpg" alt="" /></span>
+								<span class="photo"><img src="${ctx}/image/avatar1.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -1548,7 +1548,9 @@
 
 	<script src="${ctx}/js/app.js" type="text/javascript"></script>
 
-	<script src="${ctx}/js/index.js" type="text/javascript"></script>        
+	<script src="${ctx}/js/index.js" type="text/javascript"></script>    
+	
+	<script type="text/javascript" src="${ctx}/javascript/jquery.simple-table.js"></script>    
 
 	<!-- END PAGE LEVEL SCRIPTS -->  
 

@@ -1,7 +1,5 @@
 package net.shangtech.shop.product.service.impl;
 
-import javax.transaction.Transactional;
-
 import net.shangtech.framework.service.BaseService;
 import net.shangtech.shop.product.dao.ILabelDao;
 import net.shangtech.shop.product.entity.Label;
@@ -9,6 +7,7 @@ import net.shangtech.shop.product.service.ILabelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service

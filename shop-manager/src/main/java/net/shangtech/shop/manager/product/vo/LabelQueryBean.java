@@ -1,11 +1,11 @@
 package net.shangtech.shop.manager.product.vo;
 
-import java.awt.Label;
-
 import net.shangtech.framework.dao.support.QueryBean;
+import net.shangtech.shop.product.entity.Label;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
+
 import static org.hibernate.criterion.Restrictions.*;
 
 public class LabelQueryBean extends QueryBean {

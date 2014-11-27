@@ -15,7 +15,34 @@
 	width: 30px;
 	float:left;
 	margin:0px;
+	text-align:center;
 }
 .no-border-right{
 	border-right-width:0px !important;
+}
+.loading-mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: #aaa;
+    opacity: 0.3;
+}
+.loading-mask-msg{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: transparent url('../image/ajax-loading.gif') no-repeat center;
+}
+.center{
+	text-align:center;
+}
+table .checker{
+	margin:0px;
+}
+.relative{
+	position:relative;
 }

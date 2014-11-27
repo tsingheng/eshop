@@ -10,4 +10,5 @@
 	<definition name="manager.label.index" extends="manager.template">
 		<put-attribute name="content" value="/WEB-INF/page/product/label/label-index.jsp"/>
 	</definition>
+	<definition name="manager.label.form" template="/WEB-INF/page/product/label/label-form.jsp"/>
 </tiles-definitions>

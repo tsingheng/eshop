@@ -24,6 +24,7 @@ public class LabelController {
 		return "manager.label.index";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/list")
 	public Pagination<Label> list(LabelQueryBean queryBean, Pagination<Label> pagination){
 		pagination = service.findPage(queryBean, pagination);
