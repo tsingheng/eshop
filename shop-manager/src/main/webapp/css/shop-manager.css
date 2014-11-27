@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.btn-group.pager-btns{
+	margin:0px !important;
+	float:right;
+}
+.btn-group.pager-btns .btn{
+	padding: 4px 12px;
+	line-height: 20px;
+	text-decoration: none;
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+
+.pagination input{
+	width: 30px;
+	float:left;
+	margin:0px;
+}
+.no-border-right{
+	border-right-width:0px !important;
+}

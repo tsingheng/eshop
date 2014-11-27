@@ -1,22 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/page/commons/tags.jsp" %>
 <link rel="stylesheet" href="${ctx}/javascript/zTree_v3/css/zTreeStyle/zTreeStyle.css"/>
-<div id="content-header"></div>
-<div id="breadcrumb">
-	<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-	<a href="#" class="current">Dashboard</a>
-</div>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span4">
-			<div class="widget-box">
-				<div class="widget-title">
-					<span class="icon">
-						<i class="icon-align-justify"></i>									
-					</span>
-					<h5>分类树</h5>
+			<div class="portlet box purple">
+				<div class="portlet-title">
+					<div class="caption">分类树</div>
 				</div>
-				<div class="widget-content">
+				<div class="portlet-body">
 					<ul id="category-tree" class="ztree">
 						
 					</ul>
