@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name="manager.category.main" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/product/category/category-main.jsp"/>
+	</definition>
+	<definition name="manager.label.index" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/product/label/label-index.jsp"/>
+	</definition>
+	<definition name="manager.label.form" template="/WEB-INF/page/product/label/label-form.jsp"/>
+</tiles-definitions>
