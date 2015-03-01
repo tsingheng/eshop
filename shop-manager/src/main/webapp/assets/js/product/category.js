@@ -10,7 +10,7 @@ $(document).ready(function(){
 			s.push('		操作 <span class="caret"></span>');
 			s.push('	</button>');
 			s.push('	<ul class="dropdown-menu" role="menu">');
-			s.push('		<li><a href="#">添加同级分类</a></li>');
+			s.push('		<li><a href="javascript:;" class="add-brother-cate">添加同级分类</a></li>');
 			s.push('		<li><a href="#">添加下级分类</a></li>');
 			s.push('		<li><a href="#">修改分类</a></li>');
 			if(!node.children){
@@ -34,5 +34,24 @@ $(document).ready(function(){
 		if(btnGroup.hasClass('open')){
 			btnGroup.removeClass('open');
 		}
+	});
+	$('#category-tree').on('click', '.add-brother-cate', function(){
+		$('#cate-win').window('open');
+		var selectedCate = $('#category-tree').tree('getSelected');
+		var parentId = 0;
+		if(selectedCate){
+			parentId = selectedCate.parentId;
+		}
+		$('#cate-win').window('refresh', ctx + '/category/form?parentId=' + parentId);
+	});
+	$('#cate-win').on('click', '.submit', function(){
+		$('#cate-form').ajaxSubmit({
+			url: ctx + '/category/save',
+			success: function(data){
+				$('#cate-tree').tree('append', {
+					data: data
+				});
+			}
+		});
 	});
 });

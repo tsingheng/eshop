@@ -130,7 +130,8 @@ body{
 	border-bottom: 0;
 }
 
-.panel-tree .panel-body{padding:0px;margin-top:-1px;}
+.panel-tree{overflow:visible;}
+.panel-tree .panel-body{padding:0px;margin-top:-1px;border:none;overflow:visible;}
 .panel-tree .panel-body li{position:relative;}
 .panel-tree .tree-node{height:42px;padding:10px 15px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-bottom:-1px;}
 .panel-tree .tree-node .tree-title{font-size:14px;line-height:20px;color:#555;}

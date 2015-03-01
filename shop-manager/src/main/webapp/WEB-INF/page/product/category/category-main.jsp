@@ -18,9 +18,6 @@
 					</ul>
 				</div>
 			</div>
-			<div id="cate-menu">
-				
-			</div>
 		</div>
 		<div class="col-md-9">
 			<div class="widget-box">
@@ -61,4 +58,5 @@
 		</div>
 	</div>
 </div>
+<div id="cate-win" class="easyui-window" data-options="modal:true,closed:true,title:'编辑分类',width:450"></div>
 <script type="text/javascript" src="${ctx}/assets/js/product/category.js"></script>

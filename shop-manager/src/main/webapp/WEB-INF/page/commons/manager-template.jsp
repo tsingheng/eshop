@@ -4,6 +4,8 @@
 <html lang="zh-cn">
 	<head>
 		<link rel="stylesheet" href="${ctx}/assets/jquery-easyui-1.4.1/themes/bootstrap/tree.css">
+		<link rel="stylesheet" href="${ctx}/assets/jquery-easyui-1.4.1/themes/bootstrap/window.css">
+		<link rel="stylesheet" href="${ctx}/assets/jquery-easyui-1.4.1/themes/bootstrap/panel.css">
 		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${ctx}/assets/css/eshop-manager.css">
 		<script src="${ctx}/assets/jquery-easyui-1.4.1/jquery.min.js"></script>

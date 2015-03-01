@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="propertyConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="/WEB-INF/classes/config/jdbc.properties"></property>
+		<property name="location" value="classpath:config/jdbc.properties"></property>
 	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>
@@ -29,30 +29,27 @@
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.cache.use_second_level_cache">true</prop>
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
 			</props>
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>net.shangtech.shop.**.entity</value>
+				<value>net.shangtech.eshop.**.entity</value>
 			</list>
 		</property>
 	</bean>
 	
-	<context:component-scan base-package="net.shangtech.shop.**.dao.impl"></context:component-scan>
-	<context:component-scan base-package="net.shangtech.shop.**.service.impl"></context:component-scan>
+	<context:component-scan base-package="net.shangtech.eshop.**.dao.impl"></context:component-scan>
+	<context:component-scan base-package="net.shangtech.eshop.**.service.impl"></context:component-scan>
 	
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>

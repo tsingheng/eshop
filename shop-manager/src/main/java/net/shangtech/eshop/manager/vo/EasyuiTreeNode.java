@@ -17,6 +17,8 @@ public class EasyuiTreeNode implements Serializable {
 	private List<EasyuiTreeNode> children;
 	
 	private String state;
+	
+	private Long parentId;
 
 	public Long getId() {
 		return id;
@@ -48,6 +50,14 @@ public class EasyuiTreeNode implements Serializable {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 	
 }
