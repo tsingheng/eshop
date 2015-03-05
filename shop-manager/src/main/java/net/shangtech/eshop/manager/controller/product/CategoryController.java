@@ -59,6 +59,21 @@ public class CategoryController {
 		}else{
 			categoryService.update(category);
 		}
+		EasyuiTreeNode node = new EasyuiTreeNode();
+		node.setId(category.getId());
+		node.setParentId(category.getParentId());
+		node.setText(category.getName());
+		ajaxResponse.setData(node);
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/remove")
+	public AjaxResponse remove(Integer id){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		categoryService.delete(id);
+		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
 	}
 	
