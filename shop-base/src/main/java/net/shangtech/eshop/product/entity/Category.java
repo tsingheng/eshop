@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Index;
+
 import net.shangtech.framework.dao.support.BaseEntity;
 
 /**
@@ -46,6 +48,7 @@ public class Category extends BaseEntity<Long> {
     private List<Category> children;
 
     @Column(name = "parent_id")
+    @Index(name = "idx_pro_category_parent_id")
 	public Long getParentId() {
 		return parentId;
 	}
@@ -64,6 +67,7 @@ public class Category extends BaseEntity<Long> {
 	}
 
 	@Column(name = "cate_code")
+	@Index(name = "idx_pro_category_code")
 	public String getCode() {
 		return code;
 	}

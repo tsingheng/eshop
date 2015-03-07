@@ -8,10 +8,15 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import net.shangtech.eshop.manager.vo.EasyuiPage;
 import net.shangtech.eshop.manager.vo.EasyuiTreeNode;
+import net.shangtech.eshop.product.dao.qbs.ProductQueryBean;
 import net.shangtech.eshop.product.entity.Category;
+import net.shangtech.eshop.product.entity.Product;
 import net.shangtech.eshop.product.service.ICategoryService;
+import net.shangtech.eshop.product.service.IProductService;
 import net.shangtech.framework.controller.AjaxResponse;
+import net.shangtech.framework.dao.support.Pagination;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CategoryController {
 	
 	@Autowired private ICategoryService categoryService;
+	@Autowired private IProductService productService;
 
 	@RequestMapping("")
 	public String category(){
@@ -104,5 +110,15 @@ public class CategoryController {
 			}
 		}
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/products")
+	public EasyuiPage<Product> products(ProductQueryBean qb, Pagination<Product> pagination){
+		pagination = productService.findPage(qb, pagination);
+		EasyuiPage<Product> page = new EasyuiPage<Product>();
+		page.setTotal(pagination.getTotalCount());
+		page.setRows(pagination.getItems());
+		return page;
 	}
 }

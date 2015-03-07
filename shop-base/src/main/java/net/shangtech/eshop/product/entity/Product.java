@@ -27,6 +27,12 @@ public class Product extends BaseEntity<Long> {
 	private String color;
 	
 	private Long brandId;
+	
+	private String brandCode;
+	
+	private Long categoryId;
+	
+	private String status;
 
 	@Column(name = "pro_name")
 	public String getName() {
@@ -89,6 +95,33 @@ public class Product extends BaseEntity<Long> {
 
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
+	}
+
+	@Column(name = "category_id")
+	@Index(name = "idx_product_category_id")
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Column(name = "brand_code")
+	public String getBrandCode() {
+		return brandCode;
+	}
+
+	public void setBrandCode(String brandCode) {
+		this.brandCode = brandCode;
 	}
 	
 }

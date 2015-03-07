@@ -20,7 +20,14 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				<div class="caption">商品列表</div>
+				</div>
+				<div class="panel-body nopadding">
+					<table id="product-table"></table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

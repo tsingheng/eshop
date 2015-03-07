@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var categoryId = 0;
 	$('#category-tree').tree({
 		animate: true,
 		url: ctx + '/category/cate-tree',
@@ -22,8 +23,27 @@ $(document).ready(function(){
 			s.push('<span>');
 			return s.join('');
 		},
-		onContextMenu: function(e, node){
-			$(this).tree('select', node.target);
+		onSelect: function(node){
+			if(categoryId != 0){
+				//$('#product-table').datagrid('destroy');
+			}
+			if(categoryId == node.id){
+				return;
+			}
+			categoryId = node.id;
+			$('#product-table').datagrid({
+				url: ctx + '/category/products?categoryId=' + categoryId,
+				columns: [[
+				    {field: 'code', title: '编号', width: 40},
+				    {field: 'name', title: '名称', width: 200},
+				    {field: 'marketPrice', title: '市场价', width: 15},
+				    {field: 'sellPrice', title: '售价', width: 15},
+				    {field: 'brandCode', title: '品牌', width: 40}
+				]],
+				width: $('#product-table').width(),
+				fitColumns: true,
+				pagination: true
+			});
 		}
 	});
 	$('#category-tree').on('click', '.btn-group', function(){

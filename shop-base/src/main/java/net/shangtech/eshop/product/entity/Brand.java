@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 
+import org.hibernate.annotations.Index;
+
 import net.shangtech.framework.dao.support.BaseEntity;
 
 @Entity
@@ -14,7 +16,11 @@ public class Brand extends BaseEntity<Long> {
 
     private String name;
     
+    private String englishName;
+    
     private String code;
+    
+    private String sn;
     
     private String logo;
 
@@ -41,6 +47,24 @@ public class Brand extends BaseEntity<Long> {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	@Column(name = "english_name")
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
+	}
+
+	@Index(name = "idx_pro_brand_sn")
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
 	}
     
 }

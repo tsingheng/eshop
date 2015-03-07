@@ -3,6 +3,7 @@ body{
 	background:#444444;
 	overflow-y:hidden;
 }
+.nopadding{padding:0px !important;}
 #main-head{
 	height:77px;
 	width:100%;
@@ -139,3 +140,6 @@ body{
 .panel-tree .panel-body .tree-node .btn-group{display:none;position:absolute;top:4px;right:15px;}
 .panel-tree .panel-body .tree-node-hover .btn-group{display:block;}
 .panel-tree .panel-body .tree-node-hover .btn-group .dropdown-menu{right:0px;left:auto;}
+
+.panel.datagrid, .datagrid-wrap.panel-body{padding:0px;}
+.panel.datagrid{margin-bottom:0px;}

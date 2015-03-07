@@ -1,16 +1,32 @@
 package net.shangtech.eshop.manager.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.shangtech.eshop.manager.spider.ProductSpider;
 import net.shangtech.eshop.manager.vo.EasyuiTreeNode;
+import net.shangtech.eshop.product.service.ICategoryService;
+import net.shangtech.eshop.product.service.IProductService;
 
+import org.htmlparser.util.ParserException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
+	
+	@Autowired private ICategoryService categoryService;
+	@Autowired private IProductService productService;
+	
+	@RequestMapping("/product")
+	public String product() throws FileNotFoundException, ParserException, IOException, InterruptedException{
+		new ProductSpider(categoryService, productService).exec();
+		return "manager.index";
+	}
 	
 	@RequestMapping("/index")
 	public String index(){
