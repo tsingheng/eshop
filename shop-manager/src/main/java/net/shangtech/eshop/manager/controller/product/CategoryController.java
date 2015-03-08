@@ -114,8 +114,8 @@ public class CategoryController {
 	
 	@ResponseBody
 	@RequestMapping("/products")
-	public EasyuiPage<Product> products(ProductQueryBean qb, Pagination<Product> pagination){
-		pagination = productService.findPage(qb, pagination);
+	public EasyuiPage<Product> products(Long categoryId, ProductQueryBean qb, Pagination<Product> pagination){
+		pagination = productService.findByCategory(categoryId, qb, pagination);
 		EasyuiPage<Product> page = new EasyuiPage<Product>();
 		page.setTotal(pagination.getTotalCount());
 		page.setRows(pagination.getItems());

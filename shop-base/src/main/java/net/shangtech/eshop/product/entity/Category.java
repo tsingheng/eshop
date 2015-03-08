@@ -23,7 +23,8 @@ public class Category extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 1002452745760520064L;
     
-    public static final Long ROOT_CATE_ID = 0L;
+    public static final Long 	ROOT_CATE_ID 	= 	0L;
+    public static final String 	PATH_SEPARATOR 	= 	"-";
 
     /** 上级分类ID */
     private Long parentId = ROOT_CATE_ID;
@@ -46,6 +47,8 @@ public class Category extends BaseEntity<Long> {
     
     @Transient
     private List<Category> children;
+    
+    private String path;
 
     @Column(name = "parent_id")
     @Index(name = "idx_pro_category_parent_id")
@@ -116,6 +119,14 @@ public class Category extends BaseEntity<Long> {
 
 	public void setChildren(List<Category> children) {
 		this.children = children;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
     
 }

@@ -1,17 +1,20 @@
 package net.shangtech.eshop.product.dao.qbs;
 
+import java.util.Arrays;
+
+import net.shangtech.eshop.product.entity.Category;
+import net.shangtech.eshop.product.entity.Product;
+import net.shangtech.framework.dao.support.QueryBean;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-
-import net.shangtech.eshop.product.entity.Product;
-import net.shangtech.framework.dao.support.QueryBean;
 
 public class ProductQueryBean implements QueryBean {
 	
 	private String code;
 	
-	private Long categoryId;
+	private Category category;
 
 	public String getCode() {
 		return code;
@@ -21,12 +24,12 @@ public class ProductQueryBean implements QueryBean {
 		this.code = code;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
@@ -35,8 +38,8 @@ public class ProductQueryBean implements QueryBean {
 		if(StringUtils.isNotBlank(code)){
 			criteria.add(Restrictions.eq("code", code));
 		}
-		if(categoryId != null){
-			criteria.add(Restrictions.eq("categoryId", categoryId));
+		if(category != null && StringUtils.isNotBlank(category.getPath())){
+			criteria.add(Restrictions.in("categoryId", Arrays.asList(category.getPath().split(Category.PATH_SEPARATOR))));
 		}
 	    return criteria;
     }

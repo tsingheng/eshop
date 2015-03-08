@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>shop-manager</artifactId>
+	<artifactId>shop</artifactId>
 	<packaging>war</packaging>
 
 	<name>shop-manager</name>
