@@ -9,36 +9,43 @@ import org.hibernate.annotations.Index;
 import net.shangtech.framework.dao.support.BaseEntity;
 
 @Entity
-@Table(name = "t_pro_inventory")
+@Table(name = "t_sku_inventory")
 public class Inventory extends BaseEntity<Long> {
 
     private static final long serialVersionUID = -2144851727124676913L;
 	
-    private Long productId;
+    @Column(name = "sku_id")
+    @Index(name = "idx_sku_inventory_sku_id")
+    private Long skuId;
     
+    @Column(name = "size")
     private String size;
     
+    @Column(name = "color")
+    private String color;
+    
+    @Column(name = "code")
+	@Index(name = "idx_sku_inventory_code")
     private String code;
     
     private Integer stock;
     
     private Integer saled;
     
+    @Column(name = "num_min")
     private Integer min;
     
+    @Column(name = "num_max")
     private Integer max;
 
-    @Column(name = "product_id")
-    @Index(name = "idx_pro_inventory_product_id")
-	public Long getProductId() {
-		return productId;
+	public Long getSkuId() {
+		return skuId;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setSkuId(Long skuId) {
+		this.skuId = skuId;
 	}
 
-	@Column(name = "pro_size")
 	public String getSize() {
 		return size;
 	}
@@ -47,8 +54,6 @@ public class Inventory extends BaseEntity<Long> {
 		this.size = size;
 	}
 
-	@Column(name = "code")
-	@Index(name = "idx_pro_inventory_code")
 	public String getCode() {
 		return code;
 	}
@@ -73,7 +78,6 @@ public class Inventory extends BaseEntity<Long> {
 		this.saled = saled;
 	}
 
-	@Column(name = "num_min")
 	public Integer getMin() {
 		return min;
 	}
@@ -82,13 +86,20 @@ public class Inventory extends BaseEntity<Long> {
 		this.min = min;
 	}
 
-	@Column(name = "num_max")
 	public Integer getMax() {
 		return max;
 	}
 
 	public void setMax(Integer max) {
 		this.max = max;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
     
 }

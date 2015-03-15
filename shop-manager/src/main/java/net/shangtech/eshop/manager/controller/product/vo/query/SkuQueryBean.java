@@ -1,16 +1,16 @@
-package net.shangtech.eshop.product.dao.qbs;
+package net.shangtech.eshop.manager.controller.product.vo.query;
 
 import java.util.Arrays;
 
 import net.shangtech.eshop.product.entity.Category;
-import net.shangtech.eshop.product.entity.Product;
+import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.framework.dao.support.QueryBean;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-public class ProductQueryBean implements QueryBean {
+public class SkuQueryBean implements QueryBean {
 	
 	private String code;
 	
@@ -34,7 +34,7 @@ public class ProductQueryBean implements QueryBean {
 
 	@Override
     public DetachedCriteria criteria() {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
+		DetachedCriteria criteria = DetachedCriteria.forClass(Sku.class);
 		if(StringUtils.isNotBlank(code)){
 			criteria.add(Restrictions.eq("code", code));
 		}

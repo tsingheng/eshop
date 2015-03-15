@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.shangtech.eshop.product.entity.Brand;
-import net.shangtech.eshop.product.service.IBrandService;
+import net.shangtech.eshop.product.service.BrandService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlparser.NodeFilter;
@@ -26,9 +26,9 @@ public class BrandSpider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BrandSpider.class);
 	
-	private IBrandService brandService;
+	private BrandService brandService;
 	
-	public BrandSpider(IBrandService brandService){
+	public BrandSpider(BrandService brandService){
 		this.brandService = brandService;
 	}
 	
@@ -44,6 +44,7 @@ public class BrandSpider {
 	            logger.info("find brand link [{}]", link.getLink());
 	            BrandListParser listParser = new BrandListParser(link.getLink());
 	            List<Brand> list = listParser.parse();
+	            logger.info("find {} brands", list.size());
 	            if(!CollectionUtils.isEmpty(list)){
 	            	for(Brand brand : list){
 	            		Brand old = brandService.findBySn(brand.getSn());
@@ -84,7 +85,7 @@ class BrandListParser{
 				String href = link.getAttribute("href");
 				brand.setCode(href.substring(1, href.length()-1));
 				brand.setEnglishName(StringUtils.trim(nameEn.getLinkText()));
-				brand.setLogo(image.getImageURL());
+				brand.setLogo(image.getAttribute("data-original"));
 				brand.setName(StringUtils.trim(nameCn.getLinkText()));
 				brand.setSn(tag.getAttribute("sn"));
 				list.add(brand);

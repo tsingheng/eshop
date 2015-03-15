@@ -2,11 +2,10 @@ package net.shangtech.eshop.shop.controller;
 
 import java.util.List;
 
-import net.shangtech.eshop.product.dao.qbs.ProductQueryBean;
 import net.shangtech.eshop.product.entity.Category;
-import net.shangtech.eshop.product.entity.Product;
-import net.shangtech.eshop.product.service.ICategoryService;
-import net.shangtech.eshop.product.service.IProductService;
+import net.shangtech.eshop.product.entity.Sku;
+import net.shangtech.eshop.product.service.CategoryService;
+import net.shangtech.eshop.product.service.SkuService;
 import net.shangtech.framework.dao.support.Pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class ProductController {
+public class SkuController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
-	@Autowired private ICategoryService categoryService;
-	@Autowired private IProductService productService;
+	@Autowired private CategoryService categoryService;
+	@Autowired private SkuService skuService;
 	
 	@ResponseBody
 	@RequestMapping("/api/product/{id}")
-	public Product loadProduct(@PathVariable("id") Long id){
-		return productService.find(id);
+	public Sku loadProduct(@PathVariable("id") Long id){
+		return skuService.find(id);
 	}
 	
 	@ResponseBody
 	@RequestMapping("/api/product-list")
-	public Pagination<Product> loadProduct(Long categoryId, ProductQueryBean qb, Pagination<Product> pagination){
-		return productService.findByCategory(categoryId, qb, pagination);
+	public Pagination<Sku> loadProduct(Long categoryId, Pagination<Sku> pagination){
+//		return skuService.findByCategory(categoryId, qb, pagination);
+		return pagination;
 	}
 	
 	@ResponseBody

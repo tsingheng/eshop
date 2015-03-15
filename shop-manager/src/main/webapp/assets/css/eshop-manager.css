@@ -143,3 +143,6 @@ body{
 
 .panel.datagrid, .datagrid-wrap.panel-body{padding:0px;}
 .panel.datagrid{margin-bottom:0px;}
+
+.datagrid-header td{padding:6px;}
+.datagrid-body td{padding:10px 6px;}

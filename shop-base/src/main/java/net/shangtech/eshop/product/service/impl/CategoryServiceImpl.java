@@ -3,9 +3,9 @@ package net.shangtech.eshop.product.service.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.shangtech.eshop.product.dao.ICategoryDao;
+import net.shangtech.eshop.product.dao.CategoryDao;
 import net.shangtech.eshop.product.entity.Category;
-import net.shangtech.eshop.product.service.ICategoryService;
+import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.framework.service.BaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import org.springframework.util.CollectionUtils;
 
 @Service
 @Transactional
-public class CategoryServiceImpl extends BaseService<Category> implements ICategoryService {
+public class CategoryServiceImpl extends BaseService<Category> implements CategoryService {
 	
-	@Autowired private ICategoryDao dao;
+	@Autowired private CategoryDao dao;
 	
 	@Override
 	public void update(Category category){
@@ -32,6 +32,22 @@ public class CategoryServiceImpl extends BaseService<Category> implements ICateg
 			old.setVersion(category.getVersion());
 			dao.update(old);
 		}
+	}
+	
+	@Override
+	public void save(Category entity) {
+		Category old = dao.findOneByProperty("code", entity.getCode());
+		if(old != null){
+			entity.setId(old.getId());
+			return;
+		}
+		dao.save(entity);
+		entity.setPath(entity.getId().toString());
+		Category parent = dao.find(entity.getParentId());
+		if(parent != null){
+			entity.setPath(parent.getPath() + Category.PATH_SEPARATOR + entity.getPath());
+		}
+		dao.update(entity);
 	}
 	
 	@Override

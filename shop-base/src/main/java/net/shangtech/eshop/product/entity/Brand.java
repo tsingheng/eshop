@@ -14,17 +14,21 @@ public class Brand extends BaseEntity<Long> {
 
     private static final long serialVersionUID = -6783573054065025333L;
 
+    @Column(name = "brand_name")
     private String name;
     
+    @Column(name = "english_name")
     private String englishName;
     
+    @Index(name = "idx_brand_code")
     private String code;
     
+    @Column(name = "sn")
+    @Index(name = "idx_brand_sn")
     private String sn;
     
     private String logo;
 
-    @Column(name = "brand_name")
 	public String getName() {
 		return name;
 	}
@@ -49,7 +53,6 @@ public class Brand extends BaseEntity<Long> {
 		this.code = code;
 	}
 
-	@Column(name = "english_name")
 	public String getEnglishName() {
 		return englishName;
 	}
@@ -58,7 +61,6 @@ public class Brand extends BaseEntity<Long> {
 		this.englishName = englishName;
 	}
 
-	@Index(name = "idx_pro_brand_sn")
 	public String getSn() {
 		return sn;
 	}

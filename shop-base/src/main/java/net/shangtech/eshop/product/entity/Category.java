@@ -18,7 +18,7 @@ import net.shangtech.framework.dao.support.BaseEntity;
  *
  */
 @Entity
-@Table(name = "t_pro_category")
+@Table(name = "t_category")
 public class Category extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 1002452745760520064L;
@@ -27,20 +27,28 @@ public class Category extends BaseEntity<Long> {
     public static final String 	PATH_SEPARATOR 	= 	"-";
 
     /** 上级分类ID */
+    @Column(name = "parent_id")
+    @Index(name = "idx_category_parent_id")
     private Long parentId = ROOT_CATE_ID;
     
     /** 分类名称 */
+    @Column(name = "cate_name")
     private String name;
     
     /** 分类编码,英文名称 */
+    @Column(name = "cate_code")
+	@Index(name = "idx_category_code")
     private String code;
     
     /** 权重值,用来排序 */
+    @Column(name = "priority")
     private Integer priority;
     
     /** 是否是叶节点,添加节点时默认是叶节点,给其添加子节点时将leaf改为false,删除子节点时判断如果子节点已经全部删除,再改为true */
+    @Column(name = "leaf")
     private Boolean leaf = true;
     
+    @Column(name = "create_time")
     private Date createTime;
     
     private Date version;
@@ -50,8 +58,6 @@ public class Category extends BaseEntity<Long> {
     
     private String path;
 
-    @Column(name = "parent_id")
-    @Index(name = "idx_pro_category_parent_id")
 	public Long getParentId() {
 		return parentId;
 	}
@@ -60,7 +66,6 @@ public class Category extends BaseEntity<Long> {
 		this.parentId = parentId;
 	}
 
-	@Column(name = "cate_name")
 	public String getName() {
 		return name;
 	}
@@ -69,8 +74,6 @@ public class Category extends BaseEntity<Long> {
 		this.name = name;
 	}
 
-	@Column(name = "cate_code")
-	@Index(name = "idx_pro_category_code")
 	public String getCode() {
 		return code;
 	}
@@ -79,7 +82,6 @@ public class Category extends BaseEntity<Long> {
 		this.code = code;
 	}
 
-	@Column(name = "priority")
 	public Integer getPriority() {
 		return priority;
 	}
@@ -88,7 +90,6 @@ public class Category extends BaseEntity<Long> {
 		this.priority = priority;
 	}
 
-	@Column(name = "leaf")
 	public Boolean getLeaf() {
 		return leaf;
 	}
