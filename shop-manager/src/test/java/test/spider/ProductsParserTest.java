@@ -1,4 +1,4 @@
-package spider.test;
+package test.spider;
 
 import net.shangtech.eshop.manager.spider.CategoryProcessor;
 import net.shangtech.eshop.product.service.BrandService;

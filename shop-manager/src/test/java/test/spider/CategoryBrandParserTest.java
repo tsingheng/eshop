@@ -1,4 +1,4 @@
-package spider.test;
+package test.spider;
 
 import java.util.List;
 

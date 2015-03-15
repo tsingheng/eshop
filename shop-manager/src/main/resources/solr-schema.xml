@@ -3,11 +3,11 @@
 	<types>
 		<fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
 		<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
-		<fieldType name="integer" class="solr.TrieIntField" omitNorms="true"/>
-		<fieldType name="long" class="solr.TrieLongField" omitNorms="true"/>
-		<fieldType name="float" class="solr.TrieFloatField" omitNorms="true"/>
-		<fieldType name="double" class="solr.TrieDoubleField" omitNorms="true"/>
-		<fieldType name="date" class="solr.TrieDateField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="integer" class="solr.IntField" omitNorms="true"/>
+		<fieldType name="long" class="solr.LongField" omitNorms="true"/>
+		<fieldType name="float" class="solr.FloatField" omitNorms="true"/>
+		<fieldType name="double" class="solr.DoubleField" omitNorms="true"/>
+		<fieldType name="date" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>
 		
 		<!--  
 		<fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
@@ -18,13 +18,13 @@
 		
 		<fieldType name="text" class="solr.TextField">
 			<analyzer type="index">
-				<tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" isMaxWordLength="false"/>
+				<tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" isMaxWordLength="false"/>
 				<filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true"/>
 				<filter class="solr.LowerCaseFilterFactory"/>
 			</analyzer>
 			
 			<analyzer type="query">
-				<tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" isMaxWordLength="true"/>
+				<tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" isMaxWordLength="true"/>
 				<filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true"/>
 				<filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
 				<filter class="solr.LowerCaseFilterFactory"/>
@@ -54,16 +54,18 @@
 		<field name="marketPrice" type="double" indexed="true" stored="true" multiValued="false"/>
 		<field name="sellPrice" type="double" indexed="true" stored="true" multiValued="false"/>
 		
+		<field name="_version_" type="long" indexed="true" stored="true" multiValued="false"/>
+		
 		<field name="keyword" type="text" indexed="true" stored="false" multiValued="true"/>
 		
-		<dynamicField name="category_*" type="string" indexed="true" stored="true" multiValued="false"/>
+		<field name="categories" type="string" indexed="true" stored="true" multiValued="true"/>
 		
 		<copyField source="code" dest="keyword"/>
 		<copyField source="name" dest="keyword"/>
 		<copyField source="brandCode" dest="keyword"/>
 		<copyField source="brandName" dest="keyword"/>
 		<copyField source="sizes" dest="keyword"/>
-		<copyField source="category_*" dest="keyword"/>
+		<copyField source="categories" dest="keyword"/>
 		
 		<uniqueKey>id</uniqueKey>
 		<defaultSearchField>keyword</defaultSearchField>

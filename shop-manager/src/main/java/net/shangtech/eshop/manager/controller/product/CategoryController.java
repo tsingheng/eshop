@@ -114,9 +114,14 @@ public class CategoryController {
 	
 	@ResponseBody
 	@RequestMapping("/products")
-	public EasyuiPage<Sku> products(SkuQueryBean qb, Pagination<Sku> pagination){
-		if(qb.getCategory() != null && qb.getCategory().getId() != null){
-			qb.setCategory(categoryService.find(qb.getCategory().getId()));
+	public EasyuiPage<Sku> products(Long categoryId, SkuQueryBean qb, Pagination<Sku> pagination){
+		if(categoryId != null){
+			List<Category> categories = categoryService.findWithChildren(categoryId);
+			List<Long> categoryIds = new ArrayList<Long>(categories.size());
+			for(Category category : categories){
+				categoryIds.add(category.getId());
+			}
+			qb.setCategoryIds(categoryIds);
 		}
 		pagination = skuService.findPage(qb, pagination);
 		EasyuiPage<Sku> page = new EasyuiPage<Sku>();

@@ -53,4 +53,8 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="solrService" class="net.shangtech.eshop.solr.SolrService">
+		<property name="url" value="http://192.168.12.129:8080/solr/vip/"/>
+	</bean>
 </beans>

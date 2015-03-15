@@ -1,5 +1,6 @@
 package net.shangtech.eshop.product.service.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import net.shangtech.eshop.product.entity.Category;
 import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.framework.service.BaseService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,5 +85,38 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 			}
 		}
 	    return root;
+    }
+
+	@Override
+    public List<Category> findWithChildren(Long categoryId) {
+	    LinkedList<Category> temp = new LinkedList<Category>();
+	    temp.add(dao.find(categoryId));
+	    List<Category> list = new LinkedList<Category>();
+	    while(!temp.isEmpty()){
+	    	Category category = temp.remove();
+	    	if(category == null){
+	    		continue;
+	    	}
+	    	list.add(category);
+	    	temp.addAll(dao.findByParentId(category.getId()));
+	    }
+	    return list;
+    }
+
+	@Override
+    public List<Category> findWithParents(Long categoryId) {
+	    List<Category> list = new ArrayList<Category>();
+	    Category category = dao.find(categoryId);
+	    if(category != null){
+	    	list.add(category);
+	    	if(StringUtils.isNotBlank(category.getPath())){
+	    		for(String parentId : category.getPath().split(Category.PATH_SEPARATOR)){
+	    			if(!String.valueOf(category.getId()).equals(parentId)){
+	    				list.add(dao.find(Long.parseLong(parentId)));
+	    			}
+	    		}
+	    	}
+	    }
+	    return null;
     }
 }
