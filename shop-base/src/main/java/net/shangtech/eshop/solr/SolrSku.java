@@ -35,6 +35,9 @@ public class SolrSku implements Serializable {
 	
     @Field("categories")
 	private List<String> categories;
+    
+    @Field("categoryCodes")
+    private List<String> categoryCodes;
 
 	public Long getId() {
 		return id;
@@ -106,6 +109,14 @@ public class SolrSku implements Serializable {
 
 	public void setCategories(List<String> categories) {
 		this.categories = categories;
+	}
+
+	public List<String> getCategoryCodes() {
+		return categoryCodes;
+	}
+
+	public void setCategoryCodes(List<String> categoryCodes) {
+		this.categoryCodes = categoryCodes;
 	}
 	
 }

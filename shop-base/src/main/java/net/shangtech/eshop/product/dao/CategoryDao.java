@@ -7,4 +7,6 @@ import net.shangtech.framework.dao.IBaseDao;
 
 public interface CategoryDao extends IBaseDao<Category> {
 	List<Category> findByParentId(long parentId);
+	
+	Category findByCode(String code);
 }

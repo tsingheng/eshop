@@ -59,6 +59,7 @@
 		<field name="keyword" type="text" indexed="true" stored="false" multiValued="true"/>
 		
 		<field name="categories" type="string" indexed="true" stored="true" multiValued="true"/>
+		<field name="categoryCodes" type="string" indexed="true" stored="true" multiValued="true"/>
 		
 		<copyField source="code" dest="keyword"/>
 		<copyField source="name" dest="keyword"/>
@@ -66,6 +67,7 @@
 		<copyField source="brandName" dest="keyword"/>
 		<copyField source="sizes" dest="keyword"/>
 		<copyField source="categories" dest="keyword"/>
+		<copyField source="categoryCodes" dest="keyword"/>
 		
 		<uniqueKey>id</uniqueKey>
 		<defaultSearchField>keyword</defaultSearchField>

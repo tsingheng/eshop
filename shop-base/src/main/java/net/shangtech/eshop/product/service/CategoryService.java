@@ -11,4 +11,8 @@ public interface CategoryService extends IBaseService<Category> {
 	List<Category> findWithChildren(Long categoryId);
 	
 	List<Category> findWithParents(Long categoryId);
+	
+	List<Category> findByParentId(Long parentId);
+	
+	Category findByCode(String code);
 }

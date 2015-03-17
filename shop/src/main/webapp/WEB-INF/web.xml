@@ -4,15 +4,39 @@
 	version="2.4">
 	
 	<display-name>shop</display-name>
+	<filter>
+		<description>
+		</description>
+		<display-name>ShopRequestFilter</display-name>
+		<filter-name>ShopRequestFilter</filter-name>
+		<filter-class>net.shangtech.eshop.shop.filter.ShopRequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ShopRequestFilter</filter-name>
+		<url-pattern>/ShopRequestFilter</url-pattern>
+	</filter-mapping>
 	
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
 	</context-param>
+	
+	<!-- 设置一些全局变量 -->
+	<listener>
+		<listener-class>net.shangtech.eshop.shop.listener.ShopStartUpListener</listener-class>
+	</listener>
+	
+	<filter>
+		<filter-name>shopRequestFilter</filter-name>
+		<filter-class>net.shangtech.eshop.shop.filter.ShopRequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shopRequestFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>

@@ -16,4 +16,9 @@ public class CategoryDaoImpl extends BaseDao<Category> implements CategoryDao {
 	    return findByProperty("parentId", parentId);
     }
 
+	@Override
+    public Category findByCode(String code) {
+	    return findOneByProperty("code", code);
+    }
+
 }

@@ -14,6 +14,14 @@
 		</script>
 	</head>
 	<body>
-		<t:insertAttribute name="content"/>
+		<div id="header">
+			
+		</div>
+		<div id="nav">
+			<t:insertAttribute name="nav"/>
+		</div>
+		<div id="main">
+			<t:insertAttribute name="content"/>
+		</div>
 	</body>
 </html>

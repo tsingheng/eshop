@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import test.BaseSpringTest;
 
@@ -29,6 +30,18 @@ public class SolrServiceTest extends BaseSpringTest {
 	@Autowired private CategoryService categoryService;
 	@Autowired private BrandService brandService;
 	@Autowired private SolrService solrService;
+	
+	@Test
+	public void addAllToSolr() throws IOException, SolrServerException{
+		Pagination<Sku> pagination = new Pagination<Sku>();
+		pagination.setLimit(20);
+		do{
+			pagination = skuService.findAllByPage(pagination);
+			logger.info("processing page {} of {}", pagination.getPageNo(), pagination.getTotalPage());
+			solrService.saveSkuList(pagination.getItems());
+			pagination.setPageNo(pagination.getPageNo()+1);
+		}while(!CollectionUtils.isEmpty(pagination.getItems()));
+	}
 	
 	@Test
 	public void testAddSku(){

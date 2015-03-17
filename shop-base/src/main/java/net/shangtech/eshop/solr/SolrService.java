@@ -12,10 +12,12 @@ import net.shangtech.eshop.product.service.BrandService;
 import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.eshop.product.service.InventoryService;
 import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.framework.dao.support.Pagination;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -54,9 +56,32 @@ public class SolrService implements InitializingBean {
 		server.commit();
 	}
 	
+	public void saveSkuList(List<Sku> list) throws IOException, SolrServerException{
+		if(!CollectionUtils.isEmpty(list)){
+			List<SolrSku> solrSkus = new ArrayList<SolrSku>(list.size());
+			for(Sku sku : list){
+				solrSkus.add(sku2Solr(sku));
+			}
+			server.addBeans(solrSkus);
+			server.commit();
+		}
+	}
+	
 	public void deleteByIds(List<String> ids) throws SolrServerException, IOException{
 		server.deleteById(ids);
 		server.commit();
+	}
+	
+	public Pagination<SolrSku> findByCategory(String[] categoryCodes, Pagination<SolrSku> pagination) throws SolrServerException{
+		SolrQuery query = new SolrQuery("*:*");
+		for(String code : categoryCodes){
+			query.add("categoryCodes", code);
+		}
+		query.setStart(pagination.getStart());
+		query.setRows(pagination.getLimit());
+		QueryResponse qr = server.query(query);
+		pagination.setItems(qr.getBeans(SolrSku.class));
+		return pagination;
 	}
 	
 	private SolrSku sku2Solr(Sku sku){
@@ -67,20 +92,17 @@ public class SolrService implements InitializingBean {
 		solrSku.setMarketPrice(sku.getMarketPrice());
 		solrSku.setSellPrice(sku.getSellPrice());
 		if(sku.getCategoryId() != null){
-			Category category = categoryService.find(sku.getCategoryId());
-			List<String> categories = new ArrayList<String>();
-			if(category != null && !StringUtils.isBlank(category.getPath())){
-				categories.add(category.getName());
-				for(String categoryId : category.getPath().split(Category.PATH_SEPARATOR)){
-					if(!String.valueOf(category.getId()).equals(categoryId)){
-						Category parent = categoryService.find(Long.parseLong(categoryId));
-						if(parent != null){
-							categories.add(parent.getName());
-						}
-					}
+			List<Category> categoryWithParents = categoryService.findWithParents(sku.getCategoryId());
+			if(!CollectionUtils.isEmpty(categoryWithParents)){
+				List<String> categories = new ArrayList<String>(categoryWithParents.size());
+				List<String> categoryCodes = new ArrayList<String>(categoryWithParents.size());
+				for(Category category : categoryWithParents){
+					categories.add(category.getName());
+					categoryCodes.add(category.getCode());
 				}
+				solrSku.setCategories(categories);
+				solrSku.setCategoryCodes(categoryCodes);
 			}
-			solrSku.setCategories(categories);
 		}
 		if(sku.getBrandId() != null){
 			Brand brand = brandService.find(sku.getBrandId());
