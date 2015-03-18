@@ -81,6 +81,7 @@ public class SolrService implements InitializingBean {
 		query.setRows(pagination.getLimit());
 		QueryResponse qr = server.query(query);
 		pagination.setItems(qr.getBeans(SolrSku.class));
+		pagination.setTotalCount(new Long(qr.getResults().getNumFound()).intValue());
 		return pagination;
 	}
 	
