@@ -5,8 +5,8 @@
 	<li>
 		<a href="">最新折扣</a>
 	</li>
-	<c:forEach items="${topCategories}" var="topCategory">
-	<li>
+	<c:forEach items="${topCategoryList}" var="topCategory">
+	<li class="${topCategory.id eq currentTopCategory.id ? 'cur' : ''}">
 		<a href="${ctx}/${topCategory.code}/list.htm">${topCategory.name}</a>
 	</li>
 	</c:forEach>

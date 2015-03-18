@@ -61,6 +61,8 @@
 		<field name="categories" type="string" indexed="true" stored="true" multiValued="true"/>
 		<field name="categoryCodes" type="string" indexed="true" stored="true" multiValued="true"/>
 		
+		<field name="image" type="string" indexed="false" stored="true" multiValued="false"/>
+		
 		<copyField source="code" dest="keyword"/>
 		<copyField source="name" dest="keyword"/>
 		<copyField source="brandCode" dest="keyword"/>

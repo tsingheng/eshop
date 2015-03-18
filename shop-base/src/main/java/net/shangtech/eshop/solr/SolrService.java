@@ -75,7 +75,7 @@ public class SolrService implements InitializingBean {
 	public Pagination<SolrSku> findByCategory(String[] categoryCodes, Pagination<SolrSku> pagination) throws SolrServerException{
 		SolrQuery query = new SolrQuery("*:*");
 		for(String code : categoryCodes){
-			query.add("categoryCodes", code);
+			query.addFilterQuery("categoryCodes:" + code);
 		}
 		query.setStart(pagination.getStart());
 		query.setRows(pagination.getLimit());
@@ -92,6 +92,7 @@ public class SolrService implements InitializingBean {
 		solrSku.setName(sku.getName());
 		solrSku.setMarketPrice(sku.getMarketPrice());
 		solrSku.setSellPrice(sku.getSellPrice());
+		solrSku.setImage(sku.getImage());
 		if(sku.getCategoryId() != null){
 			List<Category> categoryWithParents = categoryService.findWithParents(sku.getCategoryId());
 			if(!CollectionUtils.isEmpty(categoryWithParents)){

@@ -38,6 +38,9 @@ public class SolrSku implements Serializable {
     
     @Field("categoryCodes")
     private List<String> categoryCodes;
+    
+    @Field("image")
+    private String image;
 
 	public Long getId() {
 		return id;
@@ -117,6 +120,14 @@ public class SolrSku implements Serializable {
 
 	public void setCategoryCodes(List<String> categoryCodes) {
 		this.categoryCodes = categoryCodes;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }
