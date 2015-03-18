@@ -24,7 +24,7 @@ public class SolrTest extends BaseSpringTest {
 		try{
 			Pagination<SolrSku> pagination = new Pagination<SolrSku>();
 			pagination = solrService.findByCategory(new String[]{"tops"}, pagination);
-			logger.info("query {} items", pagination.getItems().size());
+			logger.info(String.format("query %d items of %d, page %d of %d", pagination.getItems().size(), pagination.getTotalCount(), pagination.getPageNo(), pagination.getTotalPage()));
 			for(SolrSku sku : pagination.getItems()){
 				logger.info(JSON.toJSONString(sku));
 			}

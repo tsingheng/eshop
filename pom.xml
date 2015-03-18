@@ -22,6 +22,20 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+        <repository>
+            <id>shangtech-repository</id>
+            <name>shangtech-repository</name>
+            <url>https://raw.github.com/shangtech/shangtech-repository/master</url>
+        </repository>
+    </repositories>
 </project>
