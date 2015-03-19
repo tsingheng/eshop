@@ -23,7 +23,7 @@ public class ShopRequestFilter implements Filter {
 
 	private static final UrlPathHelper urlPathHelper = new UrlPathHelper();
 	
-	private static final String CATEGORY_LIST_REQUEST_ENDING = "/list.htm";
+	private static final String CATEGORY_LIST_REQUEST_ENDING = "/list";
 	
 	private static final String LABEL_LIST_REQUEST_START = "/group/";
 	

@@ -8,4 +8,5 @@
 		<put-attribute name="nav" value="/WEB-INF/page/nav/category-nav.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/page/product-list/product-list.jsp"/>
 	</definition>
+	<definition name="shop.product.list.category.page" template="/WEB-INF/page/product-list/product-list-page.jsp"/>
 </tiles-definitions>

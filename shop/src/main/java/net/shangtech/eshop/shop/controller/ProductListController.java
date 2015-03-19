@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ProductListController {
@@ -25,7 +26,7 @@ public class ProductListController {
 	@Autowired private CategoryService categoryService;
 	@Autowired private SolrService solrService;
 	
-	@RequestMapping("/cate-{categories}/list.htm")
+	@RequestMapping(value = "/cate-{categories}/list", method = RequestMethod.GET)
 	public String listByCategory(@PathVariable String categories, Model model, Pagination<SolrSku> pagination){
 		String[] categoryCodes = categories.split("-");
 		
@@ -44,6 +45,16 @@ public class ProductListController {
 		}
 		model.addAttribute("categoryList", categoryList);
 		
+		loadPageByCategory(categories, model, pagination);
+		
+		return "shop.product.list.category";
+	}
+	
+	@RequestMapping(value = "/cate-{categories}/list", method = RequestMethod.POST)
+	public String loadPageByCategory(@PathVariable String categories, Model model, Pagination<SolrSku> pagination){
+		
+		String[] categoryCodes = categories.split("-");
+		
 		pagination.setLimit(48);
 		try {
 	        pagination = solrService.findByCategory(categoryCodes, pagination);
@@ -52,7 +63,7 @@ public class ProductListController {
 	        logger.error("solr查询异常", e);
         }
 		
-		return "shop.product.list.category";
+		return "shop.product.list.category.page";
 	}
 	
 }
