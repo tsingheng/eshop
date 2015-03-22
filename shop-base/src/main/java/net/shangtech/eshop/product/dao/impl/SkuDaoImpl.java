@@ -14,4 +14,9 @@ public class SkuDaoImpl extends BaseDao<Sku> implements SkuDao {
 	    return findOneByProperty("vid", vid);
     }
 
+	@Override
+    public Sku findByCode(String code) {
+	    return findOneByProperty("code", code);
+    }
+
 }

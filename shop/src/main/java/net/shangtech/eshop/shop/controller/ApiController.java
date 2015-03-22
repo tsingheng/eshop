@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SkuController {
+public class ApiController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	

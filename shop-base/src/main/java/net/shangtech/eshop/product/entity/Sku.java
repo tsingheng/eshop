@@ -5,13 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.apache.poi.hssf.record.formula.functions.Kurt;
 import org.hibernate.annotations.Index;
 
 import net.shangtech.framework.dao.support.BaseEntity;
 
 @Entity
 @Table(name = "t_sku")
-public class Sku extends BaseEntity<Long> {
+public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 	
     private static final long serialVersionUID = -6634884131249457163L;
     
@@ -173,5 +174,10 @@ public class Sku extends BaseEntity<Long> {
 	public void setColors(String colors) {
 		this.colors = colors;
 	}
+
+	@Override
+    public int compareTo(Sku sku) {
+	    return this.getId().compareTo(sku.getId());
+    }
 	
 }

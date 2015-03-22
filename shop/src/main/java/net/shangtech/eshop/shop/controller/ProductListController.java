@@ -36,9 +36,6 @@ public class ProductListController {
 		Category currentCategory = categoryService.findByCode(categoryCodes[categoryCodes.length-1]);
 		model.addAttribute("currentCategory", currentCategory);
 		
-		List<Category> topCategoryList = categoryService.findByParentId(Category.ROOT_CATE_ID);
-		model.addAttribute("topCategoryList", topCategoryList);
-		
 		List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
 		for(Category category : categoryList){
 			category.setChildren(categoryService.findByParentId(category.getId()));

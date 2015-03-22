@@ -22,4 +22,9 @@ public class SkuServiceImpl extends BaseService<Sku> implements SkuService {
     public Sku findByVid(String vid) {
 	    return dao.findByVid(vid);
     }
+
+	@Override
+    public Sku findByCode(String code) {
+	    return dao.findByCode(code);
+    }
 }

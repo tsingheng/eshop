@@ -5,4 +5,6 @@ import net.shangtech.framework.dao.IBaseDao;
 
 public interface SkuDao extends IBaseDao<Sku> {
 	Sku findByVid(String vid);
+	
+	Sku findByCode(String code);
 }

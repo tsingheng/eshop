@@ -5,7 +5,7 @@
 <%@ taglib prefix="math" uri="http://www.shangtech.net/tags/math"%>
 <div class="nav">
 	<div class="main-nav">
-		<jsp:include page="/WEB-INF/page/nav/main-nav.jsp"/>
+		<jsp:include page="/WEB-INF/page/nav/top-nav.jsp"/>
 	</div>
 	<div class="category-nav">
 		<ul>
@@ -16,14 +16,14 @@
 					<c:forEach items="${category.children}" var="child">
 						<li class="${currentCategory.id eq child.id ? 'cur' : ''}">
 							<c:if test="${not (currentCategory.id eq child.id)}">
-							<a href="${ctx}/${currentTopCategory.code}/${category.code}/${child.code}/list.htm">${child.name}</a>
+							<a href="${ctx}/${currentTopCategory.code}/${category.code}/${child.code}/list">${child.name}</a>
 							</c:if>
 							<c:if test="${currentCategory.id eq child.id}">${child.name}</c:if>
 						</li>
 					</c:forEach>
 					</ul>
 				</c:if>
-				<a href="${ctx}/${currentTopCategory.code}/${category.code}/list.htm"><span></span><div class="category-name">${category.name}</div></a>
+				<a href="${ctx}/${currentTopCategory.code}/${category.code}/list"><span></span><div class="category-name">${category.name}</div></a>
 			</li>
 		</c:forEach>
 		</ul>
