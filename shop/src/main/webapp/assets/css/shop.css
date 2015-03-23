@@ -479,6 +479,7 @@ background-position: -500px -200px;
 }
 .sku-info .share-list{margin:40px 0px 20px 0px;height:30px;}
 
+.input-group-addon.verify{width:90px;padding:0px;background-image:url(https://passport.vip.com/captcha/getCaptcha?type=1&vipc=b67eccfa560c4b0fb0a5ae4064906fde&v=1427025397248);background-size:contain;background-position:center;background-repeat:no-repeat;}
 
 
 

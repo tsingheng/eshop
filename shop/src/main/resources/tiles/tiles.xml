@@ -6,7 +6,7 @@
 <tiles-definitions>
 	<definition name="shop.main" template="/WEB-INF/page/commons/shop-template-main.jsp"></definition>
 	<definition name="shop.index" extends="shop.main">
-		<put-attribute name="nav" value=""/>
+		<put-attribute name="nav" value="/WEB-INF/page/nav/main-nav.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/page/index.jsp"/>
 	</definition>
 </tiles-definitions>
