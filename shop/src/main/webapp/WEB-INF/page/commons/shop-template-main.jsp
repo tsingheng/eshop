@@ -15,7 +15,15 @@
 	</head>
 	<body>
 		<div id="header">
-			
+			<div class="header-nav">
+				<ul class="header-nav-tools">
+					<li>
+						<a href="${ctx}/login">登录</a>
+						<span>|</span>
+						<a href="${ctx}/register">注册</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div id="nav">
 			<t:insertAttribute name="nav"/>

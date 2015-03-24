@@ -9,4 +9,6 @@ public interface MemberService extends IBaseService<Member> {
 	Member findByMobile(String mobile);
 	
 	Member findByThirdId(String thirdId);
+	
+	Member register(Member temp);
 }

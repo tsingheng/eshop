@@ -5,6 +5,8 @@
 
 body{background:#f6f6f6;}
 
+.header-nav-tools{list-style:none;list-style-type:none;padding-left:0px;float:right;padding: 5px 15px 0 0;}
+
 .navigation{list-style:none;list-style-type:none;}
 .navigation:after{content:'';display:block;clear:both;}
 .navigation li{float:left;height:40px;}

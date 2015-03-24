@@ -30,4 +30,10 @@ public class MemberServiceImpl extends BaseService<Member> implements MemberServ
 	    return dao.findByThirdId(thirdId);
     }
 
+	@Override
+    public Member register(Member temp) {
+	    
+	    return null;
+    }
+
 }

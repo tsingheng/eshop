@@ -8,4 +8,9 @@
 		<put-attribute name="nav" value=""/>
 		<put-attribute name="content" value="/WEB-INF/page/member/register.jsp"/>
 	</definition>
+	
+	<definition name="shop.member.login" extends="shop.main">
+		<put-attribute name="nav" value=""/>
+		<put-attribute name="content" value="/WEB-INF/page/member/login.jsp"/>
+	</definition>
 </tiles-definitions>
