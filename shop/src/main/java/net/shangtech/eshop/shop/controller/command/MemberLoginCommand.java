@@ -16,7 +16,7 @@ public class MemberLoginCommand implements Serializable {
     private String password;
     
     @NotEmpty
-    private String verify;
+    private String captcha;
 
 	public String getUsername() {
 		return username;
@@ -34,12 +34,12 @@ public class MemberLoginCommand implements Serializable {
 		this.password = password;
 	}
 
-	public String getVerify() {
-		return verify;
+	public String getCaptcha() {
+		return captcha;
 	}
 
-	public void setVerify(String verify) {
-		this.verify = verify;
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
     
 }

@@ -30,11 +30,11 @@ public class MemberRegisterCommand implements Serializable {
     
     @Valid
     @net.shangtech.framework.controller.validation.constraints.Password
-    private Password pass;
+    private Password pass = new Password();
     
     /** 验证码 */
     @NotEmpty
-    private String verify;
+    private String captcha;
 
 	public String getEmail() {
 		return email;
@@ -68,12 +68,12 @@ public class MemberRegisterCommand implements Serializable {
 		this.pass = pass;
 	}
 
-	public String getVerify() {
-		return verify;
+	public String getCaptcha() {
+		return captcha;
 	}
 
-	public void setVerify(String verify) {
-		this.verify = verify;
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
     
 }

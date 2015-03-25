@@ -6,6 +6,7 @@ var App = {
 	init: function(){
 		this.initSidebar();
 		this.initTools();
+		this.initCaptcha();
 	},
 	initSidebar: function(){
 		$('#sidebar').on('click', '.submenu a', function(){
@@ -25,6 +26,12 @@ var App = {
 	initTools: function(){
 		$('body').on('click', '.easyui-window .btn-cancel', function(){
 			$(this).closest('.easyui-window').window('close');
+		});
+	},
+	initCaptcha: function(){
+		$('body').on('click', '.captcha', function(){
+			var url = $(this).data('url');
+			$(this).css('background-image', 'url("' + url + '?' + new Date().getTime() + '")');
 		});
 	}
 }

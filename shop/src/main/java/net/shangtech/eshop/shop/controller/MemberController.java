@@ -1,7 +1,11 @@
 package net.shangtech.eshop.shop.controller;
 
+import javax.servlet.http.HttpSession;
+
 import net.shangtech.eshop.account.entity.Member;
 import net.shangtech.eshop.account.service.MemberService;
+import net.shangtech.eshop.shop.constants.ScopConstants.SessionScope;
+import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.MemberLoginCommand;
 import net.shangtech.eshop.shop.controller.command.MemberRegisterCommand;
 import net.shangtech.framework.controller.AjaxResponse;
@@ -28,10 +32,16 @@ public class MemberController {
 	@RequestValid
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public AjaxResponse register(@RequestValid MemberRegisterCommand cmd){
+	public AjaxResponse register(@RequestValid MemberRegisterCommand cmd, HttpSession session){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//验证码
+		String captchaInSession = (String) session.getAttribute(SessionScope.CAPTCHA_KEY);
+		if(!StringUtils.equalsIgnoreCase(captchaInSession, cmd.getCaptcha())){
+			ajaxResponse.addError("captcha", "验证码错误");
+			return ajaxResponse;
+		}
 		
+		//邮箱一律转成小写
 		cmd.setEmail(StringUtils.lowerCase(cmd.getEmail()));
 		
 		Member old = memberService.findByEmail(cmd.getEmail());
@@ -57,9 +67,16 @@ public class MemberController {
 		return "shop.member.login";
 	}
 	
-	public AjaxResponse login(@RequestValid MemberLoginCommand cmd){
+	@ResponseBody
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public AjaxResponse login(@RequestValid MemberLoginCommand cmd, HttpSession session){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//验证码
+		String captchaInSession = (String) session.getAttribute(SessionScope.CAPTCHA_KEY);
+		if(!StringUtils.equalsIgnoreCase(captchaInSession, cmd.getCaptcha())){
+			ajaxResponse.addError("captcha", "验证码错误");
+			return ajaxResponse;
+		}
 		
 		cmd.setUsername(StringUtils.lowerCase(cmd.getUsername()));
 		
@@ -71,6 +88,12 @@ public class MemberController {
 			ajaxResponse.addError("password", "用户名和密码不匹配");
 			return ajaxResponse;
 		}
+		
+		LoginMember loginMember = new LoginMember();
+		loginMember.setId(member.getId());
+		loginMember.setUsername(cmd.getUsername());
+		session.setAttribute(SessionScope.LOGIN_MEMBER_KEY, loginMember);
+		
 		return ajaxResponse;
 	}
 }

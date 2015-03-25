@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$validator = $('#register-form').validate({
+	$('#register-form').validate({
 		rules: {
 			'email': {
 				required: true,
@@ -21,7 +21,7 @@ $(document).ready(function(){
 				required: true,
 				equalTo: '#password'
 			},
-			'verify': {
+			'captcha': {
 				required: true
 			}
 		},
@@ -48,7 +48,7 @@ $(document).ready(function(){
 				maxlength: '密码由8-16位字符组成',
 				equalTo: '两次密码输入不一致'
 			},
-			'verify': {
+			'captcha': {
 				required: '请输入验证码'
 			}
 		},

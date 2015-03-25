@@ -481,10 +481,19 @@ background-position: -500px -200px;
 }
 .sku-info .share-list{margin:40px 0px 20px 0px;height:30px;}
 
-.input-group-addon.verify{width:90px;padding:0px;background-image:url(https://passport.vip.com/captcha/getCaptcha?type=1&vipc=b67eccfa560c4b0fb0a5ae4064906fde&v=1427025397248);background-size:contain;background-position:center;background-repeat:no-repeat;}
+.input-group-addon.captcha{width:90px;padding:0px;background-size:contain;background-position:center;background-repeat:no-repeat;}
 
-
-
+.oauth-group{margin-top:50px;}
+.oauth-link{display:block;width:40px;height:40px;margin:0 auto;}
+.icon-qq,.icon-weibo,.icon-alipay,.icon-wechat{width:40px;height:40px;display:inline-block;background-image:url("../images/icon_oauth.png");background-repeat:no-repeat;}
+.icon-qq{background-position:0 0;}
+.icon-weibo{background-position:-45px 0;}
+.icon-alipay{background-position:-90px 0;}
+.icon-wechat{background-position:-135px 0;}
+.oauth-link:hover .icon-qq{background-position:0 -45px;}
+.oauth-link:hover .icon-weibo{background-position:-45px -45px;}
+.oauth-link:hover .icon-alipay{background-position:-90px -45px;}
+.oauth-link:hover .icon-wechat{background-position:-135px -45px;}
 
 
 

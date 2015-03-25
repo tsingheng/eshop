@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="math" uri="http://www.shangtech.net/tags/math"%>
 <div class="row">
 	<div class="col-md-6">
 		
@@ -53,8 +54,8 @@
 				<label for="verify" class="col-sm-2 control-label">验证码</label>
 				<div class="col-sm-6">
 				<div class="input-group">
-					<input type="text" class="form-control" id="verify" name="verify">
-					<span class="input-group-addon verify"></span>
+					<input type="text" class="form-control" id="captcha" name="captcha">
+					<span class="input-group-addon captcha" data-url="${ctx}/captcha" style="background-image:url('${ctx}/captcha?${math:random()}')"></span>
 				</div>
 				</div>
 			</div>
