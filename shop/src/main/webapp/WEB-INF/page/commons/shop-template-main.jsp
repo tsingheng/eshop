@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
+		<meta property="qc:admins" content="43036231470630167453066547" />
 		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${ctx}/assets/css/shop.css">
 		<link rel="stylesheet" href="${ctx}/assets/jqzoom/css/jquery.jqzoom.css">
