@@ -21,11 +21,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.4</version>
-		</dependency>
-		<dependency>
 			<groupId>net.shangtech</groupId>
 			<artifactId>shop-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
