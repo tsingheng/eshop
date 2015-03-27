@@ -9,8 +9,8 @@
 	</div>
 	<div class="category-nav">
 		<ul>
-		<c:forEach items="${categoryList}" var="category">
-			<li class="category-icon ${currentCategory.id eq category.id or currentCategory.parentId eq category.id ? 'cur' : ''}">
+		<c:forEach items="${categoryList}" var="category" varStatus="i">
+			<li class="category-icon ${currentCategory.id eq category.id or currentCategory.parentId eq category.id ? 'cur' : ''} ${i.index eq 0 ? 'first-category-icon' : ''}">
 				<c:if test="${not empty category.children}">
 					<ul style="width:${60*math:ceil(fn:length(category.children)/2)}px;">
 					<c:forEach items="${category.children}" var="child">

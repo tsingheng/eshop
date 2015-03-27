@@ -17,6 +17,7 @@ body{background:#f6f6f6;}
 
 .category-nav ul{list-style:none;list-style-type:none;}
 .category-nav ul li{float:left;margin-left:120px;}
+.category-nav ul li.first-category-icon{margin-left:0px;}
 .category-nav ul li a span{display:block;height:75px;width:70px;background:url('http://s.juancdn.com/juanpi/images/zhe/zhe_icons.png') no-repeat;background-position:0 0;}
 .category-nav ul li a:hover span{background-position:0 -75px;}
 .category-nav ul li.cur a span{background-position:0 -150px;}
@@ -28,6 +29,8 @@ body{background:#f6f6f6;}
 .category-nav ul li ul li a{display:block;width:60px;height:20px;}
 
 #main{width:1220px;margin:20px auto;}
+#header{width:1220px;margin:0px auto;}
+#nav{width:1220px;margin:0px auto;}
 
 .product-list{width:1220px;}
 .product-item{width:285px;background:#FFF;float:left;margin:0 18px 18px 0;border:#f6f6f6 solid 1px;}
