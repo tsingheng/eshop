@@ -7,4 +7,6 @@ import net.shangtech.framework.service.IBaseService;
 
 public interface InventoryService extends IBaseService<Inventory> {
 	List<Inventory> findBySkuId(Long skuId);
+	
+	Inventory findByCode(String code);
 }

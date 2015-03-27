@@ -1,14 +1,15 @@
 package net.shangtech.eshop.sales.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Index;
-
 import net.shangtech.framework.dao.support.BaseEntity;
+
+import org.hibernate.annotations.Index;
 
 @Entity
 @Table(name = "t_shopping_cart_item")
@@ -20,15 +21,21 @@ public class ShoppingCartItem extends BaseEntity<Long> {
 	@Index(name = "idx_shopping_cart_item_member_id")
 	private Long memberId;
 	
-	@Column(name = "sku_id")
-	@Index(name = "idx_shopping_cart_item_sku_id")
-	private Long skuId;
+	@Column(name = "inventory_code")
+	@Index(name = "idx_shopping_cart_item_code")
+	private String code;
 	
 	@Column(name = "quantity")
 	private Integer quantity;
 	
 	@Column(name = "create_time")
 	private Date createTime;
+	
+	@Column(name = "deleted")
+	private Boolean deleted = false;
+	
+	@Column(name = "delete_time")
+	private Date deleteTime;
 
 	public Long getMemberId() {
 		return memberId;
@@ -38,12 +45,12 @@ public class ShoppingCartItem extends BaseEntity<Long> {
 		this.memberId = memberId;
 	}
 
-	public Long getSkuId() {
-		return skuId;
+	public String getCode() {
+		return code;
 	}
 
-	public void setSkuId(Long skuId) {
-		this.skuId = skuId;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public Integer getQuantity() {
@@ -60,6 +67,22 @@ public class ShoppingCartItem extends BaseEntity<Long> {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public Date getDeleteTime() {
+		return deleteTime;
+	}
+
+	public void setDeleteTime(Date deleteTime) {
+		this.deleteTime = deleteTime;
 	}
 	
 }

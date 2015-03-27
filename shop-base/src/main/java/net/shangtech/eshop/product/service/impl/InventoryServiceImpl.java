@@ -21,4 +21,9 @@ public class InventoryServiceImpl extends BaseService<Inventory> implements Inve
     public List<Inventory> findBySkuId(Long skuId) {
 	    return dao.findBySkuId(skuId);
     }
+
+	@Override
+    public Inventory findByCode(String code) {
+	    return dao.findByCode(code);
+    }
 }

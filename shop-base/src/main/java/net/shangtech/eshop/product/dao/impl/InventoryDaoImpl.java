@@ -16,4 +16,9 @@ public class InventoryDaoImpl extends BaseDao<Inventory> implements InventoryDao
 	    return findByProperty("skuId", skuId);
     }
 
+	@Override
+    public Inventory findByCode(String code) {
+	    return findOneByProperty("code", code);
+    }
+
 }

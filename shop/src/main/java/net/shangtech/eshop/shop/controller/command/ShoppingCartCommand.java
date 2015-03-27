@@ -2,7 +2,10 @@ package net.shangtech.eshop.shop.controller.command;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class ShoppingCartCommand implements Serializable {
 
@@ -79,4 +82,84 @@ public class ShoppingCartCommand implements Serializable {
 		this.memberAddressId = memberAddressId;
 	}
 	
+	/**
+	 * 向购物车中添加商品
+	 * @param item
+	 */
+	public void addItem(ShoppingCartItemCommand cmd){
+		boolean hasInShoppingCart = false;
+		for(ShoppingCartItemCommand item : shoppingCartItemList){
+			if(StringUtils.equalsIgnoreCase(item.getCode(), cmd.getCode())){
+				hasInShoppingCart = true;
+				item.add(cmd.getQuantity());
+				break;
+			}
+		}
+		if(!hasInShoppingCart){
+			shoppingCartItemList.add(cmd);
+		}
+		refreshShoppingCart();
+	}
+	
+	/**
+	 * 将商品移出购物车
+	 * @param code
+	 */
+	public void removeItem(String code){
+		Iterator<ShoppingCartItemCommand> it = shoppingCartItemList.iterator();
+		while(it.hasNext()){
+			ShoppingCartItemCommand item = it.next();
+			if(StringUtils.equalsIgnoreCase(item.getCode(), code)){
+				it.remove();
+				break;
+			}
+		}
+		refreshShoppingCart();
+	}
+	
+	/**
+	 * 减少购物车中商品的数量
+	 * @param code
+	 */
+	public void reduceItem(String code){
+		Iterator<ShoppingCartItemCommand> it = shoppingCartItemList.iterator();
+		while(it.hasNext()){
+			ShoppingCartItemCommand item = it.next();
+			if(StringUtils.equalsIgnoreCase(item.getCode(), code)){
+				item.reduce(1);
+				if(item.getQuantity() == 0){
+					it.remove();
+				}
+				break;
+			}
+		}
+		refreshShoppingCart();
+	}
+	
+	/** 手动设置购物车中商品的数量 */
+	public void resetItem(String code, int quantity){
+		Iterator<ShoppingCartItemCommand> it = shoppingCartItemList.iterator();
+		while(it.hasNext()){
+			ShoppingCartItemCommand item = it.next();
+			if(StringUtils.equalsIgnoreCase(item.getCode(), code)){
+				item.setQuantity(quantity);
+				break;
+			}
+		}
+		refreshShoppingCart();
+	}
+	
+	/**
+	 * 刷新购物车属性
+	 */
+	private void refreshShoppingCart(){
+		int quantity = 0;
+		BigDecimal amount = new BigDecimal(0);
+		for(ShoppingCartItemCommand item : shoppingCartItemList){
+			quantity += item.getQuantity();
+			amount.add(new BigDecimal(item.getSku().getSellPrice()*item.getQuantity()));
+		}
+		this.quantity = quantity;
+		this.originalAmount = amount;
+	}
 }

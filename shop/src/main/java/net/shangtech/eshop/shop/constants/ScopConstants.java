@@ -7,5 +7,8 @@ public class ScopConstants {
 		
 		/** 已登录用户 */
 		public static final String LOGIN_MEMBER_KEY = "login_member_key";
+		
+		/** 购物车 */
+		public static final String SHOPPING_CART_COMMAND_KEY = "shopping_cart_command_key";
 	}
 }

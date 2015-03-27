@@ -7,4 +7,6 @@ import net.shangtech.framework.dao.IBaseDao;
 
 public interface InventoryDao extends IBaseDao<Inventory> {
 	List<Inventory> findBySkuId(Long skuId);
+	
+	Inventory findByCode(String code);
 }

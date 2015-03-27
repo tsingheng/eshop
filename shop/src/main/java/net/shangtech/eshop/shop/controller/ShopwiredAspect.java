@@ -1,10 +1,16 @@
 package net.shangtech.eshop.shop.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import net.shangtech.eshop.shop.constants.ScopConstants.SessionScope;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
+import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -36,8 +42,19 @@ public class ShopwiredAspect {
 	}
 	
 	private ShoppingCartCommand loadShoppingCart(){
-//		ShoppingCartCommand shoppingCart = WebUtils.getSessionAttribute(request, name);
-		return null;
+		ShoppingCartCommand shoppingCart = (ShoppingCartCommand) WebUtils.getSessionAttribute(request, SessionScope.SHOPPING_CART_COMMAND_KEY);
+		if(shoppingCart == null){
+			shoppingCart = new ShoppingCartCommand();
+			shoppingCart.setActualAmount(new BigDecimal(0));
+			shoppingCart.setActualFreight(new BigDecimal(0));
+			shoppingCart.setOriginalAmount(new BigDecimal(0));
+			shoppingCart.setOriginalFreight(new BigDecimal(0));
+			shoppingCart.setQuantity(0);
+			List<ShoppingCartItemCommand> items = new ArrayList<ShoppingCartItemCommand>();
+			shoppingCart.setShoppingCartItemList(Collections.synchronizedList(items));
+			WebUtils.setSessionAttribute(request, SessionScope.SHOPPING_CART_COMMAND_KEY, shoppingCart);
+		}
+		return shoppingCart;
 	}
 	
 	private LoginMember loadLoginMember(){
