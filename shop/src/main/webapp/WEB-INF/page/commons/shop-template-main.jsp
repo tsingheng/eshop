@@ -15,15 +15,54 @@
 		</script>
 	</head>
 	<body>
-		<div id="header">
-			<div class="header-nav">
-				<ul class="header-nav-tools">
-					<li>
-						<a href="${ctx}/login">登录</a>
-						<span>|</span>
-						<a href="${ctx}/register">注册</a>
-					</li>
-				</ul>
+		<div id="toolbar">
+			<div class="bar-con clear">
+				<div class="right-show pull-right">
+					<c:if test="${empty sessionScope['login_member_key']}">
+					<div class="union-login"> 
+						<a href="${ctx}/login" rel="nofollow">QQ登录</a>
+						<a href="${ctx}/register" rel="nofollow">微博登录</a>
+					</div>
+					<span class="split">|</span>
+					<div class="login-show">
+						<a href="${ctx}/login" rel="nofollow">登录</a>
+						<a href="${ctx}/register" rel="nofollow">免费注册</a>
+					</div>
+					</c:if>
+					<c:if test="${not empty sessionScope['login_member_key']}">
+					<div class="logined-show">
+						<a href="" class="normal-a">
+							<img src="http://s1.juancdn.com/face/default.jpg_20x20.jpg">
+							<span class="user">nickname</span>
+							<em class="cur"></em>
+						</a>
+						<div class="normal-box login-box">
+							<ul>
+								<li><a href="${ctx}/favorite"><i class="icon icon-01"></i><span>我的收藏</span></a></li>
+								<li><a href="${ctx}/setting"><i class="icon icon-03"></i><span>账号设置</span></a></li>
+								<li><a href="${ctx}/rebate"><i class="icon icon-02"></i><span>我的返利</span></a></li>
+								<li><a href="${ctx}/logout"><i class="icon icon-04"></i><span>退出</span></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="personal-show">
+						<a href="${ctx}/order"><span>我的订单</span></a>
+						<a href="${ctx}/beans"><span>我的积分</span></a>
+						<a href="${ctx}/message"><span>我的消息</span><em class="count" style="display: none;">0</em></a>
+					</div>
+					</c:if>
+					<span class="split">&nbsp;</span>
+					<div class="bag-show">
+						<a href="" target="_blank" class="bag-a">
+							<span class="icon-normal icon-bag"></span>
+							<span class="empty fl">购物袋（0）</span>
+						</a>
+						<div class="bag-tool bag-tool-empty" style="display:none;">
+							<div id="loadingimg" style="display:none"></div>
+							<p><span class="icon-normal icon-bag-empty"></span>购物袋还是空荡荡的~</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="nav">

@@ -121,12 +121,12 @@ public class ShoppingCartCommand implements Serializable {
 	 * 减少购物车中商品的数量
 	 * @param code
 	 */
-	public void reduceItem(String code){
+	public void reduceItem(String code, int quantity){
 		Iterator<ShoppingCartItemCommand> it = shoppingCartItemList.iterator();
 		while(it.hasNext()){
 			ShoppingCartItemCommand item = it.next();
 			if(StringUtils.equalsIgnoreCase(item.getCode(), code)){
-				item.reduce(1);
+				item.reduce(quantity);
 				if(item.getQuantity() == 0){
 					it.remove();
 				}

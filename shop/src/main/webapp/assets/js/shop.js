@@ -7,6 +7,7 @@ var App = {
 		this.initSidebar();
 		this.initTools();
 		this.initCaptcha();
+		this.initShoppingCart();
 	},
 	initSidebar: function(){
 		$('#sidebar').on('click', '.submenu a', function(){
@@ -32,6 +33,13 @@ var App = {
 		$('body').on('click', '.captcha', function(){
 			var url = $(this).data('url');
 			$(this).css('background-image', 'url("' + url + '?' + new Date().getTime() + '")');
+		});
+	},
+	initShoppingCart: function(){
+		$('.bag-show, .logined-show').hover(function(){
+			$(this).addClass('hover');
+		}, function(){
+			$(this).removeClass('hover');
 		});
 	}
 }

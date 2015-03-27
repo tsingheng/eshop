@@ -13,8 +13,10 @@ import net.shangtech.framework.controller.AjaxResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 购物相关
@@ -29,7 +31,8 @@ public class ShoppingController {
 	@Autowired private 	SkuService 							skuService;
 	
 	@Shopwired
-	@RequestMapping("/add-to-shopping-cat")
+	@ResponseBody
+	@RequestMapping("/add-to-shopping-cart")
 	public AjaxResponse addToShoppingCart(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -61,5 +64,74 @@ public class ShoppingController {
 		
 		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping("/reduce-shopping-item")
+	public AjaxResponse reduceShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
+			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		//code是否存在
+		Inventory inventory = inventoryService.findByCode(code);
+		if(inventory == null){
+			ajaxResponse.setMessage("商品不存在");
+			return ajaxResponse;
+		}
+		shoppingCart.reduceItem(code, quantity);
+		
+		//如果是已登录用户,同步至数据库
+		if(loginMember != null){
+			shoppingCartItemService.reduceItem(code, quantity, loginMember.getId());
+		}
+		
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping("/reset-shopping-item")
+	public AjaxResponse resetShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
+			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		//code是否存在
+		Inventory inventory = inventoryService.findByCode(code);
+		if(inventory == null){
+			ajaxResponse.setMessage("商品不存在");
+			return ajaxResponse;
+		}
+		shoppingCart.resetItem(code, quantity);
+		
+		if(loginMember != null){
+			shoppingCartItemService.updateItem(code, quantity, loginMember.getId());
+		}
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	public AjaxResponse removeShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
+			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		//code是否存在
+		Inventory inventory = inventoryService.findByCode(code);
+		if(inventory == null){
+			ajaxResponse.setMessage("商品不存在");
+			return ajaxResponse;
+		}
+		shoppingCart.removeItem(code);
+		
+		if(loginMember != null){
+			shoppingCartItemService.removeItem(code, quantity, loginMember.getId());
+		}
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@RequestMapping("/shopping-cart")
+	public String gotoShoppingCart(Model model, ShoppingCartCommand shoppingCart){
+		model.addAttribute("shoppingCart", shoppingCart);
+		return "shop.sales.cart";
 	}
 }
