@@ -63,6 +63,7 @@ $(document).ready(function(){
 		$this.parent().find('.sli-selected').removeClass('sli-selected');
 		$this.addClass('sli-selected');
 		avaliable = $this.data('avaliable');
+		$('#J-sizeArea-wrap').removeClass('status-notice');
 	});
 	$('.num-add').click(function(){
 		var $this = $(this);
@@ -78,6 +79,7 @@ $(document).ready(function(){
 		if(num > 1){
 			$('.num-reduce').removeClass('num-reduce-disabled');
 		}
+		$('#J-num-select').removeClass('status-notice');
 	});
 	$('.num-reduce').click(function(){
 		var $this = $(this);
@@ -93,5 +95,71 @@ $(document).ready(function(){
 		if(avaliable > -1 && num < avaliable){
 			$('.num-add').removeClass('num-add-disabled');
 		}
+		$('#J-num-select').removeClass('status-notice');
+	});
+	
+	$('#cart-form').validate({
+		rules: {
+			'code': 'required',
+			'quantity': {
+				required: true
+			}
+		},
+		messages: {
+			'code': '请选择尺码',
+			'quantity': {
+				required: '请选择购买数量'
+			}
+		},
+		errorClass: 'status-notice',
+		errorPlacement: function(error, $ele){
+			$ele.next().html(error.html());
+		},
+		highlight: function(element, errorClass, validClass){
+			$(element).parent().addClass(errorClass);
+		},
+		unhighlight: function(element, errorClass, validClass){
+			$(element).parent().removeClass(errorClass);
+		},
+		submitHandler: function(form){
+			return false;
+		}
+	});
+	$('#J-cartAdd-submit').click(function(){
+		var code = $('.size-list .sli-selected').data('code');
+		if(!code){
+			//未选择尺码
+			$('#J-sizeArea-wrap').addClass('status-notice');
+			return;
+		}
+		var quantity = parseInt($('.num-box .J-pro-num-txt').html());
+		if(isNaN(quantity) || quantity < 1){
+			//未填写数量
+			$('#J-num-select .J-num-tips').html('请选择购买数量');
+			$('#J-num-select').addClass('status-notice');
+			return;
+		}
+		if(quantity > avaliable){
+			//库存不足
+			$('#J-num-select .J-num-tips').html('该尺码库存仅剩' + avaliable + '件');
+			$('#J-num-select').addClass('status-notice');
+			return;
+		}
+		$.ajax({
+			url: ctx + '/add-to-shopping-cart',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				code: code,
+				quantity: quantity
+			},
+			success: function(response){
+				if(response.errors && response.errors.length > 0){
+					$('#cart-form').validate().showErrors(response.errors);
+					return;
+				}
+				App.loadShoppingCart();
+			}
+		});
 	});
 });

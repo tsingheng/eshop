@@ -1,4 +1,4 @@
-package net.shangtech.eshop.shop.controller;
+package net.shangtech.eshop.shop.controller.aspect;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

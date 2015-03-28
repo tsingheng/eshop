@@ -8,6 +8,7 @@ var App = {
 		this.initTools();
 		this.initCaptcha();
 		this.initShoppingCart();
+		this.loadShoppingCart();
 	},
 	initSidebar: function(){
 		$('#sidebar').on('click', '.submenu a', function(){
@@ -40,6 +41,16 @@ var App = {
 			$(this).addClass('hover');
 		}, function(){
 			$(this).removeClass('hover');
+		});
+	},
+	loadShoppingCart: function(){
+		$.ajax({
+			url: ctx + '/load-shopping-cart',
+			type: 'POST',
+			dataType: 'json',
+			success: function(cart){
+				$('#cart-summary').html('购物袋 (' + cart.quantity + ') ');
+			}
 		});
 	}
 }

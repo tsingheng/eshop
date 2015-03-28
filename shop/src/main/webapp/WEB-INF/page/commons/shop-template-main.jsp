@@ -52,14 +52,59 @@
 					</div>
 					</c:if>
 					<span class="split">&nbsp;</span>
-					<div class="bag-show">
+					<div class="bag-show hover">
 						<a href="" target="_blank" class="bag-a">
 							<span class="icon-normal icon-bag"></span>
-							<span class="empty fl">购物袋（0）</span>
+							<span class="empty fl" id="cart-summary"></span>
 						</a>
-						<div class="bag-tool bag-tool-empty" style="display:none;">
+						<div class="bag-tool _bag-tool-empty" style="display:none;">
 							<div id="loadingimg" style="display:none"></div>
+							<!--  
 							<p><span class="icon-normal icon-bag-empty"></span>购物袋还是空荡荡的~</p>
+							-->
+							<ul class="clear">
+								<li>
+									<a class="pic fl">
+										<img class="lazy" src="http://s1.juancdn.com/bao/150324/n/3/5510fff4ab5a8_400x400.jpg_60x60.jpg" style="display: inline;">
+									</a>
+									<div class="detail">
+										<p class="title">
+											<a target="_blank" href="http://shop.juanpi.com/deal/1592499">印花不规则下摆雪纺衫</a>
+											<span class="fr"><em>￥</em>59</span>
+										</p>
+										<p class="normal">尺码：L（大码）<a href="javascript:;" class="del fr">删除</a></p>
+										<p class="normal">颜色：粉红色</p>
+									</div>
+									<div class="tips_alert" style="display:none;">
+										<div class="mask_bg"></div>
+										<div class="btn_all">
+											<a class="btn btn01" data-skuid="118946" href="javascript:;">删除</a>
+											<a class="btn btn02" href="javascript:;">保留</a>
+										</div>
+									</div>
+								</li>
+								<li class="last">
+									<a class="pic fl">
+										<img class="lazy" src="http://s1.juancdn.com/bao/150324/n/3/5510fff4ab5a8_400x400.jpg_60x60.jpg" style="display: inline;">
+									</a>
+									<div class="detail">
+										<p class="title">
+											<a target="_blank" href="http://shop.juanpi.com/deal/1592499">印花不规则下摆雪纺衫</a>
+											<span class="fr"><em>￥</em>59</span>
+										</p>
+										<p class="normal">尺码：M（中码）<a href="javascript:;" class="del fr">删除</a></p>
+										<p class="normal">颜色：粉红色</p>
+									</div>
+									<div class="tips_alert" style="display:none;">
+										<div class="mask_bg"></div>
+										<div class="btn_all">
+											<a class="btn btn01" data-skuid="118945" href="javascript:;">删除</a>
+											<a class="btn btn02" href="javascript:;">保留</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<div class="amount"><a class="fr btn" target="_blank" href="http://cart.juanpi.com">去购物袋结算</a></div>
 						</div>
 					</div>
 				</div>

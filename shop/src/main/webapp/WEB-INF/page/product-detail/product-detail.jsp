@@ -32,6 +32,7 @@
 				</span>
 			</div>
 		</div>
+		<form id="cart-form">
 		<div class="sku-info">
 			<div class="sku-title">
 				<p class="sku-brand"><a href="#">${brand.name}</a></p>
@@ -74,11 +75,15 @@
 			    
 			    <dl class="i-size clearfix J-sizeArea-wrap" id="J-sizeArea-wrap">
 				    <dt class="size-name">尺码：</dt>
+				    <input type="hidden" name="code" id="code"/>
 				    <dd class="i-notice-msg">请选择尺码</dd>
 				    <dd class="size-list">
 				    	<ul>
 				    		<c:forEach items="${inventoryList}" var="inventory">
-				           	<li data-max="${inventory.max}" data-avaliable="${math:max(inventory.stock-inventory.saled, 0)}" class="size-list-item J-sizeID ${inventory.saled ge inventory.stock ? 'sli-disabled' : ''} size-list-item-small" id="J-cartAdd-sizeID-${inventory.id}" data-size-name="${inventory.size}" data-hover="size-list-item-hover" data-id="${inventory.id}" mars_sead="m_te_goods_buy_size_check" style="z-index: 4;">
+				           	<li data-max="${inventory.max}" data-avaliable="${math:max(inventory.stock-inventory.saled, 0)}" 
+				           		class="size-list-item J-sizeID ${inventory.saled ge inventory.stock ? 'sli-disabled' : ''} size-list-item-small" 
+				           		id="J-cartAdd-sizeID-${inventory.id}" data-size-name="${inventory.size}" data-hover="size-list-item-hover" 
+				           		data-id="${inventory.id}" mars_sead="m_te_goods_buy_size_check" style="z-index: 4;" data-code="${inventory.code}">
 				                <span class="size-list-item-name">${inventory.size}</span>
 				                <span class="i-select"></span>
 				    		</li>
@@ -92,6 +97,7 @@
 				
 				<dl class="i-num clearfix" id="J-num-select">
 				    <dt class="num-name">数量：</dt>
+				    <input type="hidden" name="quantity" id="quantity"/>
 				    <dd class="i-notice-msg J-num-tips"></dd>
 				    <dd class="num-box">
 				        <span class="num-reduce num-reduce-disabled J-num-act-reduce"></span>
@@ -125,8 +131,10 @@
 			    </ul>
 		    </div>
 		</div>
+		</form>
 	</div>
 </div>
 
+<script type="text/javascript" src="${ctx}/assets/jquery-validation-1.13.1/jquery.validate.js"></script>
 <script type="text/javascript" src="${ctx}/assets/js/product-detail.js"></script>
 <script type="text/javascript" src="${ctx}/assets/jqzoom/js/jquery.jqzoom-core.js"></script>

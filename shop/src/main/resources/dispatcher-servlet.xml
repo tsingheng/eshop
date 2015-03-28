@@ -25,6 +25,7 @@
 	<!-- 自动扫描的包名 -->
 	<context:component-scan base-package="net.shangtech.**.controller"/>
 	<bean class="net.shangtech.framework.controller.validation.RequestValidatorAspect"></bean>
+	<bean class="net.shangtech.eshop.shop.controller.aspect.ShopwiredAspect"></bean>
 
 	<!-- 
 	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>

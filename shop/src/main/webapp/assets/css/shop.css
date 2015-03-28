@@ -14,6 +14,14 @@ body {
 	background: #f6f6f6;
 }
 
+ul{
+	list-style:none;
+	list-style-type:none;
+	padding:0px;
+}
+.fr{
+	float:right;
+}
 .header-nav-tools {
 	list-style: none;
 	list-style-type: none;
@@ -654,18 +662,6 @@ body {
 	zoom: 1;
 }
 
-.i-notice-msg {
-	position: absolute;
-	height: 26px;
-	line-height: 26px;
-	bottom: -26px;
-	right: 0;
-	padding-left: 20px;
-	color: #f43499;
-	background-position: -500px -250px;
-	display: none;
-}
-
 .size-list {
 	float: left;
 	max-width: 360px;
@@ -757,17 +753,6 @@ body {
 	background-position: -50px -100px;
 }
 
-.i-notice-msg {
-	position: absolute;
-	height: 26px;
-	line-height: 26px;
-	bottom: -26px;
-	right: 0;
-	padding-left: 20px;
-	color: #f43499;
-	background-position: -500px -250px;
-	display: none;
-}
 
 .num-box {
 	float: left;
@@ -785,6 +770,21 @@ body {
 	background:
 		url(http://s2.vipstatic.com/img/te/detail_imgs_new.png?02f9f4c0)
 		no-repeat;
+}
+.i-notice-msg {
+	position: absolute;
+	height: 26px;
+	line-height: 26px;
+	bottom: -26px;
+	right: 0;
+	padding-left: 20px;
+	color: #f43499;
+	background-position: -500px -250px;
+	display: none;
+}
+
+.status-notice .i-notice-msg {
+display: block;
 }
 
 .i-select {
@@ -1150,11 +1150,6 @@ body {
 	color: #333;
 }
 
-.fl {
-	float: left;
-	display: inline;
-}
-
 #toolbar .bar-con .right-show .bag-show .bag-a span.empty {
 	line-height: 34px;
 	color: #333;
@@ -1168,7 +1163,7 @@ body {
 	position: absolute;
 	right: 0;
 	top: 34px;
-	width: 293px;
+	width: 333px;
 	z-index: 11;
 }
 
@@ -1334,4 +1329,148 @@ body {
 #toolbar .bar-con .right-show div.logined-show .normal-box ul li a .icon-04
 	{
 	background-position: 0 -136px;
+}
+
+.status-notice {
+border: 1px solid #f30b7f;
+background-color: #fdedf5;
+padding-left: 10px;
+padding-top: 10px;
+padding-right: 10px;
+}
+.i-size.status-notice {
+padding: 10px 10px 0;
+}
+.bag-tool ul {
+	max-height:334px;
+	overflow-y:auto;
+}
+
+.bag-tool ul li {
+position: relative;
+float: left;
+padding: 10px 0;
+border-bottom: #e2e2e2 dashed 1px;
+}
+.bag-tool ul li .pic {
+margin-left: 0 !important;
+margin-right:0px !important;
+width: 60px;
+height: 60px;
+overflow: hidden;
+}
+#toolbar .bar-con .right-show div a {
+margin-left: 10px;
+color: #333;
+}
+.bag-tool ul li .pic img {
+width: 60px;
+}
+.bag-tool ul li .detail {
+width: 233px;
+height: 60px;
+overflow: hidden;
+float: left;
+display: inline;
+}
+.bag-tool ul li p {
+line-height: 16px;
+height: 16px;
+overflow: hidden;
+margin: 0 0 6px 0;
+}
+.bag-tool ul li p.title {
+margin-top: -2px;
+margin-left: 10px;
+}
+.bag-tool ul li p.title a {
+margin-left: 0 !important;
+display: block;
+float: left;
+width: 170px;
+overflow: hidden;
+height: 16px;
+color: #666 !important;
+}
+.bag-tool ul li p.title span {
+color: #f36;
+font-size: 14px;
+font: Tahoma,Helvetica,Arial,'宋体',sans-serif,\5b8b\4f53;
+}
+.bag-tool ul li p.title span em {
+font-size: 12px;
+font-family: "微软雅黑","verdana";
+font-style:normal;
+}
+.bag-tool ul li p.normal {
+color: #999;
+margin-left: 10px;
+}
+.bag-tool ul li .tips_alert {
+display: none;
+}
+.bag-tool ul li .mask_bg {
+display: block;
+position: absolute;
+top: 0;
+left: -20px;
+width: 333px;
+height: 80px;
+background: #000;
+opacity: .3;
+max-height:394px;
+overflow-y:auto;
+}
+.bag-tool ul li .btn_all {
+display: block;
+position: absolute;
+top: 30px;
+left: 50%;
+margin-left: -68px;
+-z-index: 10;
+width: 136px;
+}
+.bag-tool ul li .btn_all .btn {
+padding:0px;
+width: 52px;
+height: 24px;
+line-height: 24px;
+display: inline;
+float: left;
+margin: 0 10px;
+text-align: center;
+border-radius: 3px;
+font:12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif,\5b8b\4f53;
+}
+.bag-tool ul li .btn_all .btn.btn01 {
+background: #ff2d5e;
+border: #dc0138 solid 1px;
+color: #fff !important;
+}
+.bag-tool ul li .btn_all .btn.btn02 {
+background: #f1f1f1;
+border: #e2e2e2 solid 1px;
+color: #333 !important;
+}
+.bag-tool ul li.last {
+border-bottom: none;
+}
+.bag-tool .amount {
+color: #333;
+width: 100%;
+height: 30px;
+line-height: 28px;
+margin-top: 10px;
+border-top: #e2e2e2 solid 1px;
+padding-top: 10px;
+}
+.bag-tool .amount .btn {
+background: none repeat scroll 0 0 #ff2d5e;
+border: 1px solid #dc0138;
+border-radius: 3px;
+color: #fff !important;
+text-align: center;
+width: 117px;
+padding:0px;
+line-height: 28px;
 }

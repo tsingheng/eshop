@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +33,7 @@ public class ShoppingController {
 	
 	@Shopwired
 	@ResponseBody
-	@RequestMapping("/add-to-shopping-cart")
+	@RequestMapping(value = "/add-to-shopping-cart", method = RequestMethod.POST)
 	public AjaxResponse addToShoppingCart(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -43,7 +44,7 @@ public class ShoppingController {
 			return ajaxResponse;
 		}
 		//库存校验
-		if(inventory.getStock() <= inventory.getStock()){
+		if(inventory.getStock() <= inventory.getSaled()){
 			ajaxResponse.setMessage("商品已售完");
 			return ajaxResponse;
 		}
@@ -68,7 +69,7 @@ public class ShoppingController {
 	
 	@Shopwired
 	@ResponseBody
-	@RequestMapping("/reduce-shopping-item")
+	@RequestMapping(value = "/reduce-shopping-item", method = RequestMethod.POST)
 	public AjaxResponse reduceShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -91,7 +92,7 @@ public class ShoppingController {
 	
 	@Shopwired
 	@ResponseBody
-	@RequestMapping("/reset-shopping-item")
+	@RequestMapping(value = "/reset-shopping-item", method = RequestMethod.POST)
 	public AjaxResponse resetShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -110,6 +111,9 @@ public class ShoppingController {
 		return ajaxResponse;
 	}
 	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping(value = "/remove-shopping-item", method = RequestMethod.POST)
 	public AjaxResponse removeShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -126,6 +130,13 @@ public class ShoppingController {
 		}
 		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping(value = "/load-shopping-cart", method = RequestMethod.POST)
+	public ShoppingCartCommand loadShoppingCart(ShoppingCartCommand shoppingCart){
+		return shoppingCart;
 	}
 	
 	@Shopwired
