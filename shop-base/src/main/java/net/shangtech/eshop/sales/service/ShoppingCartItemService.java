@@ -32,8 +32,7 @@ public interface ShoppingCartItemService extends IBaseService<ShoppingCartItem> 
 	/**
 	 * 移除商品
 	 * @param code
-	 * @param quantity
 	 * @param memberId
 	 */
-	void removeItem(String code, int quantity, Long memberId);
+	void removeItem(String code, Long memberId);
 }

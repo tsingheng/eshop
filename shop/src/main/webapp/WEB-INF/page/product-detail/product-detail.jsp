@@ -135,6 +135,28 @@
 	</div>
 </div>
 
+		<div class="alert_fullbg" style="display:none;"></div>
+		<div id="shopping_alert" class="alert_bg" style="left: 513px; top: 202px; position: fixed;display:none;">
+			<div class="alert_box">
+				<div class="alert_top">
+					<span></span>
+					<a href="javascript:;" class="alert_close"></a>
+				</div>
+				<div class="alert_content">
+					<div class="con-go">
+						<p class="txt">
+							<em class="icon icon-success"></em>
+							<span>商品已成功加入购物袋!</span>
+						</p>
+						<div class="submit-go">
+							<a href="javascript:void(0);" class="button button_01">去结算</a>
+							<a href="javascript:void(0);" class="btn continue alert_close">逛更多</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 <script type="text/javascript" src="${ctx}/assets/jquery-validation-1.13.1/jquery.validate.js"></script>
 <script type="text/javascript" src="${ctx}/assets/js/product-detail.js"></script>
 <script type="text/javascript" src="${ctx}/assets/jqzoom/js/jquery.jqzoom-core.js"></script>

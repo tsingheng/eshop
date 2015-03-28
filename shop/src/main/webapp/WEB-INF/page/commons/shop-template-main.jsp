@@ -52,16 +52,12 @@
 					</div>
 					</c:if>
 					<span class="split">&nbsp;</span>
-					<div class="bag-show hover">
+					<div class="bag-show">
 						<a href="" target="_blank" class="bag-a">
 							<span class="icon-normal icon-bag"></span>
 							<span class="empty fl" id="cart-summary"></span>
 						</a>
-						<div class="bag-tool _bag-tool-empty" style="display:none;">
-							<div id="loadingimg" style="display:none"></div>
-							<!--  
-							<p><span class="icon-normal icon-bag-empty"></span>购物袋还是空荡荡的~</p>
-							-->
+						<div class="bag-tool" style="display:none;">
 							<ul class="clear">
 								<li>
 									<a class="pic fl">

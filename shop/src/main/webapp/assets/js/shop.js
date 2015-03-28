@@ -50,6 +50,40 @@ var App = {
 			dataType: 'json',
 			success: function(cart){
 				$('#cart-summary').html('购物袋 (' + cart.quantity + ') ');
+				if(cart.quantity == 0){
+					$('.bag-tool').addClass('bag-tool-empty').html('<p><span class="icon-normal icon-bag-empty"></span>购物袋还是空荡荡的~</p>');
+				}else{
+					$('.bag-tool').removeClass('bag-tool-empty').html('');
+					var cartUl = $('<ul class="clear"></ul>');
+					var lis = [];
+					lis.push('<ul class="clear">');
+					for(var i in cart.shoppingCartItemList){
+						var item = cart.shoppingCartItemList[i];
+						lis.push('<li class="' + (i == cart.shoppingCartItemList.length-1 ? 'last' : '') + '" id="cart-' + item.code + '">');
+						lis.push('	<a class="pic fl">');
+						lis.push('		<img class="lazy" src="' + item.sku.image.replace('_1', '') + '" style="display: inline;">');
+						lis.push('	</a>');
+						lis.push('	<div class="detail">');
+						lis.push('		<p class="title">');
+						lis.push('			<a target="_blank" href="' + ctx + '/' + item.sku.code + '">' + item.sku.name + '</a>');
+						lis.push('			<span class="fr"><em>￥</em>' + item.sku.sellPrice + '</span>');
+						lis.push('		</p>');
+						lis.push('		<p class="normal">尺码：' + item.size + '<a href="javascript:;" class="del fr">删除</a></p>');
+						lis.push('		<p class="normal">颜色：' + item.color + '</p>');
+						lis.push('	</div>');
+						lis.push('	<div class="tips_alert" style="display:none;">');
+						lis.push('		<div class="mask_bg"></div>');
+						lis.push('		<div class="btn_all">');
+						lis.push('			<a class="btn btn01" data-code="' + item.code + '" href="javascript:;">删除</a>');
+						lis.push('			<a class="btn btn02" href="javascript:;">保留</a>');
+						lis.push('		</div>');
+						lis.push('	</div>');
+						lis.push('</li>');
+					}
+					lis.push('</ul>');
+					lis.push('<div class="amount"><a class="fr btn" target="_blank" href="http://cart.juanpi.com">去购物袋结算</a></div>');
+					$('.bag-tool').html(lis.join(''));
+				}
 			}
 		});
 	}

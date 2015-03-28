@@ -53,7 +53,7 @@ public class ShoppingCartItemServiceImpl extends BaseService<ShoppingCartItem> i
     }
 
 	@Override
-    public void removeItem(String code, int quantity, Long memberId) {
+    public void removeItem(String code, Long memberId) {
 	    ShoppingCartItem item = dao.findByCodeAndMemberId(code, memberId);
 	    item.setDeleted(true);
 	    item.setDeleteTime(new Date());

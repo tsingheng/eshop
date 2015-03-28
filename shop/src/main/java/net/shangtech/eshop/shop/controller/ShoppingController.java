@@ -55,6 +55,8 @@ public class ShoppingController {
 		cmd.setSku(sku);
 		cmd.setCode(code);
 		cmd.setQuantity(quantity);
+		cmd.setSize(inventory.getSize());
+		cmd.setColor(sku.getColor());
 		cmd.setAvaliable(inventory.getStock() - inventory.getSaled());
 		shoppingCart.addItem(cmd);
 		
@@ -114,7 +116,7 @@ public class ShoppingController {
 	@Shopwired
 	@ResponseBody
 	@RequestMapping(value = "/remove-shopping-item", method = RequestMethod.POST)
-	public AjaxResponse removeShoppingItem(@RequestParam("code") String code, @RequestParam("quantity") Integer quantity
+	public AjaxResponse removeShoppingItem(@RequestParam("code") String code
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//code是否存在
@@ -126,7 +128,7 @@ public class ShoppingController {
 		shoppingCart.removeItem(code);
 		
 		if(loginMember != null){
-			shoppingCartItemService.removeItem(code, quantity, loginMember.getId());
+			shoppingCartItemService.removeItem(code, loginMember.getId());
 		}
 		ajaxResponse.setSuccess(true);
 		return ajaxResponse;

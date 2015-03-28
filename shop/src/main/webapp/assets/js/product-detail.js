@@ -158,6 +158,41 @@ $(document).ready(function(){
 					$('#cart-form').validate().showErrors(response.errors);
 					return;
 				}
+				setTimeout(function(){
+					App.loadShoppingCart();
+				}, 0);
+				setTimeout(function(){
+					$('.alert_fullbg').show();
+					$('#shopping_alert').show();
+				}, 0);
+			}
+		});
+	});
+	
+	$('body').on('click', '.alert_close', function(){
+		$('.alert_fullbg').hide();
+		$('#shopping_alert').hide();
+	});
+	
+	$('body').on('click', '.bag-tool .del', function(){
+		$(this).closest('li').find('.tips_alert').show();
+	});
+	$('body').on('click', '.tips_alert .btn02', function(){
+		$(this).closest('.tips_alert').hide();
+	});
+	$('body').on('click', '.tips_alert .btn01', function(){
+		var li = $(this).closest('li');
+		$.ajax({
+			url: ctx + '/remove-shopping-item',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				code: $(this).data('code')
+			},
+			success: function(response){
+				if(!response.success){
+					return
+				}
 				App.loadShoppingCart();
 			}
 		});
