@@ -70,6 +70,7 @@ public class ShoppingController {
 		}
 		
 		ajaxResponse.setSuccess(true);
+		ajaxResponse.setData(shoppingCart);
 		return ajaxResponse;
 	}
 	
@@ -93,6 +94,7 @@ public class ShoppingController {
 		}
 		
 		ajaxResponse.setSuccess(true);
+		ajaxResponse.setData(shoppingCart);
 		return ajaxResponse;
 	}
 	
@@ -114,6 +116,7 @@ public class ShoppingController {
 			shoppingCartItemService.updateItem(code, quantity, loginMember.getId());
 		}
 		ajaxResponse.setSuccess(true);
+		ajaxResponse.setData(shoppingCart);
 		return ajaxResponse;
 	}
 	
@@ -135,6 +138,7 @@ public class ShoppingController {
 			shoppingCartItemService.removeItem(code, loginMember.getId());
 		}
 		ajaxResponse.setSuccess(true);
+		ajaxResponse.setData(shoppingCart);
 		return ajaxResponse;
 	}
 	

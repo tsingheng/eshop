@@ -39,7 +39,7 @@
 					</c:if>
 					<span class="split">&nbsp;</span>
 					<div class="bag-show">
-						<a href="" target="_blank" class="bag-a">
+						<a href="${ctx}/shopping-cart" target="_blank" class="bag-a">
 							<span class="icon-normal icon-bag"></span>
 							<span class="empty fl" id="cart-summary"></span>
 						</a>

@@ -129,4 +129,9 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
     public List<Category> findByParentId(Long parentId) {
 	    return dao.findByParentId(parentId);
     }
+
+	@Override
+    public Category findByCodeAndRootId(String code, Long rootId) {
+	    return dao.findByCodeAndRootId(code, rootId);
+    }
 }

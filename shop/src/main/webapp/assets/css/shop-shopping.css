@@ -50,7 +50,7 @@ clear:both;
     height: 50px;
     width: 100%;}
 .orders .orders-hd ul li{float:left;width:20%;line-height:50px;text-align:center;font-weight:bold;}
-.orders .product-item{width:36% !important;}
+.orders .name-item{width:36% !important;}
 .orders .price-item{width:15% !important;}
 .orders .quantity-item{width:15% !important;}
 .orders .subtotal-item{width:17% !important;}
@@ -59,7 +59,7 @@ clear:both;
 .orders .orders-hd ul li.orders-hd-t{width:20%;}
 .orders .orders-hd ul li.orders-hd-o{width:10%;}
 .orders .orders-hd ul li.orders-hd-l{width:10%;}
-.orders .orders-bd{border:#e2e2e2 solid 1px;margin-top:20px;position:relative;}
+.orders .orders-bd{border-right:#e2e2e2 solid 1px;border-bottom:#e2e2e2 solid 1px;border-left:#e2e2e2 solid 1px;margin-top:20px;position:relative;}
 .orders .orders-bd .name{text-indent:20px;}
 .orders .orders-bd .table-box{background:#f1f1f1;height:30px;line-height:30px;color:#999;}
 .orders .orders-bd .table-box span,.orders .orders-bd .table-box a{display:block;float:left;}
@@ -325,3 +325,99 @@ clear:both;
 .w1200 .old_record .list li .detail .jion{margin-top:5px;}
 .w1200 .old_record .list li .del{bottom:20px;right:20px;}
 .w1200 .orders-total-pay{width:1200px;}
+#shopping_alert .alert_box .alert_top {
+background: #fff;
+width: 400px;
+}
+.alert_bg .alert_box .alert_top span {
+float: left;
+color: #797D84;
+}
+.alert_bg .alert_box .alert_top a, .alert_bg .alert_box .close {
+height: 24px;
+width: 24px;
+background: url("http://s.juancdn.com/juanpi/images/total/total_alert.gif") no-repeat -173px -722px;
+display: block;
+float: right;
+margin-top: 6px;
+margin-right: 6px;
+_margin-right: 2px;
+}
+.alert_content {
+background-color: #FFFFFF;
+font-size: 12px;
+width: 480px;
+height: auto;
+overflow: hidden;
+}
+#shopping_alert .alert_box .alert_content {
+width: 400px;
+}
+#shopping_alert .alert_box .con-go {
+padding: 30px 40px 60px;
+width: 400px;
+height: auto;
+overflow: hidden;
+}
+#shopping_alert .alert_box .con-go .txt {
+color: #333;
+text-align: center;
+font-size: 14px;
+}
+#shopping_alert .alert_box .con-go .txt .icon {
+background: url(http://s.juancdn.com/juanpi/images/total/icons-total.gif) no-repeat;
+width: 16px;
+height: 16px;
+display: inline-block;
+}
+#shopping_alert .alert_box .con-go .txt .icon.icon-success {
+background-position: -10px -284px;
+margin-right: 5px;
+vertical-align: -4px;
+}
+#shopping_alert .alert_box .con-go .submit-go {
+width: 320px;
+margin: 30px auto;
+}
+.alert_bg .button {
+background: #ff2d5e;
+border: #dc0138 solid 1px;
+color: #fff;
+font-size: 14px;
+display: inline;
+float: left;
+text-align: center;
+border-radius: 3px;
+-moz-border-radius: 3px;
+}
+.alert_bg .button_01 {
+height: 28px;
+line-height: 28px;
+width: 74px;
+}
+#shopping_alert .alert_box .con-go .submit-go .button_01 {
+margin: 0 30px 0 85px;
+}
+.submit-go .btn {
+text-align: center;
+line-height: 50px;
+background: #f36;
+width: 180px;
+height: 50px;
+display: block;
+font-size: 20px;
+padding:0px;
+color: #fff;
+font-family: "微软雅黑","宋体";
+float: left;
+border-radius: 2px;
+}
+.submit-go .btn.continue {
+width: auto;
+height: 28px;
+line-height: 28px;
+color: #39c;
+background: #fff;
+font-size: 14px;
+font-family: "宋体";
+}

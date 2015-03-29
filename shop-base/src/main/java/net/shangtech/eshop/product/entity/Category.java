@@ -53,6 +53,9 @@ public class Category extends BaseEntity<Long> {
     
     private Date version;
     
+    @Column(name = "root_id")
+    private Long rootId;
+    
     @Transient
     private List<Category> children;
     
@@ -128,6 +131,14 @@ public class Category extends BaseEntity<Long> {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public Long getRootId() {
+		return rootId;
+	}
+
+	public void setRootId(Long rootId) {
+		this.rootId = rootId;
 	}
     
 }

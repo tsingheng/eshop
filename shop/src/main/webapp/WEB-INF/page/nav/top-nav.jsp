@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <ul class="navigation">
-	<li>
-		<a href="">最新折扣</a>
+	<li class="${empty currentTopCategory ? 'cur' : ''}">
+		<a href="${ctx}/">最新折扣</a>
 	</li>
 	<c:forEach items="${topCategoryList}" var="topCategory">
 	<li class="${topCategory.id eq currentTopCategory.id ? 'cur' : ''}">

@@ -9,4 +9,6 @@ public interface CategoryDao extends IBaseDao<Category> {
 	List<Category> findByParentId(long parentId);
 	
 	Category findByCode(String code);
+	
+	Category findByCodeAndRootId(String code, Long rootId);
 }

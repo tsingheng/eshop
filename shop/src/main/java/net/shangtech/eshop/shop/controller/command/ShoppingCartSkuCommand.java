@@ -19,6 +19,8 @@ public class ShoppingCartSkuCommand implements Serializable {
     private Double marketPrice;
     
     private Double sellPrice;
+    
+    private String image;
 
 	public String getCode() {
 		return code;
@@ -74,6 +76,14 @@ public class ShoppingCartSkuCommand implements Serializable {
 
 	public void setSellPrice(Double sellPrice) {
 		this.sellPrice = sellPrice;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
     
 }

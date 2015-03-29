@@ -33,7 +33,8 @@ public class ProductListController {
 		Category currentTopCategory = categoryService.findByCode(categoryCodes[0]);
 		model.addAttribute("currentTopCategory", currentTopCategory);
 		
-		Category currentCategory = categoryService.findByCode(categoryCodes[categoryCodes.length-1]);
+		//code不是唯一的,需要结合上级id查询
+		Category currentCategory = categoryService.findByCodeAndRootId(categoryCodes[categoryCodes.length-1], currentTopCategory.getId());
 		model.addAttribute("currentCategory", currentCategory);
 		
 		List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());

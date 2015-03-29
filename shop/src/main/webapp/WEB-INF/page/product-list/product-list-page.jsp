@@ -4,8 +4,8 @@
 <%@ taglib prefix="sfn" uri="http://www.shangtech.net/tags/functions"%>
 
 <div class="product-list">
-	<c:forEach items="${pagination.items}" var="item">
-	<div id="1991434" gtype="3" g_type="3" class="product-item">
+	<c:forEach items="${pagination.items}" var="item" varStatus="i">
+	<div id="1991434" gtype="3" g_type="3" class="product-item ${i.index%4 == 3 ? 'product-item-right' : ''} ${i.index%4 == 0 ? 'product-item-left' : ''}">
         <div class="list-good buy">
             <div class="good-pic">
                 <div class="pic-img">

@@ -174,27 +174,4 @@ $(document).ready(function(){
 		$('#shopping_alert').hide();
 	});
 	
-	$('body').on('click', '.bag-tool .del', function(){
-		$(this).closest('li').find('.tips_alert').show();
-	});
-	$('body').on('click', '.tips_alert .btn02', function(){
-		$(this).closest('.tips_alert').hide();
-	});
-	$('body').on('click', '.tips_alert .btn01', function(){
-		var li = $(this).closest('li');
-		$.ajax({
-			url: ctx + '/remove-shopping-item',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				code: $(this).data('code')
-			},
-			success: function(response){
-				if(!response.success){
-					return
-				}
-				App.loadShoppingCart();
-			}
-		});
-	});
 });

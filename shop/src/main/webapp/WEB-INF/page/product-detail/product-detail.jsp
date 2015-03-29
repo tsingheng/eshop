@@ -149,7 +149,7 @@
 							<span>商品已成功加入购物袋!</span>
 						</p>
 						<div class="submit-go">
-							<a href="javascript:void(0);" class="button button_01">去结算</a>
+							<a href="${ctx}/shopping-cart" class="button button_01">去结算</a>
 							<a href="javascript:void(0);" class="btn continue alert_close">逛更多</a>
 						</div>
 					</div>
