@@ -9,8 +9,10 @@ import net.shangtech.eshop.shop.controller.annotation.Shopwired;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
+import net.shangtech.eshop.shop.controller.command.ShoppingCartSkuCommand;
 import net.shangtech.framework.controller.AjaxResponse;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +54,9 @@ public class ShoppingController {
 		Sku sku = skuService.find(inventory.getSkuId());
 		
 		ShoppingCartItemCommand cmd = new ShoppingCartItemCommand();
-		cmd.setSku(sku);
+		ShoppingCartSkuCommand skuCommand = new ShoppingCartSkuCommand();
+		BeanUtils.copyProperties(sku, skuCommand);
+		cmd.setSku(skuCommand);
 		cmd.setCode(code);
 		cmd.setQuantity(quantity);
 		cmd.setSize(inventory.getSize());
@@ -138,6 +142,7 @@ public class ShoppingController {
 	@ResponseBody
 	@RequestMapping(value = "/load-shopping-cart", method = RequestMethod.POST)
 	public ShoppingCartCommand loadShoppingCart(ShoppingCartCommand shoppingCart){
+		//更新cookie中的购物车
 		return shoppingCart;
 	}
 	
@@ -145,6 +150,6 @@ public class ShoppingController {
 	@RequestMapping("/shopping-cart")
 	public String gotoShoppingCart(Model model, ShoppingCartCommand shoppingCart){
 		model.addAttribute("shoppingCart", shoppingCart);
-		return "shop.sales.cart";
+		return "shop.shopping.cart";
 	}
 }

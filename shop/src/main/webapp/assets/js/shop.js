@@ -65,8 +65,8 @@ var App = {
 						lis.push('	</a>');
 						lis.push('	<div class="detail">');
 						lis.push('		<p class="title">');
-						lis.push('			<a target="_blank" href="' + ctx + '/' + item.sku.code + '">' + item.sku.name + '</a>');
-						lis.push('			<span class="fr"><em>￥</em>' + item.sku.sellPrice + '</span>');
+						lis.push('			<a target="_blank" href="' + ctx + '/detail/' + item.sku.code + '">' + item.sku.name + '</a>');
+						lis.push('			<span class="fr"><em>￥</em>' + item.sku.sellPrice + '×' + item.quantity + '</span>');
 						lis.push('		</p>');
 						lis.push('		<p class="normal">尺码：' + item.size + '<a href="javascript:;" class="del fr">删除</a></p>');
 						lis.push('		<p class="normal">颜色：' + item.color + '</p>');

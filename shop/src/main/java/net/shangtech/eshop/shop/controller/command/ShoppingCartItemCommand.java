@@ -2,13 +2,11 @@ package net.shangtech.eshop.shop.controller.command;
 
 import java.io.Serializable;
 
-import net.shangtech.eshop.product.entity.Sku;
-
 public class ShoppingCartItemCommand implements Serializable {
 
 	private static final long serialVersionUID = -5821218860974954008L;
 
-	private Sku sku;
+	private ShoppingCartSkuCommand sku;
 	
 	/** 库存编码 */
 	private String code;
@@ -22,11 +20,11 @@ public class ShoppingCartItemCommand implements Serializable {
 	/** 库存 */
 	private int avaliable;
 
-	public Sku getSku() {
+	public ShoppingCartSkuCommand getSku() {
 		return sku;
 	}
 
-	public void setSku(Sku sku) {
+	public void setSku(ShoppingCartSkuCommand sku) {
 		this.sku = sku;
 	}
 
