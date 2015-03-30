@@ -1,5 +1,10 @@
 package net.shangtech.eshop.shop.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
+import net.shangtech.eshop.account.entity.MemberAddress;
+import net.shangtech.eshop.account.service.MemberAddressService;
 import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.service.InventoryService;
@@ -12,6 +17,7 @@ import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartSkuCommand;
 import net.shangtech.framework.controller.AjaxResponse;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +38,7 @@ public class ShoppingController {
 	@Autowired private 	ShoppingCartItemService 			shoppingCartItemService;
 	@Autowired private 	InventoryService 					inventoryService;
 	@Autowired private 	SkuService 							skuService;
+	@Autowired private 	MemberAddressService				memberAddressService;
 	
 	@Shopwired
 	@ResponseBody
@@ -155,5 +162,30 @@ public class ShoppingController {
 	public String gotoShoppingCart(Model model, ShoppingCartCommand shoppingCart){
 		model.addAttribute("shoppingCart", shoppingCart);
 		return "shop.shopping.cart";
+	}
+	
+	@Shopwired
+	@RequestMapping("/shopping-checkout")
+	public String checkout(Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		model.addAttribute("shoppingCart", shoppingCart);
+		
+		List<MemberAddress> memberAddressList = null;
+		if (loginMember != null) {
+	        memberAddressList = memberAddressService.findbyMemberId(loginMember.getId());
+	        if(shoppingCart.getMemberAddressId() == null){
+	        	for(MemberAddress address : memberAddressList){
+	        		if(BooleanUtils.isTrue(address.getIsDefault())){
+	        			shoppingCart.setMemberAddressId(address.getId());
+	        			break;
+	        		}
+	        	}
+	        }
+        } else if (shoppingCart.getMemberAddressId() != null) {
+        	memberAddressList = Arrays.asList(memberAddressService.find(shoppingCart.getMemberAddressId()));
+        }
+		model.addAttribute("memberAddressList", memberAddressList);
+		model.addAttribute("loginMmber", loginMember);
+		
+		return "shop.shopping.checkout";
 	}
 }

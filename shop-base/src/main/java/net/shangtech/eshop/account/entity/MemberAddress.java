@@ -15,6 +15,8 @@ import net.shangtech.framework.dao.support.BaseEntity;
 public class MemberAddress extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 2827924817546325433L;
+	
+	public static final Long GUEST_MEMBER_ID = 0L;
 
 	@Column(name = "member_id")
 	@Index(name = "idx_member_address_member_id")
@@ -49,6 +51,9 @@ public class MemberAddress extends BaseEntity<Long> {
 	
 	@Column(name = "contact")
 	private String contact;
+	
+	@Column(name = "postcode")
+	private String postcode;
 	
 	@Column(name = "is_default")
 	private Boolean isDefault;
@@ -147,6 +152,14 @@ public class MemberAddress extends BaseEntity<Long> {
 
 	public void setIsDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 	
 }

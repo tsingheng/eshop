@@ -3,17 +3,22 @@ package net.shangtech.eshop.shop.controller;
 import javax.servlet.http.HttpSession;
 
 import net.shangtech.eshop.account.entity.Member;
+import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.eshop.account.service.MemberService;
 import net.shangtech.eshop.shop.constants.ScopConstants.SessionScope;
+import net.shangtech.eshop.shop.controller.annotation.Shopwired;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
+import net.shangtech.eshop.shop.controller.command.MemberAddressCommand;
 import net.shangtech.eshop.shop.controller.command.MemberLoginCommand;
 import net.shangtech.eshop.shop.controller.command.MemberRegisterCommand;
+import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
 import net.shangtech.framework.controller.AjaxResponse;
 import net.shangtech.framework.controller.validation.RequestValid;
 import net.shangtech.framework.util.EncoderUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -93,6 +98,16 @@ public class MemberController {
 		loginMember.setId(member.getId());
 		loginMember.setUsername(cmd.getUsername());
 		session.setAttribute(SessionScope.LOGIN_MEMBER_KEY, loginMember);
+		
+		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@RequestValid
+	@ResponseBody
+	@RequestMapping(value = "/save-address", method = RequestMethod.POST)
+	public AjaxResponse saveMemberAddress(@RequestValid MemberAddressCommand addressCommand, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		
 		return ajaxResponse;
 	}
