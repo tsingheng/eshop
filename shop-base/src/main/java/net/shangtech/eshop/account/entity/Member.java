@@ -15,6 +15,8 @@ import net.shangtech.framework.dao.support.BaseEntity;
 public class Member extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 2575512302919390212L;
+    
+    public static final Long GUEST_MEMBER_ID = 0L;
 
     @Column(name = "email")
     @Index(name = "idx_member_email")

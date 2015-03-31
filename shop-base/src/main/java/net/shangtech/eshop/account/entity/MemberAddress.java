@@ -1,14 +1,15 @@
 package net.shangtech.eshop.account.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Index;
-
 import net.shangtech.framework.dao.support.BaseEntity;
+
+import org.hibernate.annotations.Index;
 
 @Entity
 @Table(name = "t_member_address")

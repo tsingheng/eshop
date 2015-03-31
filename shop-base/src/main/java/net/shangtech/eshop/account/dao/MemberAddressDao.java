@@ -9,4 +9,5 @@ public interface MemberAddressDao extends IBaseDao<MemberAddress> {
 	
 	List<MemberAddress> findByMemberId(Long memberId);
 	
+	MemberAddress findDefaultMemberAddress(Long memberId);
 }
