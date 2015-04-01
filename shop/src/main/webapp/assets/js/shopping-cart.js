@@ -112,4 +112,13 @@ $(document).ready(function(){
 		}
 		$('.orders-total-pay .other').html('<p class="all">共有<em>' + shoppingCart.quantity + '</em>件商品，金额<span><i>￥</i><label>' + shoppingCart.originalAmount + '</label></span></p><p class="count">总计（不含运费）<span><i>￥</i><label>' + shoppingCart.originalAmount + '</label></span></p>');
 	}
+	
+	$('body').on('click', '.go_pay', function(){
+		var $this = $(this);
+		if($this.hasClass('no')){
+			return;
+		}
+		$this.addClass('no');
+		$('#cartConfirmForm')[0].submit();
+	});
 });

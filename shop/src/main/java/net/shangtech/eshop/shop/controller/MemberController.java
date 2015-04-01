@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -125,7 +126,7 @@ public class MemberController {
 			memberAddressService.save(memberAddress);
 		}else{
 			MemberAddress old = memberAddressService.find(memberAddress.getId());
-			if(old == null){
+			if(old == null || old.getMemberId() != loginMember.getId()){
 				ajaxResponse.setMessage("不存在该地址");
 				return ajaxResponse;
 			}
@@ -137,6 +138,25 @@ public class MemberController {
 		ajaxResponse.setData(addressCommand);
 		ajaxResponse.setSuccess(true);
 		
+		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping(value = "/deleve-address", method = RequestMethod.POST)
+	public AjaxResponse deleteMemberAddress(@RequestParam("addressId") Long addressId, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		if(loginMember == null){
+			ajaxResponse.setMessage("请先登录");
+			return ajaxResponse;
+		}
+		MemberAddress old = memberAddressService.find(addressId);
+		if(old == null || old.getMemberId() != loginMember.getId()){
+			ajaxResponse.setMessage("不存在该地址");
+			return ajaxResponse;
+		}
+		memberAddressService.delete(addressId);
+		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
 	}
 }

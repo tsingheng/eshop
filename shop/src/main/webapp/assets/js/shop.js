@@ -104,7 +104,7 @@ var App = {
 						lis.push('</li>');
 					}
 					lis.push('</ul>');
-					lis.push('<div class="amount"><a class="fr btn" target="_blank" href="http://cart.juanpi.com">去购物袋结算</a></div>');
+					lis.push('<div class="amount"><a class="fr btn" target="_blank" href="' + ctx + '/shopping-cart">去购物袋结算</a></div>');
 					$('.bag-tool').html(lis.join(''));
 				}
 			}

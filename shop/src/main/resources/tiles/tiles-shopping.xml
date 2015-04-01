@@ -8,4 +8,9 @@
 		<put-attribute name="nav" value="/WEB-INF/page/nav/shopping-nav.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/page/shopping/shopping-cart.jsp"/>
 	</definition>
+	
+	<definition name="shop.shopping.checkout" extends="shop.shopping">
+		<put-attribute name="nav" value="/WEB-INF/page/nav/shopping-nav.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/page/shopping/shopping-checkout.jsp"/>
+	</definition>
 </tiles-definitions>

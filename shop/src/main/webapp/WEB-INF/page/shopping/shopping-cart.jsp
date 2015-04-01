@@ -115,10 +115,8 @@
 		        <div class="orders-pay-fixed clear">
 		            <div class="orders-total-pay">
 		                <a href="${ctx}/" class="go_shopping fl">&lt;&lt;继续购物</a>
-		                <form id="cartConfirmForm" method="post" action="http://user.juanpi.com/pay/confirm_order">
-		                <input type="hidden" name="couponcode">
-		                <input type="hidden" name="couponmoney">
-		                <input type="hidden" name="token" value="93a37abe776ce74c08e13227e8c4aa85">
+		                <form id="cartConfirmForm" method="post" action="${ctx}/shopping-checkout">
+		                
 		                </form>
 		                <a href="javascript:;" class="go_pay fr">去结算</a>
 		                <div class="other fr">

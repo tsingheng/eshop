@@ -167,7 +167,7 @@ public class ShoppingController {
 	@Shopwired
 	@RequestMapping("/shopping-checkout")
 	public String checkout(Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
-		model.addAttribute("shoppingCart", shoppingCart);
+		//model.addAttribute("shoppingCart", shoppingCart);
 		
 		List<MemberAddress> memberAddressList = null;
 		if (loginMember != null) {
@@ -184,7 +184,7 @@ public class ShoppingController {
         	memberAddressList = Arrays.asList(memberAddressService.find(shoppingCart.getMemberAddressId()));
         }
 		model.addAttribute("memberAddressList", memberAddressList);
-		model.addAttribute("loginMmber", loginMember);
+		model.addAttribute("loginMember", loginMember);
 		
 		return "shop.shopping.checkout";
 	}
