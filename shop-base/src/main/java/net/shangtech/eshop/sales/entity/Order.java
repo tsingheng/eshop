@@ -75,4 +75,157 @@ public class Order extends BaseEntity<Long> {
 	
 	@Column(name = "postcode")
 	private String postcode;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Long getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+
+	public Date getPaymentCompleteTime() {
+		return paymentCompleteTime;
+	}
+
+	public void setPaymentCompleteTime(Date paymentCompleteTime) {
+		this.paymentCompleteTime = paymentCompleteTime;
+	}
+
+	public Double getOriginalAmount() {
+		return originalAmount;
+	}
+
+	public void setOriginalAmount(Double originalAmount) {
+		this.originalAmount = originalAmount;
+	}
+
+	public Double getActualAmount() {
+		return actualAmount;
+	}
+
+	public void setActualAmount(Double actualAmount) {
+		this.actualAmount = actualAmount;
+	}
+
+	public Double getOriginalFreight() {
+		return originalFreight;
+	}
+
+	public void setOriginalFreight(Double originalFreight) {
+		this.originalFreight = originalFreight;
+	}
+
+	public Double getActualFreight() {
+		return actualFreight;
+	}
+
+	public void setActualFreight(Double actualFreight) {
+		this.actualFreight = actualFreight;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	
 }
