@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import javax.validation.Valid;
 
-import net.shangtech.framework.controller.validation.Password;
-import net.shangtech.framework.controller.validation.constraints.Enum;
-import net.shangtech.framework.controller.validation.constraints.Mobile;
 import net.shangtech.framework.enums.Gender;
+import net.shangtech.framework.web.controller.validation.Password;
+import net.shangtech.framework.web.controller.validation.constraints.Enum;
+import net.shangtech.framework.web.controller.validation.constraints.Mobile;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -29,7 +29,7 @@ public class MemberRegisterCommand implements Serializable {
     private String gender;
     
     @Valid
-    @net.shangtech.framework.controller.validation.constraints.Password
+    @net.shangtech.framework.web.controller.validation.constraints.Password
     private Password pass = new Password();
     
     /** 验证码 */

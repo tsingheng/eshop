@@ -3,7 +3,7 @@ package net.shangtech.eshop.account.dao;
 import java.util.List;
 
 import net.shangtech.eshop.account.entity.MemberAddress;
-import net.shangtech.framework.dao.IBaseDao;
+import net.shangtech.framework.orm.dao.IBaseDao;
 
 public interface MemberAddressDao extends IBaseDao<MemberAddress> {
 	

@@ -15,8 +15,8 @@ import net.shangtech.eshop.product.entity.Category;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.eshop.product.service.SkuService;
-import net.shangtech.framework.controller.AjaxResponse;
-import net.shangtech.framework.dao.support.Pagination;
+import net.shangtech.framework.orm.dao.support.Pagination;
+import net.shangtech.framework.web.controller.AjaxResponse;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

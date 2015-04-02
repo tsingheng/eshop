@@ -1,5 +1,6 @@
 package net.shangtech.eshop.shop.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,13 +10,16 @@ import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.service.InventoryService;
 import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.eshop.sales.service.OrderService;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
+import net.shangtech.eshop.sales.service.bo.OrderBo;
+import net.shangtech.eshop.sales.service.bo.OrderItemBo;
 import net.shangtech.eshop.shop.controller.annotation.Shopwired;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartSkuCommand;
-import net.shangtech.framework.controller.AjaxResponse;
+import net.shangtech.framework.web.controller.AjaxResponse;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +43,7 @@ public class ShoppingController {
 	@Autowired private 	InventoryService 					inventoryService;
 	@Autowired private 	SkuService 							skuService;
 	@Autowired private 	MemberAddressService				memberAddressService;
+	@Autowired private 	OrderService						orderService;
 	
 	@Shopwired
 	@ResponseBody
@@ -187,5 +192,41 @@ public class ShoppingController {
 		model.addAttribute("loginMember", loginMember);
 		
 		return "shop.shopping.checkout";
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping("/create-order")
+	public AjaxResponse createOrder(Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		
+		OrderBo order = new OrderBo();
+		order.setActualAmount(shoppingCart.getActualAmount().doubleValue());
+		order.setActualFreight(shoppingCart.getActualFreight().doubleValue());
+		order.setMemberAddressId(shoppingCart.getMemberAddressId());
+		order.setOriginalAmount(shoppingCart.getOriginalAmount().doubleValue());
+		order.setOriginalFreight(shoppingCart.getOriginalFreight().doubleValue());
+		order.setQuantity(shoppingCart.getQuantity());
+		if(loginMember != null){
+			order.setMemberId(loginMember.getId());
+		}
+		
+		List<OrderItemBo> orderItemList = new ArrayList<OrderItemBo>();
+		for(ShoppingCartItemCommand item : shoppingCart.getShoppingCartItemList()){
+			OrderItemBo orderItem = new OrderItemBo();
+			orderItem.setActualAmount(item.getSku().getSellPrice()*item.getQuantity());
+			orderItem.setOriginalAmount(item.getSku().getSellPrice()*item.getQuantity());
+			orderItem.setInventoryCode(item.getCode());
+			orderItem.setPrice(item.getSku().getSellPrice());
+			orderItem.setQuantity(item.getQuantity());
+			Sku sku = skuService.findByCode(item.getSku().getCode());
+			orderItem.setSkuId(sku.getId());
+			orderItemList.add(orderItem);
+		}
+		order.setItems(orderItemList);
+		
+		orderService.createOrder(order);
+		
+		return ajaxResponse;
 	}
 }

@@ -1,7 +1,7 @@
 package net.shangtech.eshop.account.dao;
 
 import net.shangtech.eshop.account.entity.Member;
-import net.shangtech.framework.dao.IBaseDao;
+import net.shangtech.framework.orm.dao.IBaseDao;
 
 public interface MemberDao extends IBaseDao<Member> {
 	Member findByEmail(String email);

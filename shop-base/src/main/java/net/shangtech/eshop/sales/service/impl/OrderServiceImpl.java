@@ -7,7 +7,7 @@ import net.shangtech.eshop.sales.dao.OrderItemDao;
 import net.shangtech.eshop.sales.entity.Order;
 import net.shangtech.eshop.sales.service.OrderService;
 import net.shangtech.eshop.sales.service.bo.OrderBo;
-import net.shangtech.framework.service.BaseService;
+import net.shangtech.framework.orm.service.BaseService;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,9 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 	@Autowired private MemberAddressDao addressDao;
 	@Override
 	public Order createOrder(OrderBo bo) {
+		
+		//validate bo
+		
 		Order order = new Order();
 		BeanUtils.copyProperties(bo, order);
 		

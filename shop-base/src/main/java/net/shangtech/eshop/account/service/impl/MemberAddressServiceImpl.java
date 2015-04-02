@@ -7,7 +7,7 @@ import net.shangtech.eshop.account.dao.MemberAddressDao;
 import net.shangtech.eshop.account.entity.Member;
 import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.eshop.account.service.MemberAddressService;
-import net.shangtech.framework.service.BaseService;
+import net.shangtech.framework.orm.service.BaseService;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,12 +2,12 @@ package net.shangtech.eshop.account.dao.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import net.shangtech.eshop.account.dao.MemberAddressDao;
 import net.shangtech.eshop.account.entity.MemberAddress;
-import net.shangtech.framework.dao.hibernate.BaseDao;
-import net.shangtech.framework.dao.support.MapHolder;
+import net.shangtech.framework.orm.dao.hibernate.BaseDao;
+import net.shangtech.framework.orm.dao.support.MapHolder;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberAddressDaoImpl extends BaseDao<MemberAddress> implements MemberAddressDao {

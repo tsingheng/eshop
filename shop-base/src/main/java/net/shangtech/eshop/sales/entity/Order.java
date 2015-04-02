@@ -6,9 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Index;
+import net.shangtech.framework.orm.dao.support.BaseEntity;
 
-import net.shangtech.framework.dao.support.BaseEntity;
+import org.hibernate.annotations.Index;
 
 @Entity
 @Table(name = "t_order")

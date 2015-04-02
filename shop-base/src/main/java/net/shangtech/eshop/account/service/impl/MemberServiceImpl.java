@@ -1,13 +1,13 @@
 package net.shangtech.eshop.account.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import net.shangtech.eshop.account.dao.MemberDao;
 import net.shangtech.eshop.account.entity.Member;
 import net.shangtech.eshop.account.service.MemberService;
-import net.shangtech.framework.service.BaseService;
+import net.shangtech.framework.orm.service.BaseService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional

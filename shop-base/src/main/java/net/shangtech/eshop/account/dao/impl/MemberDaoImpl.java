@@ -1,10 +1,10 @@
 package net.shangtech.eshop.account.dao.impl;
 
-import org.springframework.stereotype.Repository;
-
 import net.shangtech.eshop.account.dao.MemberDao;
 import net.shangtech.eshop.account.entity.Member;
-import net.shangtech.framework.dao.hibernate.BaseDao;
+import net.shangtech.framework.orm.dao.hibernate.BaseDao;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDaoImpl extends BaseDao<Member> implements MemberDao {

@@ -1,10 +1,10 @@
 package net.shangtech.eshop.product.dao.impl;
 
-import org.springframework.stereotype.Repository;
-
 import net.shangtech.eshop.product.dao.BrandDao;
 import net.shangtech.eshop.product.entity.Brand;
-import net.shangtech.framework.dao.hibernate.BaseDao;
+import net.shangtech.framework.orm.dao.hibernate.BaseDao;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class BrandDaoImpl extends BaseDao<Brand> implements BrandDao {

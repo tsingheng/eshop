@@ -2,16 +2,16 @@ package shop.test.solr;
 
 import net.shangtech.eshop.solr.SolrService;
 import net.shangtech.eshop.solr.SolrSku;
-import net.shangtech.framework.dao.support.Pagination;
+import net.shangtech.framework.orm.dao.support.Pagination;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.fastjson.JSON;
-
 import shop.test.BaseSpringTest;
+
+import com.alibaba.fastjson.JSON;
 
 public class SolrTest extends BaseSpringTest {
 	

@@ -2,7 +2,7 @@ package net.shangtech.eshop.shop.controller.command;
 
 import java.io.Serializable;
 
-import net.shangtech.framework.controller.validation.constraints.Mobile;
+import net.shangtech.framework.web.controller.validation.constraints.Mobile;
 
 import org.hibernate.validator.constraints.NotBlank;
 

@@ -7,7 +7,7 @@ import java.util.List;
 import net.shangtech.eshop.product.dao.CategoryDao;
 import net.shangtech.eshop.product.entity.Category;
 import net.shangtech.eshop.product.service.CategoryService;
-import net.shangtech.framework.service.BaseService;
+import net.shangtech.framework.orm.service.BaseService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

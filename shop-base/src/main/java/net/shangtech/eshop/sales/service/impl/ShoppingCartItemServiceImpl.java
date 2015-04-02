@@ -6,7 +6,7 @@ import java.util.Date;
 import net.shangtech.eshop.sales.dao.ShoppingCartItemDao;
 import net.shangtech.eshop.sales.entity.ShoppingCartItem;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
-import net.shangtech.framework.service.BaseService;
+import net.shangtech.framework.orm.service.BaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

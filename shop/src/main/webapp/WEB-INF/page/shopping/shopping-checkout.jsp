@@ -17,8 +17,7 @@
         </h2>
         <ul class="list" id="myAddress">
         	<c:forEach items="${memberAddressList}" var="address">
-        	<li class="${address.id eq loginMember.memberAddressId ? 'cur' : ''}">
-        		<input name="area" class="area-radio check" type="radio" tel="" value="46629" primary="1" provinceid="310000" cityid="310100" townid="310108" style="display:none">
+        	<li id="address-${address.id}" class="${address.id eq loginMember.memberAddressId ? 'cur' : ''}" data-id="${address.id}">
         		<div class="fl">
         			<div class="slice-border">
         				<div class="area-sumary">
@@ -29,7 +28,7 @@
         				<span class="area-address street">test</span> 
         				<span class="area-postcode"></span>
         			</div>
-        			<div class="province">上海 上海市 闸北区</div>
+        			<div class="province" data-province="${address.province}" data-city="${address.city}" data="${address.district}">上海 上海市 闸北区</div>
         			<div>
         				<span class="area-mobile phone">18559693212</span>
         				<a href="javascript:void(0);" class="addr-edit modify">修改</a>
@@ -92,6 +91,7 @@
                         </li>
                     </ul>
                 </div>
+                <input type="hidden" name="id" id="id"/>
             </form>
         </div>
     </div>
@@ -136,6 +136,7 @@
 		    </div>
 
     		<div class="orders-bd">
+    			<%--
     			<div class="table-box">
     				<span class="name">店铺：</span>
     				<span>康费莱旗舰店</span>
@@ -143,19 +144,28 @@
     					<img style="display: inline-block;" src="http://s.juancdn.com/user/images/shopping/qq-icon.jpg" border="0">
     				</a>
     			</div>
+    			--%>
 			    <table class="tbl-main">
 			        <tbody>
+			        	<c:forEach items="${shoppingCart.shoppingCartItemList}" var="item">
 			            <tr ispost="0">
 				            <td class="name-item sku-item" data-skuid="117943">
-				                <div class="pic"><a href="http://shop.juanpi.com/deal/1392488" target="_blank"><img src="http://s1.juancdn.com//bao/150323/4/5/51035dad2e12_400x400.jpg_60x60.jpg" class="lazy" d-src="http://s1.juancdn.com//bao/150323/4/5/51035dad2e12_400x400.jpg_60x60.jpg" style="display: inline;"></a></div>
+				                <div class="pic">
+				                	<a href="${ctx}/detail/${item.sku.code}" target="_blank">
+				                		<img src="${fn:replace(item.sku.image, '_1', '')}" class="lazy" style="display: inline;">
+				                	</a>
+				                </div>
 				                <div class="detail">
-				                <div class="title"><a href="http://shop.juanpi.com/deal/1392488" target="_blank">亚麻欧根纱显瘦连衣裙</a></div>
-				                <div class="other"><p>尺码：L（大码）</p><p>颜色：白色</p></div></div></td>
-				            <td class="price-item cell-center"><p class="old_p">276.00</p><p class="price">108.00</p></td>
-				            <td class="quantity-item cell-center"><p class="number">1</p></td>
-				            <td class="subtotal-item cell-center"><p class="count">108</p></td>
-				            <td class="actions-item cell-center"><p>包邮</p></td>
+				                	<div class="title"><a href="${ctx}/detail/${item.sku.code}" target="_blank">${item.sku.name}</a></div>
+				                	<div class="other"><p>尺码：${item.size}</p><p>颜色：${item.sku.color}</p></div>
+				                </div>
+				            </td>
+				            <td class="price-item cell-center"><p class="old_p">${item.sku.marketPrice}</p><p class="price">${item.sku.sellPrice}</p></td>
+				            <td class="quantity-item cell-center"><p class="number">${item.quantity}</p></td>
+				            <td class="subtotal-item cell-center"><p class="count">${item.actualAmount}</p></td>
+				            <%-- <td class="actions-item cell-center"><p>包邮</p></td> --%>
 			        	</tr>
+			        	</c:forEach>
 			        </tbody>
 			        <tfoot>
 			        	<tr>
@@ -165,7 +175,7 @@
 				                </div></div>
 				            </td>
 			                <td colspan="2" class="bgc">
-			                	<p><span>共计：</span><span class="fr postage">108.00</span></p>
+			                	<p><span>共计：</span><span class="fr postage">${shoppingCart.actualAmount}</span></p>
 			                </td>
 			            </tr>
 			        </tfoot>

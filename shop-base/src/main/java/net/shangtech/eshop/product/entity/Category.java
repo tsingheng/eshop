@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Index;
+import net.shangtech.framework.orm.dao.support.BaseEntity;
 
-import net.shangtech.framework.dao.support.BaseEntity;
+import org.hibernate.annotations.Index;
 
 /**
  * 商品分类

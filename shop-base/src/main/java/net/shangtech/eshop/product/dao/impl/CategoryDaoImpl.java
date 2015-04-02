@@ -2,12 +2,12 @@ package net.shangtech.eshop.product.dao.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import net.shangtech.eshop.product.dao.CategoryDao;
 import net.shangtech.eshop.product.entity.Category;
-import net.shangtech.framework.dao.hibernate.BaseDao;
-import net.shangtech.framework.dao.support.MapHolder;
+import net.shangtech.framework.orm.dao.hibernate.BaseDao;
+import net.shangtech.framework.orm.dao.support.MapHolder;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class CategoryDaoImpl extends BaseDao<Category> implements CategoryDao {

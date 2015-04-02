@@ -2,11 +2,11 @@ package net.shangtech.eshop.product.dao.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import net.shangtech.eshop.product.dao.InventoryDao;
 import net.shangtech.eshop.product.entity.Inventory;
-import net.shangtech.framework.dao.hibernate.BaseDao;
+import net.shangtech.framework.orm.dao.hibernate.BaseDao;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class InventoryDaoImpl extends BaseDao<Inventory> implements InventoryDao {

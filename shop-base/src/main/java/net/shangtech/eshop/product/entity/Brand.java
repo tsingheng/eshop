@@ -1,12 +1,12 @@
 package net.shangtech.eshop.product.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import net.shangtech.framework.orm.dao.support.BaseEntity;
 
 import org.hibernate.annotations.Index;
-
-import net.shangtech.framework.dao.support.BaseEntity;
 
 @Entity
 @Table(name = "t_brand")

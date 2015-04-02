@@ -3,7 +3,7 @@ package net.shangtech.eshop.product.service;
 import java.util.List;
 
 import net.shangtech.eshop.product.entity.Category;
-import net.shangtech.framework.service.IBaseService;
+import net.shangtech.framework.orm.service.IBaseService;
 
 public interface CategoryService extends IBaseService<Category> {
 	Category findAllCategory();

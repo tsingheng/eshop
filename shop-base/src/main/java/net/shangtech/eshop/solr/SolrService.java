@@ -12,7 +12,7 @@ import net.shangtech.eshop.product.service.BrandService;
 import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.eshop.product.service.InventoryService;
 import net.shangtech.eshop.product.service.SkuService;
-import net.shangtech.framework.dao.support.Pagination;
+import net.shangtech.framework.orm.dao.support.Pagination;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;

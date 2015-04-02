@@ -13,9 +13,9 @@ import net.shangtech.eshop.shop.controller.command.MemberAddressCommand;
 import net.shangtech.eshop.shop.controller.command.MemberLoginCommand;
 import net.shangtech.eshop.shop.controller.command.MemberRegisterCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
-import net.shangtech.framework.controller.AjaxResponse;
-import net.shangtech.framework.controller.validation.RequestValid;
 import net.shangtech.framework.util.EncoderUtils;
+import net.shangtech.framework.web.controller.AjaxResponse;
+import net.shangtech.framework.web.controller.validation.RequestValid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

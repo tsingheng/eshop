@@ -3,7 +3,7 @@ package net.shangtech.eshop.manager.controller.product.vo.query;
 import java.util.List;
 
 import net.shangtech.eshop.product.entity.Sku;
-import net.shangtech.framework.dao.support.QueryBean;
+import net.shangtech.framework.orm.dao.support.QueryBean;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;

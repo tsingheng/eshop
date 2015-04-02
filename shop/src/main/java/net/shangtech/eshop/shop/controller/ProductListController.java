@@ -6,7 +6,7 @@ import net.shangtech.eshop.product.entity.Category;
 import net.shangtech.eshop.product.service.CategoryService;
 import net.shangtech.eshop.solr.SolrService;
 import net.shangtech.eshop.solr.SolrSku;
-import net.shangtech.framework.dao.support.Pagination;
+import net.shangtech.framework.orm.dao.support.Pagination;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.slf4j.Logger;
