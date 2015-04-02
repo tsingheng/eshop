@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="main pr mt20 clear">
 <div class="confirm-order">
     <!-- 收货信息 -->
@@ -17,25 +18,27 @@
         </h2>
         <ul class="list" id="myAddress">
         	<c:forEach items="${memberAddressList}" var="address">
-        	<li id="address-${address.id}" class="${address.id eq loginMember.memberAddressId ? 'cur' : ''}" data-id="${address.id}">
+        	<li id="address-${address.id}" class="${address.id eq shoppingCart.memberAddressId ? 'cur' : ''}" data-id="${address.id}">
         		<div class="fl">
         			<div class="slice-border">
         				<div class="area-sumary">
-        					<span class="area-name name">test</span>收
+        					<span class="area-name name">${address.contact}</span>收
         				</div>
         			</div>
         			<div class="mb5">
-        				<span class="area-address street">test</span> 
-        				<span class="area-postcode"></span>
+        				<span class="area-address street">${address.street}</span> 
+        				<span class="area-postcode">${address.postcode}</span>
         			</div>
-        			<div class="province" data-province="${address.province}" data-city="${address.city}" data="${address.district}">上海 上海市 闸北区</div>
+        			<div class="province" data-province="${address.province}" data-city="${address.city}" data-district="${address.district}">${address.province} ${address.city} ${address.district}</div>
         			<div>
-        				<span class="area-mobile phone">18559693212</span>
+        				<span class="area-mobile phone">${address.mobile}</span>
         				<a href="javascript:void(0);" class="addr-edit modify">修改</a>
         			</div>
         		</div>
         		<div class="slt-icon"></div>
+        		<c:if test="${address.isDefault}">
         		<div class="default-add">默认地址</div>
+        		</c:if>
         		<div class="slt-icon"></div>
         	</li>
         	</c:forEach>
@@ -162,14 +165,14 @@
 				            </td>
 				            <td class="price-item cell-center"><p class="old_p">${item.sku.marketPrice}</p><p class="price">${item.sku.sellPrice}</p></td>
 				            <td class="quantity-item cell-center"><p class="number">${item.quantity}</p></td>
-				            <td class="subtotal-item cell-center"><p class="count">${item.actualAmount}</p></td>
-				            <%-- <td class="actions-item cell-center"><p>包邮</p></td> --%>
+				            <td class="subtotal-item cell-center"><p class="count">${item.sku.sellPrice*item.quantity}</p></td>
+				            <td class="actions-item cell-center"><p>包邮</p></td>
 			        	</tr>
 			        	</c:forEach>
 			        </tbody>
 			        <tfoot>
 			        	<tr>
-			            	<td class="bgc" colspan="4">
+			            	<td class="bgc" colspan="3">
 				                <div class="message"><label class="hd">留言：</label>
 				                <div class="inputmask"><textarea placeholder="选填：对本次交易的补充说明，最多不超过50字" autocomplete="off" class="txt" data-maxlength="50" id="u_note" name="u_note[4074024]" title="选填：对本次交易的补充说明，最多不超过50字"></textarea>
 				                </div></div>

@@ -113,7 +113,9 @@ public class MemberController {
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		
 		MemberAddress memberAddress = new MemberAddress();
-		BeanUtils.copyProperties(addressCommand, addressCommand);
+		BeanUtils.copyProperties(addressCommand, memberAddress);
+		
+		//如果是未登录用户,只允许有一条地址
 		if(loginMember == null && shoppingCart.getMemberAddressId() != null){
 			memberAddress.setId(shoppingCart.getMemberAddressId());
 		}
@@ -126,7 +128,7 @@ public class MemberController {
 			memberAddressService.save(memberAddress);
 		}else{
 			MemberAddress old = memberAddressService.find(memberAddress.getId());
-			if(old == null || old.getMemberId() != loginMember.getId()){
+			if(old == null || (loginMember != null && old.getMemberId() != loginMember.getId())){
 				ajaxResponse.setMessage("不存在该地址");
 				return ajaxResponse;
 			}

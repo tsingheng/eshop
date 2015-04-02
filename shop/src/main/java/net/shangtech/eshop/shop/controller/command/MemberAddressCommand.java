@@ -10,6 +10,8 @@ public class MemberAddressCommand implements Serializable {
 
     private static final long serialVersionUID = 3125931256520353319L;
 	
+    private Long id;
+    
     @NotBlank
     private String contact;
     
@@ -96,6 +98,14 @@ public class MemberAddressCommand implements Serializable {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
     
 }

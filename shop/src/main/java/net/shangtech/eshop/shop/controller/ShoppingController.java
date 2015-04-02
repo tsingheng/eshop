@@ -166,13 +166,14 @@ public class ShoppingController {
 	@RequestMapping("/shopping-cart")
 	public String gotoShoppingCart(Model model, ShoppingCartCommand shoppingCart){
 		model.addAttribute("shoppingCart", shoppingCart);
+		model.addAttribute("step", 1);
 		return "shop.shopping.cart";
 	}
 	
 	@Shopwired
 	@RequestMapping("/shopping-checkout")
 	public String checkout(Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
-		//model.addAttribute("shoppingCart", shoppingCart);
+		model.addAttribute("shoppingCart", shoppingCart);
 		
 		List<MemberAddress> memberAddressList = null;
 		if (loginMember != null) {
@@ -190,6 +191,7 @@ public class ShoppingController {
         }
 		model.addAttribute("memberAddressList", memberAddressList);
 		model.addAttribute("loginMember", loginMember);
+		model.addAttribute("step", 2);
 		
 		return "shop.shopping.checkout";
 	}

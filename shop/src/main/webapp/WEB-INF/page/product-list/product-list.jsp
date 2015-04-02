@@ -5,5 +5,5 @@
 
 </div>
 <div class="product-list-wrapper">
-<jsp:include page="product-list-page.jsp"/>
+<jsp:include page="/WEB-INF/page/product-list/product-list-page.jsp"/>
 </div>

@@ -55,7 +55,7 @@ $(document).ready(function(){
 			$(form).ajaxSubmit({
 				dataType: 'json',
 				success: function(response){
-					if(response.errors.length > 0){
+					if(response.errors){
 						validator.showErrors(response.errors);
 						return;
 					}
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$province = $('#province'), $city = $('#city'), district = $('#district');
+	$province = $('#province'), $city = $('#city'), $district = $('#district');
 	$province.append(findChildrenArea('1'));
 	$province.change(function(){
 		$city.find('option:gt(0)').remove();
@@ -100,10 +100,20 @@ $(document).ready(function(){
 		$city.find('option[value="' + address.city + '"]').attr('selected', 'selected');
 		$city.trigger('change');
 		$district.find('option[value="' + address.district + '"]').attr('selected', 'selected');
+		$district.trigger('change');
+		if(address.isDefault){
+			$('#isDefault').attr('checked', 'checked');
+		}
+		$('#addrform .quxiao').show();
 	});
 	$('#myAddress').on('click', '.add', function(){
 		$('#addrform')[0].reset();
 		$('#addrform').show();
+		$('#addrform .quxiao').show();
+	});
+	$('#addrform').on('click', '.quxiao', function(){
+		$('#addrform')[0].reset();
+		$('#addrform').hide();
 	});
 });
 
@@ -123,10 +133,12 @@ function findChildrenArea(parent){
 	return children.join('');
 }
 function doUpdateAddress(address){
-	var $address = $(address);
+	var $address = $(buildAddressHtml(address));
 	var $old = $('#address-' + address.id);
+	$('#myAddress .cur').removeClass('cur');
 	if($old.length > 0){
 		$old.html($address.html());
+		$old.addClass('cur');
 	}else if($('#myAddress li').length > 0){
 		$address.insertBefore($('#myAddress li:last'));
 	}else{
@@ -137,7 +149,7 @@ function doUpdateAddress(address){
 }
 function buildAddressHtml(address){
 	var html = [];
-	html.push('<li data-id="' + address.id + '" id="address-' + address.id + '">');
+	html.push('<li data-id="' + address.id + '" id="address-' + address.id + '" class="cur">');
 	html.push('	<div class="fl">');
 	html.push('		<div class="slice-border">');
 	html.push('			<div class="area-sumary">');
@@ -150,7 +162,7 @@ function buildAddressHtml(address){
 	html.push('	</div>');
 	html.push('	<div class="province" data-province="' + address.province + '" data-city="' + address.city + '" data-district="' + address.district + '">' + address.province + ' ' + address.city + ' ' + address.district + '</div>');
 	html.push('		<div>');
-	html.push('			<span class="area-mobile phone">' + mobile + '</span>');
+	html.push('			<span class="area-mobile phone">' + address.mobile + '</span>');
 	html.push('			<a href="javascript:void(0);" class="addr-edit modify">修改</a>');
 	html.push('		</div>');
 	html.push('	</div>');
@@ -163,5 +175,15 @@ function buildAddressHtml(address){
 	return html.join('');
 }
 function buildAddressObject($address){
-	
+	var address = {};
+	address['contact'] = $.trim($address.find('.name').html());
+	address['street'] = $.trim($address.find('.street').html());
+	address['postcode'] = $.trim($address.find('.area-postcode').html());
+	address['province'] = $.trim($address.find('.province').data('province'));
+	address['city'] = $.trim($address.find('.province').data('city'));
+	address['district'] = $.trim($address.find('.province').data('district'));
+	address['mobile'] = $.trim($address.find('.area-mobile').html());
+	address['isDefault'] = $address.find('.default-add').length > 0;
+	address['id'] = $address.data('id');
+	return address;
 }
