@@ -15,11 +15,13 @@ import net.shangtech.eshop.sales.service.ShoppingCartItemService;
 import net.shangtech.eshop.sales.service.bo.OrderBo;
 import net.shangtech.eshop.sales.service.bo.OrderItemBo;
 import net.shangtech.eshop.shop.controller.annotation.Shopwired;
+import net.shangtech.eshop.shop.controller.command.CreateOrderCommand;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartSkuCommand;
 import net.shangtech.framework.web.controller.AjaxResponse;
+import net.shangtech.framework.web.controller.validation.RequestValid;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.BeanUtils;
@@ -197,9 +199,10 @@ public class ShoppingController {
 	}
 	
 	@Shopwired
+	@RequestValid
 	@ResponseBody
 	@RequestMapping("/create-order")
-	public AjaxResponse createOrder(Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+	public AjaxResponse createOrder(@RequestValid CreateOrderCommand cmd, Model model, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		
 		OrderBo order = new OrderBo();
@@ -209,8 +212,15 @@ public class ShoppingController {
 		order.setOriginalAmount(shoppingCart.getOriginalAmount().doubleValue());
 		order.setOriginalFreight(shoppingCart.getOriginalFreight().doubleValue());
 		order.setQuantity(shoppingCart.getQuantity());
+		order.setMessage(cmd.getMessage());
 		if(loginMember != null){
 			order.setMemberId(loginMember.getId());
+			if(cmd.getMemberAddressId() != null){
+				MemberAddress address = memberAddressService.find(cmd.getMemberAddressId());
+				if(address != null){
+					order.setMemberAddressId(cmd.getMemberAddressId());
+				}
+			}
 		}
 		
 		List<OrderItemBo> orderItemList = new ArrayList<OrderItemBo>();

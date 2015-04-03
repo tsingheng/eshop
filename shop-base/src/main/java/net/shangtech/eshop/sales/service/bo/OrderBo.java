@@ -30,6 +30,8 @@ public class OrderBo {
 	@NotNull
 	private Double actualFreight;
 	
+	private String message;
+	
 	@Valid
 	@NotEmpty
 	private List<OrderItemBo> items;
@@ -96,6 +98,14 @@ public class OrderBo {
 
 	public void setItems(List<OrderItemBo> items) {
 		this.items = items;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }

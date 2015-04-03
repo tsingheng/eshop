@@ -7,9 +7,12 @@ import java.util.List;
 import net.shangtech.eshop.product.entity.Brand;
 import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
+import net.shangtech.eshop.product.entity.SkuMetaInfo;
 import net.shangtech.eshop.product.service.BrandService;
 import net.shangtech.eshop.product.service.InventoryService;
+import net.shangtech.eshop.product.service.SkuMetaInfoService;
 import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.eshop.shop.constants.ShopConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProductController {
 	
-	@Autowired private SkuService skuService;
+	@Autowired private SkuService 				skuService;
 	
-	@Autowired private BrandService brandService;
+	@Autowired private BrandService 			brandService;
 	
-	@Autowired private InventoryService inventoryService;
+	@Autowired private InventoryService 		inventoryService;
+	
+	@Autowired private SkuMetaInfoService 		skuMetaInfoService;
 	
 	@RequestMapping("/detail/{code}")
 	public String detail(@PathVariable String code, Model model){
@@ -51,6 +56,12 @@ public class ProductController {
 			}
 			Collections.sort(colorList);
 			model.addAttribute("colorList", colorList);
+		}
+		
+		SkuMetaInfo metaInfo = skuMetaInfoService.findBySkuId(sku.getId());
+		if(metaInfo != null){
+			model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
+			model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
 		}
 		
 		return "shop.product.detail";

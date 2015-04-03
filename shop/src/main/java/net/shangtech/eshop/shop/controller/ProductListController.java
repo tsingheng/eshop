@@ -3,7 +3,10 @@ package net.shangtech.eshop.shop.controller;
 import java.util.List;
 
 import net.shangtech.eshop.product.entity.Category;
+import net.shangtech.eshop.product.entity.CategoryMetaInfo;
+import net.shangtech.eshop.product.service.CategoryMetaInfoService;
 import net.shangtech.eshop.product.service.CategoryService;
+import net.shangtech.eshop.shop.constants.ShopConstants;
 import net.shangtech.eshop.solr.SolrService;
 import net.shangtech.eshop.solr.SolrSku;
 import net.shangtech.framework.orm.dao.support.Pagination;
@@ -23,8 +26,9 @@ public class ProductListController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductListController.class);
 	
-	@Autowired private CategoryService categoryService;
-	@Autowired private SolrService solrService;
+	@Autowired private CategoryService 				categoryService;
+	@Autowired private SolrService 					solrService;
+	@Autowired private CategoryMetaInfoService		categoryMetaInfoService;
 	
 	@RequestMapping(value = "/cate-{categories}/list", method = RequestMethod.GET)
 	public String listByCategory(@PathVariable String categories, Model model, Pagination<SolrSku> pagination){
@@ -36,6 +40,11 @@ public class ProductListController {
 		//code不是唯一的,需要结合上级id查询
 		Category currentCategory = categoryService.findByCodeAndRootId(categoryCodes[categoryCodes.length-1], currentTopCategory.getId());
 		model.addAttribute("currentCategory", currentCategory);
+		CategoryMetaInfo metaInfo = categoryMetaInfoService.findByCategoryId(currentCategory.getId());
+		if(metaInfo != null){
+			model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
+			model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
+		}
 		
 		List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
 		for(Category category : categoryList){

@@ -1,5 +1,6 @@
 package net.shangtech.eshop.shop.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.shangtech.eshop.account.entity.Member;
@@ -31,6 +32,7 @@ public class MemberController {
 	
 	@Autowired private MemberService memberService;
 	@Autowired private MemberAddressService memberAddressService;
+	@Autowired private HttpServletRequest request;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String gotoRegister(){
@@ -62,7 +64,7 @@ public class MemberController {
 		Member member = new Member();
 		member.setEmail(cmd.getEmail());
 		member.setGender(cmd.getGender());
-		member.setPasswrod(EncoderUtils.MD5(cmd.getEmail()));
+		member.setPasswrod(EncoderUtils.MD5(cmd.getPass().getPassword()));
 		memberService.save(member);
 		
 		//auto login
@@ -75,9 +77,10 @@ public class MemberController {
 		return "shop.member.login";
 	}
 	
+	@Shopwired
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public AjaxResponse login(@RequestValid MemberLoginCommand cmd, HttpSession session){
+	public AjaxResponse login(@RequestValid MemberLoginCommand cmd, ShoppingCartCommand shoppingCart, HttpSession session){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//验证码
 		String captchaInSession = (String) session.getAttribute(SessionScope.CAPTCHA_KEY);

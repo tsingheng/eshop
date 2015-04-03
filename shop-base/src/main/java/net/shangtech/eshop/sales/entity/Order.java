@@ -75,6 +75,9 @@ public class Order extends BaseEntity<Long> {
 	
 	@Column(name = "postcode")
 	private String postcode;
+	
+	@Column(name = "message")
+	private String message;
 
 	public String getCode() {
 		return code;
@@ -226,6 +229,14 @@ public class Order extends BaseEntity<Long> {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }
