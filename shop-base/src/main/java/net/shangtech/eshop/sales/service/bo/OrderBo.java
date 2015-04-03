@@ -32,6 +32,9 @@ public class OrderBo {
 	
 	private String message;
 	
+	@NotEmpty
+	private String paymentType;
+	
 	@Valid
 	@NotEmpty
 	private List<OrderItemBo> items;
@@ -106,6 +109,14 @@ public class OrderBo {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}
 	
 }

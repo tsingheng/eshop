@@ -1,5 +1,8 @@
 package net.shangtech.eshop.shop.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +10,12 @@ import net.shangtech.eshop.account.entity.Member;
 import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.eshop.account.service.MemberAddressService;
 import net.shangtech.eshop.account.service.MemberService;
+import net.shangtech.eshop.product.entity.Inventory;
+import net.shangtech.eshop.product.entity.Sku;
+import net.shangtech.eshop.product.service.InventoryService;
+import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.eshop.sales.entity.ShoppingCartItem;
+import net.shangtech.eshop.sales.service.ShoppingCartItemService;
 import net.shangtech.eshop.shop.constants.ScopConstants.SessionScope;
 import net.shangtech.eshop.shop.controller.annotation.Shopwired;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
@@ -14,6 +23,8 @@ import net.shangtech.eshop.shop.controller.command.MemberAddressCommand;
 import net.shangtech.eshop.shop.controller.command.MemberLoginCommand;
 import net.shangtech.eshop.shop.controller.command.MemberRegisterCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
+import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
+import net.shangtech.eshop.shop.controller.command.ShoppingCartSkuCommand;
 import net.shangtech.framework.util.EncoderUtils;
 import net.shangtech.framework.web.controller.AjaxResponse;
 import net.shangtech.framework.web.controller.validation.RequestValid;
@@ -22,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +42,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MemberController {
 	
-	@Autowired private MemberService memberService;
-	@Autowired private MemberAddressService memberAddressService;
-	@Autowired private HttpServletRequest request;
+	@Autowired private MemberService 				memberService;
+	@Autowired private MemberAddressService 		memberAddressService;
+	@Autowired private HttpServletRequest 			request;
+	@Autowired private ShoppingCartItemService 		shoppingCartItemService;
+	@Autowired private InventoryService 			inventoryService;
+	@Autowired private SkuService 					skuService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String gotoRegister(){
@@ -105,7 +120,51 @@ public class MemberController {
 		loginMember.setUsername(cmd.getUsername());
 		session.setAttribute(SessionScope.LOGIN_MEMBER_KEY, loginMember);
 		
+		mergeShoppingCart(shoppingCart, loginMember);
+		
 		return ajaxResponse;
+	}
+	
+	/**
+	 * 合并数据库和session中的shoppingCart
+	 * @param shoppingCart
+	 * @param loginMember
+	 */
+	private void mergeShoppingCart(ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		//清理数据库中的购物车
+		List<ShoppingCartItem> shoppingCartItems = shoppingCartItemService.findByMemberId(loginMember.getId());
+		List<ShoppingCartItemCommand> validItems = new ArrayList<ShoppingCartItemCommand>();
+		for(ShoppingCartItem item : shoppingCartItems){
+			Inventory inventory = inventoryService.findByCode(item.getCode());
+			if(inventory == null){
+				shoppingCartItemService.removeItem(item.getCode(), loginMember.getId());
+			}
+			int avaliable = inventory.getStock() - inventory.getSaled();
+			Sku sku = skuService.find(inventory.getSkuId());
+			if(avaliable <= 0 || sku == null){
+				shoppingCartItemService.removeItem(item.getCode(), loginMember.getId());
+			}
+			ShoppingCartItemCommand itemCommand = new ShoppingCartItemCommand();
+			itemCommand.setAvaliable(avaliable);
+			itemCommand.setCode(inventory.getCode());
+			itemCommand.setColor(sku.getColor());
+			itemCommand.setQuantity(item.getQuantity());
+			itemCommand.setSize(inventory.getSize());
+			ShoppingCartSkuCommand skuCommand = new ShoppingCartSkuCommand();
+			BeanUtils.copyProperties(sku, skuCommand);
+			itemCommand.setSku(skuCommand);
+			validItems.add(itemCommand);
+		}
+		//将session中的购物车合并到数据库中
+		if(!CollectionUtils.isEmpty(shoppingCart.getShoppingCartItemList())){
+			for(ShoppingCartItemCommand item : shoppingCart.getShoppingCartItemList()){
+				shoppingCartItemService.addItem(item.getCode(), item.getQuantity(), loginMember.getId());
+			}
+		}
+		//将数据库中有效数据合并至session购物车中
+		for(ShoppingCartItemCommand item : validItems){
+			shoppingCart.addItem(item);
+		}
 	}
 	
 	@Shopwired

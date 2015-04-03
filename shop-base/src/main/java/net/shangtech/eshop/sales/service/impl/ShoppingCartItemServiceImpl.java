@@ -2,6 +2,7 @@ package net.shangtech.eshop.sales.service.impl;
 
 
 import java.util.Date;
+import java.util.List;
 
 import net.shangtech.eshop.sales.dao.ShoppingCartItemDao;
 import net.shangtech.eshop.sales.entity.ShoppingCartItem;
@@ -59,4 +60,9 @@ public class ShoppingCartItemServiceImpl extends BaseService<ShoppingCartItem> i
 	    item.setDeleteTime(new Date());
 	    dao.update(item);
     }
+
+	@Override
+	public List<ShoppingCartItem> findByMemberId(Long memberId) {
+		return dao.findByProperty("memberId", memberId);
+	}
 }

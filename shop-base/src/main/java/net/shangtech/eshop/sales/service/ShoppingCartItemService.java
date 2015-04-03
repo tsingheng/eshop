@@ -1,5 +1,7 @@
 package net.shangtech.eshop.sales.service;
 
+import java.util.List;
+
 import net.shangtech.eshop.sales.entity.ShoppingCartItem;
 import net.shangtech.framework.orm.service.IBaseService;
 
@@ -34,4 +36,6 @@ public interface ShoppingCartItemService extends IBaseService<ShoppingCartItem> 
 	 * @param memberId
 	 */
 	void removeItem(String code, Long memberId);
+	
+	List<ShoppingCartItem> findByMemberId(Long memberId);
 }

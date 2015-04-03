@@ -213,6 +213,7 @@ public class ShoppingController {
 		order.setOriginalFreight(shoppingCart.getOriginalFreight().doubleValue());
 		order.setQuantity(shoppingCart.getQuantity());
 		order.setMessage(cmd.getMessage());
+		order.setPaymentType(cmd.getPaymentType());
 		if(loginMember != null){
 			order.setMemberId(loginMember.getId());
 			if(cmd.getMemberAddressId() != null){
