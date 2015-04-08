@@ -87,7 +87,8 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#myAddress').on('click', '.modify', function(){
+	$('#myAddress').on('click', '.modify', function(e){
+		e.stopPropagation();
 		var $address = $(this).closest('li');
 		var address = buildAddressObject($address);
 		$('#addrform input[type="text"]').each(function(){
@@ -102,14 +103,26 @@ $(document).ready(function(){
 		$district.find('option[value="' + address.district + '"]').attr('selected', 'selected');
 		$district.trigger('change');
 		if(address.isDefault){
-			$('#isDefault').attr('checked', 'checked');
+			$('#J_SetDefault').attr('checked', 'checked');
+		}else{
+			$('#J_SetDefault').removeAttr('checked');
 		}
 		$('#addrform .quxiao').show();
 	});
-	$('#myAddress').on('click', '.add', function(){
+	$('#myAddress').on('click', '.add', function(e){
+		e.stopPropagation();
 		$('#addrform')[0].reset();
 		$('#addrform').show();
 		$('#addrform .quxiao').show();
+	});
+	$('#myAddress').on('click', 'li[id]', function(){
+		var $this = $(this);
+		if($this.hasClass('cur')){
+			return;
+		}
+		$('#myAddress li.cur').removeClass('cur');
+		$this.addClass('cur');
+		onSelectAddress(buildAddressObject($this));
 	});
 	$('#addrform').on('click', '.quxiao', function(){
 		$('#addrform')[0].reset();
@@ -136,6 +149,9 @@ function doUpdateAddress(address){
 	var $address = $(buildAddressHtml(address));
 	var $old = $('#address-' + address.id);
 	$('#myAddress .cur').removeClass('cur');
+	if(address.isDefault){
+		$('#myAddress .default-add').remove();
+	}
 	if($old.length > 0){
 		$old.html($address.html());
 		$old.addClass('cur');
@@ -146,6 +162,10 @@ function doUpdateAddress(address){
 	}
 	$('#addrform').hide();
 	$('#addrform')[0].reset();
+	onSelectAddress(address);
+}
+function onSelectAddress(address){
+	$('#selected-address').html(address.province + ' ' + address.city + ' ' + address.district + ' ' + address.street + '<br/>' + address.contact + ' ' + address.mobile);
 }
 function buildAddressHtml(address){
 	var html = [];

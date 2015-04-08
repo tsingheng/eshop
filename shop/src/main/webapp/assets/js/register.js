@@ -66,7 +66,7 @@ $(document).ready(function(){
 			$(element).closest('.form-group').removeClass(errorClass);
 		},
 		submitHandler: function(form){
-			var validator = this;
+			var validator = $('#register-form').validate();
 			$(form).ajaxSubmit({
 				success: function(result){
 					if(result.errors){

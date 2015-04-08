@@ -35,6 +35,8 @@ public class MemberAddressCommand implements Serializable {
     
     @NotBlank
     private String postcode;
+    
+    private Boolean isDefault = false;
 
 	public String getContact() {
 		return contact;
@@ -106,6 +108,14 @@ public class MemberAddressCommand implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Boolean getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Boolean isDefault) {
+		this.isDefault = isDefault;
 	}
     
 }

@@ -84,6 +84,7 @@ public class MemberController {
 		
 		//auto login
 		
+		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
 	}
 	
@@ -122,6 +123,7 @@ public class MemberController {
 		
 		mergeShoppingCart(shoppingCart, loginMember);
 		
+		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
 	}
 	
@@ -181,12 +183,12 @@ public class MemberController {
 		if(loginMember == null && shoppingCart.getMemberAddressId() != null){
 			memberAddress.setId(shoppingCart.getMemberAddressId());
 		}
+		if(loginMember == null){
+			memberAddress.setMemberId(Member.GUEST_MEMBER_ID);
+		}else{
+			memberAddress.setMemberId(loginMember.getId());
+		}
 		if(memberAddress.getId() == null){
-			if(loginMember == null){
-				memberAddress.setMemberId(Member.GUEST_MEMBER_ID);
-			}else{
-				memberAddress.setMemberId(loginMember.getId());
-			}
 			memberAddressService.save(memberAddress);
 		}else{
 			MemberAddress old = memberAddressService.find(memberAddress.getId());
@@ -199,6 +201,7 @@ public class MemberController {
 		shoppingCart.setMemberAddressId(memberAddress.getId());
 		
 		BeanUtils.copyProperties(memberAddress, addressCommand);
+		addressCommand.setId(memberAddress.getId());
 		ajaxResponse.setData(addressCommand);
 		ajaxResponse.setSuccess(true);
 		

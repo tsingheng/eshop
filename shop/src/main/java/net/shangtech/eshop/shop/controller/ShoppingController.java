@@ -191,6 +191,10 @@ public class ShoppingController {
         } else if (shoppingCart.getMemberAddressId() != null) {
         	memberAddressList = Arrays.asList(memberAddressService.find(shoppingCart.getMemberAddressId()));
         }
+		if(shoppingCart.getMemberAddressId() != null){
+			MemberAddress memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
+			model.addAttribute("memberAddress", memberAddress);
+		}
 		model.addAttribute("memberAddressList", memberAddressList);
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("step", 2);

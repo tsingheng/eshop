@@ -83,7 +83,7 @@
                         </li>
                         <li>
                             <label></label>
-                            <input type="checkbox" class="set-check" name="idDefault" id="J_SetDefault" value="1">
+                            <input type="checkbox" class="set-check" name="isDefault" id="J_SetDefault" value="1">
                             <label class="set" for="J_SetDefault">设置为默认收货地址</label>
                         </li>
                         <li>
@@ -126,15 +126,15 @@
 
     <!-- 确认商品订单信息 -->
     <div class="order-goods">
-        <h2><span class="fl">确认订单信息</span><a class="go_back fr" href="http://cart.juanpi.com">&lt;&lt;返回购物袋修改</a></h2>
+        <h2><span class="fl">确认订单信息</span><a class="go_back fr" href="${ctx}/shopping-cart">&lt;&lt;返回购物袋修改</a></h2>
         <div class="orders clear">
     		<div class="orders-hd">
 		        <ul>
-		            <li class="name-item"><span>商品信息</span></li>
-		            <li class="price-item"><span class="text">单价（元）</span></li>
-		            <li class="quantity-item"><span class="text">数量</span></li>
-		            <li class="subtotal-item"><span class="text">小计</span></li>
-		            <li class="actions-item"><span class="text">邮费</span></li>
+		            <li class="name-item" style="width:44% !important;"><span>商品信息</span></li>
+		            <li class="price-item" style="width:18% !important;"><span class="text">单价（元）</span></li>
+		            <li class="quantity-item" style="width:18% !important;"><span class="text">数量</span></li>
+		            <li class="subtotal-item" style="width:20% !important;"><span class="text">小计</span></li>
+		            <%--<li class="actions-item"><span class="text">邮费</span></li>--%>
 		        </ul>
 		    </div>
 
@@ -166,7 +166,7 @@
 				            <td class="price-item cell-center"><p class="old_p">${item.sku.marketPrice}</p><p class="price">${item.sku.sellPrice}</p></td>
 				            <td class="quantity-item cell-center"><p class="number">${item.quantity}</p></td>
 				            <td class="subtotal-item cell-center"><p class="count">${item.sku.sellPrice*item.quantity}</p></td>
-				            <td class="actions-item cell-center"><p>包邮</p></td>
+				            <%--<td class="actions-item cell-center"><p>包邮</p></td>--%>
 			        	</tr>
 			        	</c:forEach>
 			        </tbody>
@@ -188,10 +188,14 @@
     <div class="m-orders-total">
         <div class="m-orders-detail clear">
             <div class="site fl">
-            <label class="fl">寄送至：</label><span class="fl">上海 上海市 闸北区 test<br>test 18559693212</span></div>
+            <label class="fl">寄送至：</label><span class="fl" id="selected-address">${memberAddress.province} ${memberAddress.city} ${memberAddress.district} ${memberAddress.street}<br>${memberAddress.contact} ${memberAddress.mobile}</span></div>
             <div class="other fr">
-                <p>合计：<span class="normal"><em>￥</em>108</span>运费：<span class="postprice normal"><em>￥</em>0.00</span>现金券扣减：<span class="normal"><em>￥</em>0.00</span></p>
-                <p class="txt"><span class="wait_pay"><b>待支付：</b><span class="tlwaitpay"><em>￥</em>108.00</span></span></p>
+                <p>
+                	合计：<span class="normal"><em>￥</em>${shoppingCart.originalAmount}</span>
+                	运费：<span class="postprice normal"><em>￥</em>${shoppingCart.actualFreight}</span>
+                	<%--现金券扣减：<span class="normal"><em>￥</em>0.00</span>--%>
+                </p>
+                <p class="txt"><span class="wait_pay"><b>待支付：</b><span class="tlwaitpay"><em>￥</em>${shoppingCart.actualAmount+shoppingCart.actualFreight}</span></span></p>
             </div>
         </div>
     </div>
@@ -215,9 +219,9 @@
 <input id="coupon_amount" name="coupon_amount" type="hidden" value="0">
 </div>
     <div class="orders-total-pay">
-        <p class="affirm fl"><label><input type="checkbox" class="ck" id="ck" name="ck" checked="checked">我已阅读并同意<a href="http://www.juanpi.com/about/argree_user" target="_blank">《卷皮特卖服务协议》</a></label></p>
+        <p class="affirm fl"><label><input type="checkbox" class="ck" id="ck" name="ck" checked="checked">我已阅读并同意<a href="javascript:;" target="_blank">《xxxx服务协议》</a></label></p>
         <a class="go_pay fr" href="javascript:void(0)">确认并支付</a>
-        <p class="fr tips">请在<em><label id="daotime">17</label>分<label id="daosec">13</label>秒</em>内完成付款，超时将自动取消订单</p>
+        <%--<p class="fr tips">请在<em><label id="daotime">17</label>分<label id="daosec">13</label>秒</em>内完成付款，超时将自动取消订单</p>--%>
     </div> 
 
 </div>
