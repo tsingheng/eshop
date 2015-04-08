@@ -16,7 +16,7 @@ cd ~/git/eshop
 
 echo "update eshop"
 git fetch
-git rebase origin/master
+git rebase origin/store-b2c
 
 echo "mvn install"
 mvn install
