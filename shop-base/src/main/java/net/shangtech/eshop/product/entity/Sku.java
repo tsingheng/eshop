@@ -61,6 +61,9 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 	
 	@Column(name = "colors")
 	private String colors;
+	
+	@Column(name = "tags")
+	private String tags;
 
 	public String getName() {
 		return name;
@@ -172,6 +175,14 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 
 	public void setColors(String colors) {
 		this.colors = colors;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 	@Override
