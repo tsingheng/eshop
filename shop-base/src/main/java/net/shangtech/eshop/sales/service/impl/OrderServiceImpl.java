@@ -1,5 +1,6 @@
 package net.shangtech.eshop.sales.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import net.shangtech.eshop.account.dao.MemberAddressDao;
@@ -10,6 +11,7 @@ import net.shangtech.eshop.sales.entity.Order;
 import net.shangtech.eshop.sales.entity.OrderItem;
 import net.shangtech.eshop.sales.service.OrderService;
 import net.shangtech.eshop.sales.service.bo.OrderBo;
+import net.shangtech.eshop.sales.service.bo.OrderItemBo;
 import net.shangtech.framework.orm.dao.support.Pagination;
 import net.shangtech.framework.orm.service.BaseService;
 
@@ -34,8 +36,24 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 		BeanUtils.copyProperties(bo, order);
 		
 		MemberAddress address = addressDao.find(bo.getMemberAddressId());
+		order.setCountry(address.getCountry());
+		order.setProvince(address.getProvince());
 		order.setCity(address.getCity());
+		order.setDistrict(address.getDistrict());
+		order.setStreet(address.getStreet());
+		order.setContact(address.getContact());
+		order.setPostcode(address.getPostcode());
+		order.setMobile(address.getMobile());
 		
+		order.setCreateTime(new Date());
+		
+		dao.save(order);
+		for(OrderItemBo itemBo : bo.getItems()){
+			OrderItem item = new OrderItem();
+			BeanUtils.copyProperties(itemBo, item);
+			item.setOrderId(order.getId());
+			orderItemDao.save(item);
+		}
 		return order;
 	}
 	@Override

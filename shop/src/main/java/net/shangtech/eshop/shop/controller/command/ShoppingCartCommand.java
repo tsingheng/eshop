@@ -152,14 +152,17 @@ public class ShoppingCartCommand implements Serializable {
 	/**
 	 * 刷新购物车属性
 	 */
-	private void refreshShoppingCart(){
+	public void refreshShoppingCart(){
 		int quantity = 0;
-		BigDecimal amount = new BigDecimal(0);
+		BigDecimal originalAmount = new BigDecimal(0);
+		BigDecimal actualAmount = new BigDecimal(0);
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
-			amount = amount.add(new BigDecimal(item.getSku().getSellPrice()*item.getQuantity()));
+			originalAmount = originalAmount.add(new BigDecimal(item.getSku().getMarketPrice()*item.getQuantity()));
+			actualAmount = actualAmount.add(new BigDecimal(item.getSku().getSellPrice()*item.getQuantity()));
 		}
 		this.quantity = quantity;
-		this.originalAmount = amount;
+		this.originalAmount = originalAmount;
+		this.actualAmount = actualAmount;
 	}
 }

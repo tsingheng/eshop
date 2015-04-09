@@ -63,6 +63,7 @@ public class ShopwiredAspect {
 			List<ShoppingCartItemCommand> items = Collections.synchronizedList(new ArrayList<ShoppingCartItemCommand>());
 			shoppingCart.setShoppingCartItemList(items);
 			loadShoppingCartFromCookie(items);
+			shoppingCart.refreshShoppingCart();
 			WebUtils.setSessionAttribute(request, SessionScope.SHOPPING_CART_COMMAND_KEY, shoppingCart);
 		}
 		return shoppingCart;

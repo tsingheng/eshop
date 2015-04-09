@@ -203,6 +203,25 @@ public class ShoppingController {
 	}
 	
 	@Shopwired
+	@ResponseBody
+	@RequestMapping("/select-address")
+	public AjaxResponse selectAddress(@RequestParam Long addressId, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		if(loginMember == null){
+			return ajaxResponse;
+		}
+		MemberAddress address = memberAddressService.find(addressId);
+		if(address == null || loginMember.getId() != address.getMemberId()){
+			return ajaxResponse;
+		}
+		shoppingCart.setMemberAddressId(addressId);
+		//计算运费
+		
+		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	@Shopwired
 	@RequestValid
 	@ResponseBody
 	@RequestMapping("/create-order")
@@ -220,12 +239,6 @@ public class ShoppingController {
 		order.setPaymentType(cmd.getPaymentType());
 		if(loginMember != null){
 			order.setMemberId(loginMember.getId());
-			if(cmd.getMemberAddressId() != null){
-				MemberAddress address = memberAddressService.find(cmd.getMemberAddressId());
-				if(address != null){
-					order.setMemberAddressId(cmd.getMemberAddressId());
-				}
-			}
 		}
 		
 		List<OrderItemBo> orderItemList = new ArrayList<OrderItemBo>();

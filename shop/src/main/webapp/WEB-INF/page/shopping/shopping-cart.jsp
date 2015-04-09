@@ -120,8 +120,8 @@
 		                </form>
 		                <a href="javascript:;" class="go_pay fr">去结算</a>
 		                <div class="other fr">
-		                <p class="all">共有<em>${shoppingCart.quantity}</em>件商品，金额<span><i>￥</i><label>${shoppingCart.originalAmount}</label></span></p>
-		                <p class="count">总计（不含运费）<span><i>￥</i><label>${shoppingCart.originalAmount}</label></span></p></div>
+		                <p class="all">共有<em>${shoppingCart.quantity}</em>件商品，金额<span><i>￥</i><label>${shoppingCart.actualAmount}</label></span></p>
+		                <p class="count">总计（不含运费）<span><i>￥</i><label>${shoppingCart.actualAmount}</label></span></p></div>
 		            </div>
 		        </div>
     		</div>

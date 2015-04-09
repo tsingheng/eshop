@@ -120,13 +120,40 @@ $(document).ready(function(){
 		if($this.hasClass('cur')){
 			return;
 		}
-		$('#myAddress li.cur').removeClass('cur');
-		$this.addClass('cur');
-		onSelectAddress(buildAddressObject($this));
+		var address = buildAddressObject($this);
+		$.ajax({
+			url: ctx + '/select-address',
+			dataType: 'json',
+			data: {
+				addressId: address.id
+			},
+			success: function(response){
+				if(response.success){
+					$('#myAddress li.cur').removeClass('cur');
+					$this.addClass('cur');
+					onSelectAddress(address);
+				}
+			}
+		});
 	});
 	$('#addrform').on('click', '.quxiao', function(){
 		$('#addrform')[0].reset();
 		$('#addrform').hide();
+	});
+	
+	$('.go_pay').click(function(){
+		var $this = $(this);
+		if($this.hasClass('no')){
+			return;
+		}
+		$this.addClass('no');
+		$('#create-order').ajaxSubmit({
+			success: function(response){
+				if(!response.success){
+					$this.removeClass('no');
+				}
+			}
+		});
 	});
 });
 

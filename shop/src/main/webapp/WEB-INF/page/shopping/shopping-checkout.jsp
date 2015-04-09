@@ -98,7 +98,7 @@
             </form>
         </div>
     </div>
-<form accept-charset="UTF-8" name="post_order" id="post_order" action="http://user.juanpi.com/pay/create_order" method="post">
+<form accept-charset="UTF-8" name="create-order" id="create-order" action="${ctx}/create-order" method="post">
     <div class="order-payment">
     <!--选择支付方式-->
         <h2>选择支付方式</h2>
@@ -107,7 +107,7 @@
                 <li>
                     <a href="javascript:;">
                     	<label>
-	                        <input type="radio" value="2" name="choose_pay" checked="checked" class="check">
+	                        <input type="radio" value="2" name="paymentType" checked="checked" class="check">
 	                        <p class="img"><img src="http://s.juancdn.com/juanpi/images/sale/Alipay.jpg"></p>
                     	</label>
                     </a>
@@ -115,7 +115,7 @@
                 <li style="display:none">
                     <a href="javascript:;">
                     	<label>
-	                        <input type="radio" value="7" name="choose_pay" class="check">
+	                        <input type="radio" value="7" name="paymentType" class="check">
 	                        <p class="img"><img src="http://s.juancdn.com/juanpi/images/sale/weixin.jpg"></p>
                     	</label>
                     </a>
@@ -174,7 +174,7 @@
 			        	<tr>
 			            	<td class="bgc" colspan="3">
 				                <div class="message"><label class="hd">留言：</label>
-				                <div class="inputmask"><textarea placeholder="选填：对本次交易的补充说明，最多不超过50字" autocomplete="off" class="txt" data-maxlength="50" id="u_note" name="u_note[4074024]" title="选填：对本次交易的补充说明，最多不超过50字"></textarea>
+				                <div class="inputmask"><textarea placeholder="选填：对本次交易的补充说明，最多不超过50字" autocomplete="off" class="txt" data-maxlength="50" id="message" name="message" title="选填：对本次交易的补充说明，最多不超过50字"></textarea>
 				                </div></div>
 				            </td>
 			                <td colspan="2" class="bgc">
@@ -191,7 +191,7 @@
             <label class="fl">寄送至：</label><span class="fl" id="selected-address">${memberAddress.province} ${memberAddress.city} ${memberAddress.district} ${memberAddress.street}<br>${memberAddress.contact} ${memberAddress.mobile}</span></div>
             <div class="other fr">
                 <p>
-                	合计：<span class="normal"><em>￥</em>${shoppingCart.originalAmount}</span>
+                	合计：<span class="normal"><em>￥</em>${shoppingCart.actualAmount}</span>
                 	运费：<span class="postprice normal"><em>￥</em>${shoppingCart.actualFreight}</span>
                 	<%--现金券扣减：<span class="normal"><em>￥</em>0.00</span>--%>
                 </p>

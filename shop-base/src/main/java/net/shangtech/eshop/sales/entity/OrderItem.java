@@ -22,7 +22,7 @@ public class OrderItem extends BaseEntity<Long> {
 	private Long skuId;
 	
 	@Column(name = "inventory_code")
-	private Long inventoryCode;
+	private String inventoryCode;
 	
 	@Column(name = "quantity")
 	private Integer quantity;
@@ -52,11 +52,11 @@ public class OrderItem extends BaseEntity<Long> {
 		this.skuId = skuId;
 	}
 
-	public Long getInventoryCode() {
+	public String getInventoryCode() {
 		return inventoryCode;
 	}
 
-	public void setInventoryCode(Long inventoryCode) {
+	public void setInventoryCode(String inventoryCode) {
 		this.inventoryCode = inventoryCode;
 	}
 
