@@ -961,10 +961,10 @@ blockquote {
 	background-repeat: no-repeat;
 	background-position: center center;
 	overflow: hidden;
-	-o-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+	-o-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
 }
 
 #catalogue .thumbnail .caption-link{
