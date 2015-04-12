@@ -16,18 +16,37 @@
 	<div class="col-md-3 col-sm-3">
 		<div class="list-group category-list">
 			<c:forEach items="${topCategoryList}" var="item">
-			<a href="${ctx}/${item.code}/list" class="list-group-item ${(currentCategory.id eq item.id) ? 'active' : ''} ${((not empty item.children)  and (not (currentCategory.parentId eq item.id))) ? 'has-children' : ''}">
-				${item.name}
-				<c:if test="${(not empty item.children) and (not (currentCategory.parentId eq item.id))}">
-				<span class="pull-right glyphicon glyphicon-chevron-right"></span>
-				</c:if>
-			</a>
-			<c:if test="${not empty item.children}">
-			<div class="category-children ${currentCategory.parentId eq item.id ? 'expand' : ''} float">
-			<c:forEach items="${item.children}" var="child">
-				<a href="${ctx}/${item.code}/${child.code}/list" class="list-group-item ${currentCategory.id eq child.id ? 'active' : ''}">${child.name}</a>
-			</c:forEach>
-			</div>
+			<c:if test="${currentCategory.parentId eq item.id}">
+				<div class="category-wrapper expand">
+					<a href="${ctx}/${item.code}/list" class="list-group-item">
+						${item.name}
+						<c:if test="${(not empty item.children) and (not (currentCategory.parentId eq item.id))}">
+						<span class="pull-right glyphicon glyphicon-chevron-right"></span>
+						</c:if>
+					</a>
+					<div class="category-children">
+					<c:forEach items="${item.children}" var="child">
+						<a href="${ctx}/${item.code}/${child.code}/list" class="list-group-item ${currentCategory.id eq child.id ? 'active' : ''}">${child.name}</a>
+					</c:forEach>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${not (currentCategory.parentId eq item.id)}">
+				<div class="category-wrapper hide-children">
+					<a href="${ctx}/${item.code}/list" class="list-group-item ${(currentCategory.id eq item.id) ? 'active' : ''} ${(not empty item.children) ? 'has-children' : ''}">
+						${item.name}
+						<c:if test="${not empty item.children}">
+						<span class="pull-right glyphicon glyphicon-chevron-right"></span>
+						</c:if>
+					</a>
+					<c:if test="${not empty item.children}">
+					<div class="category-children">
+					<c:forEach items="${item.children}" var="child">
+						<a href="${ctx}/${item.code}/${child.code}/list" class="list-group-item">${child.name}</a>
+					</c:forEach>
+					</div>
+					</c:if>
+				</div>
 			</c:if>
 			</c:forEach>
 		</div>

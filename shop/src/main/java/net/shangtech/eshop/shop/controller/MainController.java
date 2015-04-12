@@ -4,6 +4,7 @@ import net.shangtech.eshop.solr.SolrService;
 import net.shangtech.eshop.solr.SolrSku;
 import net.shangtech.framework.orm.dao.support.Pagination;
 
+import org.apache.solr.client.solrj.SolrServerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class MainController {
 	public String index(Model model, Pagination<SolrSku> pagination){
 		
 		pagination.setLimit(48);
-//		try {
-//	        //pagination = solrService.findByCategory(new String[]{}, pagination);
-//	        model.addAttribute("pagination", pagination);
-//        } catch (SolrServerException e) {
-//	        logger.error("solr查询异常", e);
-//        }
+		try {
+	        pagination = solrService.findByCategory(new String[]{}, pagination);
+	        model.addAttribute("pagination", pagination);
+        } catch (SolrServerException e) {
+	        logger.error("solr查询异常", e);
+        }
 		
 		return "shop.index";
 	}
