@@ -44,9 +44,7 @@
 		<!-- /.container-fluid -->
 	</nav>
 	<div style="height:45px;"></div>
-	<div id="main">
-		<t:insertAttribute name="content" />
-	</div>
+	<t:insertAttribute name="content" />
 	<div id="footer">
 		<div class="container">
 			<div class="row">

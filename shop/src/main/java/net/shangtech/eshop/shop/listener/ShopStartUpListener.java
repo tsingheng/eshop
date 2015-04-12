@@ -36,6 +36,9 @@ public class ShopStartUpListener implements ServletContextListener {
 	private void initTopCategoryList(){
 		CategoryService categoryService = ac.getBean(CategoryService.class);
 		List<Category> topCategoryList = categoryService.findByParentId(Category.ROOT_CATE_ID);
+		for(Category category : topCategoryList){
+			category.setChildren(categoryService.findByParentId(category.getId()));
+		}
 		sc.setAttribute("topCategoryList", topCategoryList);
 	}
 

@@ -9,6 +9,7 @@ var App = {
 		this.initCaptcha();
 		this.initShoppingCart();
 		this.loadShoppingCart();
+		this.initCategory();
 	},
 	initSidebar: function(){
 		$('#sidebar').on('click', '.submenu a', function(){
@@ -108,6 +109,11 @@ var App = {
 					$('.bag-tool').html(lis.join(''));
 				}
 			}
+		});
+	},
+	initCategory: function(){
+		$('.category-list .has-children').hover(function(){
+			
 		});
 	}
 }

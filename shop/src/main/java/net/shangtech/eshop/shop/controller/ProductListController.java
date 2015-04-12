@@ -30,39 +30,58 @@ public class ProductListController {
 	@Autowired private SolrService 					solrService;
 	@Autowired private CategoryMetaInfoService		categoryMetaInfoService;
 	
-	@RequestMapping(value = "/cate-{categories}/list", method = RequestMethod.GET)
-	public String listByCategory(@PathVariable String categories, Model model, Pagination<SolrSku> pagination){
-		String[] categoryCodes = categories.split("-");
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String listByCategory(Model model, Pagination<SolrSku> pagination){
+		return doListByCategory(model, pagination);
+	}
+	
+	@RequestMapping(value = "/{c1}/list", method = RequestMethod.GET)
+	public String listByCategory(@PathVariable String c1, Model model, Pagination<SolrSku> pagination){
+		return doListByCategory(model, pagination, c1);
+	}
+	
+	@RequestMapping(value = "/{c1}/{c2}/list", method = RequestMethod.GET)
+	public String listByCategory(@PathVariable String c1, @PathVariable String c2, Model model, Pagination<SolrSku> pagination){
+		return doListByCategory(model, pagination, c1, c2);
+	}
+	
+	@RequestMapping(value = "/{c1}/{c2}/{c3}/list", method = RequestMethod.GET)
+	public String listByCategory(@PathVariable String c1, @PathVariable String c2, @PathVariable String c3, Model model, Pagination<SolrSku> pagination){
+		return doListByCategory(model, pagination, c1, c2, c3);
+	}
+	
+	private String doListByCategory(Model model, Pagination<SolrSku> pagination, String... categoryCodes){
+		if(categoryCodes != null && categoryCodes.length > 0){
+			Category currentTopCategory = categoryService.findByCode(categoryCodes[0]);
+			model.addAttribute("currentTopCategory", currentTopCategory);
+			
+			//code不是唯一的,需要结合上级id查询
+			Category currentCategory = currentTopCategory;
+			if(categoryCodes.length > 1){
+				currentCategory = categoryService.findByCodeAndRootId(categoryCodes[categoryCodes.length-1], currentTopCategory.getId());
+			}
+			model.addAttribute("currentCategory", currentCategory);
+			CategoryMetaInfo metaInfo = categoryMetaInfoService.findByCategoryId(currentCategory.getId());
+			if(metaInfo != null){
+				model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
+				model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
+			}
 		
-		Category currentTopCategory = categoryService.findByCode(categoryCodes[0]);
-		model.addAttribute("currentTopCategory", currentTopCategory);
-		
-		//code不是唯一的,需要结合上级id查询
-		Category currentCategory = categoryService.findByCodeAndRootId(categoryCodes[categoryCodes.length-1], currentTopCategory.getId());
-		model.addAttribute("currentCategory", currentCategory);
-		CategoryMetaInfo metaInfo = categoryMetaInfoService.findByCategoryId(currentCategory.getId());
-		if(metaInfo != null){
-			model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
-			model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
+			List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
+			for(Category category : categoryList){
+				category.setChildren(categoryService.findByParentId(category.getId()));
+			}
+			model.addAttribute("categoryList", categoryList);
 		}
 		
-		List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
-		for(Category category : categoryList){
-			category.setChildren(categoryService.findByParentId(category.getId()));
-		}
-		model.addAttribute("categoryList", categoryList);
-		
-		loadPageByCategory(categories, model, pagination);
+		doLoadPageByCategory(model, pagination, categoryCodes);
 		
 		return "shop.product.list.category";
 	}
 	
-	@RequestMapping(value = "/cate-{categories}/list", method = RequestMethod.POST)
-	public String loadPageByCategory(@PathVariable String categories, Model model, Pagination<SolrSku> pagination){
+	private String doLoadPageByCategory(Model model, Pagination<SolrSku> pagination, String... categoryCodes){
 		
-		String[] categoryCodes = categories.split("-");
-		
-		pagination.setLimit(48);
+		pagination.setLimit(40);
 		try {
 	        pagination = solrService.findByCategory(categoryCodes, pagination);
 	        model.addAttribute("pagination", pagination);

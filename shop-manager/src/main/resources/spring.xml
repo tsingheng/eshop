@@ -12,7 +12,12 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="propertyConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:config/jdbc.properties"></property>
+		<property name="locations">
+			<list>
+				<value>classpath:config/jdbc.properties</value>
+				<value>classpath:config/solr.properties</value>
+			</list>
+		</property>
 	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>
@@ -48,6 +53,8 @@
 	
 	<context:component-scan base-package="net.shangtech.eshop.**.dao.impl"></context:component-scan>
 	<context:component-scan base-package="net.shangtech.eshop.**.service.impl"></context:component-scan>
+	<context:component-scan base-package="net.shangtech.eshop.manager.spider"></context:component-scan>
+	<context:component-scan base-package="net.shangtech.eshop.manager.spider.alibaba"></context:component-scan>
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
@@ -55,6 +62,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="solrService" class="net.shangtech.eshop.solr.SolrService">
-		<property name="url" value="http://192.168.12.129:8080/solr/vip/"/>
+		<property name="url" value="https://solr-shangtecheshop.rhcloud.com/vip/"/>
 	</bean>
 </beans>

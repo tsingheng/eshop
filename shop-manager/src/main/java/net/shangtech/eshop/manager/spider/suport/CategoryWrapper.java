@@ -1,5 +1,7 @@
 package net.shangtech.eshop.manager.spider.suport;
 
+import java.util.List;
+
 import net.shangtech.eshop.product.entity.Category;
 
 public class CategoryWrapper {
@@ -12,6 +14,8 @@ public class CategoryWrapper {
     private Category parent;
     
 	private String url;
+	
+	private List<CategoryWrapper> children;
 
 	public String getUrl() {
 		return url;
@@ -52,4 +56,13 @@ public class CategoryWrapper {
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
+
+	public List<CategoryWrapper> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<CategoryWrapper> children) {
+		this.children = children;
+	}
+	
 }

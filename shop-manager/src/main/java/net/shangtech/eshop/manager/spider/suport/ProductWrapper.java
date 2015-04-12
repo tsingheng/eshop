@@ -12,6 +12,8 @@ public class ProductWrapper {
 	private Sku product;
 	
 	private List<Inventory> inventories;
+	
+	private String url;
 
 	public Sku getProduct() {
 		return product;
@@ -31,6 +33,14 @@ public class ProductWrapper {
 	
 	public String getDetailUrl(){
 		return PRODUCT_DETAIL_URL.replace("{id}", product.getVid());
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 }

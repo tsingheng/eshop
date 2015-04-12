@@ -1,11 +1,7 @@
 package net.shangtech.eshop.shop.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import net.shangtech.eshop.product.entity.Brand;
-import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.entity.SkuMetaInfo;
 import net.shangtech.eshop.product.service.BrandService;
@@ -14,7 +10,6 @@ import net.shangtech.eshop.product.service.SkuMetaInfoService;
 import net.shangtech.eshop.product.service.SkuService;
 import net.shangtech.eshop.shop.constants.ShopConstants;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +27,7 @@ public class ProductController {
 	
 	@Autowired private SkuMetaInfoService 		skuMetaInfoService;
 	
-	@RequestMapping("/detail/{code}")
+	@RequestMapping("/product/{code}")
 	public String detail(@PathVariable String code, Model model){
 		
 		Sku sku = skuService.findByCode(code);
@@ -41,28 +36,14 @@ public class ProductController {
 		}
 		model.addAttribute("sku", sku);
 		
-		Brand brand = brandService.find(sku.getBrandId());
-		model.addAttribute("brand", brand);
-		
-		List<Inventory> inventoryList = inventoryService.findBySkuId(sku.getId());
-		model.addAttribute("inventoryList", inventoryList);
-		
-		//colors
-		if(StringUtils.isNotBlank(sku.getColors())){
-			List<Sku> colorList = new ArrayList<Sku>();
-			colorList.add(sku);
-			for(String colorCode : sku.getColors().split(",")){
-				colorList.add(skuService.findByVid(colorCode));
-			}
-			Collections.sort(colorList);
-			model.addAttribute("colorList", colorList);
-		}
-		
 		SkuMetaInfo metaInfo = skuMetaInfoService.findBySkuId(sku.getId());
 		if(metaInfo != null){
 			model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
 			model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
 		}
+		
+		List<Sku> relateList = skuService.findByCategoryId(sku.getCategoryId(), 8);
+		model.addAttribute("relateList", relateList);
 		
 		return "shop.product.detail";
 	}

@@ -2,19 +2,27 @@ $(document).ready(function(){
 	
 	$('.img-slider-list li').hover(function(){
 		var $this = $(this);
-		if($this.hasClass('cur')){
+		if($this.hasClass('active')){
 			return;
 		}
-		$this.parent().find('.cur').removeClass('cur');
-		$this.addClass('cur');
-		var imgSrc = $this.data('img');
+		$this.parent().find('.active').removeClass('active');
+		$this.addClass('active');
+		var imgSrc = $this.data('src');
 		$('.jqzoom').attr('href', imgSrc.replace('_#size#', ''));
 		$('.jqzoom').html('<img id="jq-zoom" src="' + imgSrc.replace('#size#', '1') + '"/>');
-		$('.jqzoom').data('jqzoom', '').jqzoom({zoomType:"standard",title:false,lens:false,alwaysOn:false});
+		$('.jqzoom').data('jqzoom', '').jqzoom({zoomType:"standard",title:false,lens:false,alwaysOn:false,zoomWidth:400,zoomHeight:400});
 	});
 	$('.img-slider-list li:first').trigger('mouseover');
+	if($('.img-slider-list li').length == 0){
+		$('.jqzoom').jqzoom({zoomType:"standard",title:false,lens:false,alwaysOn:false,zoomWidth:400,zoomHeight:400});
+	}
+	
+	$('#product-details img[data-src]').each(function(){
+		$(this).attr('src', $(this).data('src'));
+	});
 	
 	var sliding = false;
+	var slideUnit = $('.img-slider-list ul li:first').width() + 7;
 	$('.pic-slider-down').click(function(){
 		if(sliding){
 			return;
@@ -26,11 +34,11 @@ $(document).ready(function(){
 		sliding = true;
 		$this.parent().find('.switchable-first').removeClass('switchable-first');
 		var $ul = $('.img-slider-list ul'), marginLeft = parseInt($ul.css('margin-left')) || 0;
-		marginLeft -= 64;
+		marginLeft -= slideUnit;
 		$ul.animate({marginLeft: marginLeft + 'px'}, function(){
 			sliding = false;
 		});
-		if(-marginLeft >= ($ul.children().length-5)*64){
+		if(-marginLeft >= ($ul.children().length-5)*slideUnit){
 			$this.addClass('switchable-last');
 		}
 	});
@@ -45,7 +53,7 @@ $(document).ready(function(){
 		sliding = true;
 		$this.parent().find('.switchable-last').removeClass('switchable-last');
 		var $ul = $('.img-slider-list ul'), marginLeft = parseInt($ul.css('margin-left'));
-		marginLeft += 64;
+		marginLeft += slideUnit;
 		$ul.animate({marginLeft: marginLeft + 'px'}, function(){
 			sliding = false;
 		});
@@ -67,35 +75,33 @@ $(document).ready(function(){
 	});
 	$('.num-add').click(function(){
 		var $this = $(this);
-		if($this.hasClass('num-add-disabled')){
+		if($this.hasClass('disabled')){
 			return;
 		}
-		var num = parseInt($('.num-input').html()) + 1;
+		var num = parseInt($('#quantity').val()) + 1;
 		if(avaliable > -1 && num >= avaliable){
-			$this.addClass('num-add-disabled');
+			$this.addClass('disabled');
 			num = avaliable;
 		}
-		$('.num-input').html(num);
+		$('#quantity').val(num);
 		if(num > 1){
-			$('.num-reduce').removeClass('num-reduce-disabled');
+			$('.num-reduce').removeClass('disabled');
 		}
-		$('#J-num-select').removeClass('status-notice');
 	});
 	$('.num-reduce').click(function(){
 		var $this = $(this);
-		if($this.hasClass('num-reduce-disabled')){
+		if($this.hasClass('disabled')){
 			return;
 		}
-		var num = parseInt($('.num-input').html()) - 1;
+		var num = parseInt($('#quantity').val()) - 1;
 		if(num <= 1){
-			$this.addClass('num-reduce-disabled');
+			$this.addClass('disabled');
 			num = 1;
 		}
-		$('.num-input').html(num);
+		$('#quantity').val(num);
 		if(avaliable > -1 && num < avaliable){
-			$('.num-add').removeClass('num-add-disabled');
+			$('.num-add').removeClass('disabled');
 		}
-		$('#J-num-select').removeClass('status-notice');
 	});
 	
 	$('#cart-form').validate({

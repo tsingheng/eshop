@@ -1,6 +1,6 @@
 package net.shangtech.eshop.product.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -60,6 +60,8 @@ public class Category extends BaseEntity<Long> {
     private List<Category> children;
     
     private String path;
+    
+    private String url;
 
 	public Long getParentId() {
 		return parentId;
@@ -139,6 +141,14 @@ public class Category extends BaseEntity<Long> {
 
 	public void setRootId(Long rootId) {
 		this.rootId = rootId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
     
 }

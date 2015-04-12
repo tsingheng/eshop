@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="${ctx}/assets/css/style.css">
 <link rel="stylesheet" href="${ctx}/assets/css/shop.css">
 <link rel="stylesheet" href="${ctx}/assets/css/responsive.css">
+<%-- 
+<link rel="stylesheet" href="${ctx}/assets/magiczoom/magiczoom.css">
+--%>
 <link rel="stylesheet" href="${ctx}/assets/jqzoom/css/jquery.jqzoom.css">
 <!--[if lt IE 9]>
 <script src="${ctx}/assets/js/html5shiv.js"></script>

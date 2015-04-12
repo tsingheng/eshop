@@ -15,7 +15,7 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 	
     private static final long serialVersionUID = -6634884131249457163L;
     
-    @Column(name = "pro_name")
+    @Column(name = "sku_name")
 	private String name;
 	
     @Column(name = "sku_code")
@@ -64,6 +64,15 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 	
 	@Column(name = "tags")
 	private String tags;
+	
+	@Column(name = "min")
+	private Integer min;
+	
+	@Column(name = "max")
+	private Integer max;
+	
+	@Column(name = "image_num")
+	private Integer imageNum;
 
 	public String getName() {
 		return name;
@@ -183,6 +192,30 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public Integer getMin() {
+		return min;
+	}
+
+	public void setMin(Integer min) {
+		this.min = min;
+	}
+
+	public Integer getMax() {
+		return max;
+	}
+
+	public void setMax(Integer max) {
+		this.max = max;
+	}
+
+	public Integer getImageNum() {
+		return imageNum;
+	}
+
+	public void setImageNum(Integer imageNum) {
+		this.imageNum = imageNum;
 	}
 
 	@Override

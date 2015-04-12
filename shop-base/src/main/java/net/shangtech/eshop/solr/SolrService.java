@@ -74,8 +74,10 @@ public class SolrService implements InitializingBean {
 	
 	public Pagination<SolrSku> findByCategory(String[] categoryCodes, Pagination<SolrSku> pagination) throws SolrServerException{
 		SolrQuery query = new SolrQuery("*:*");
-		for(String code : categoryCodes){
-			query.addFilterQuery("categoryCodes:" + code);
+		if(categoryCodes != null){
+			for(String code : categoryCodes){
+				query.addFilterQuery("categoryCodes:" + code);
+			}
 		}
 		query.setStart(pagination.getStart());
 		query.setRows(pagination.getLimit());
