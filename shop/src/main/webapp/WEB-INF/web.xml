@@ -18,6 +18,11 @@
 		<listener-class>net.shangtech.eshop.shop.listener.ShopStartUpListener</listener-class>
 	</listener>
 	
+	<!-- SpringUtils -->
+	<listener>
+		<listener-class>net.shangtech.framework.web.listener.ApplicationStartupListener</listener-class>
+	</listener>
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

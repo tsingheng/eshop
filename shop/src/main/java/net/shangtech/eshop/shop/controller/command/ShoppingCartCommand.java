@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
+import net.shangtech.eshop.product.entity.SkuPrice;
+import net.shangtech.eshop.product.service.SkuPriceService;
+import net.shangtech.framework.util.SpringUtils;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class ShoppingCartCommand implements Serializable {
@@ -154,15 +158,17 @@ public class ShoppingCartCommand implements Serializable {
 	 */
 	public void refreshShoppingCart(){
 		int quantity = 0;
-		BigDecimal originalAmount = new BigDecimal(0);
-		BigDecimal actualAmount = new BigDecimal(0);
+		Double originalAmount = 0.0;
+		Double actualAmount = 0.0;
+		SkuPriceService skuPriceService = SpringUtils.getBean(SkuPriceService.class);
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
-			originalAmount = originalAmount.add(new BigDecimal(item.getSku().getMarketPrice()*item.getQuantity()));
-			actualAmount = actualAmount.add(new BigDecimal(item.getSku().getSellPrice()*item.getQuantity()));
+			SkuPrice skuPrice = skuPriceService.getPrice(item.getSku().getId(), item.getQuantity());
+			originalAmount = originalAmount + skuPrice.getPrice()*item.getQuantity();
+			actualAmount = actualAmount + skuPrice.getPrice()*item.getQuantity();
 		}
 		this.quantity = quantity;
-		this.originalAmount = originalAmount;
-		this.actualAmount = actualAmount;
+		this.originalAmount = new BigDecimal(originalAmount);
+		this.actualAmount = new BigDecimal(actualAmount);
 	}
 }

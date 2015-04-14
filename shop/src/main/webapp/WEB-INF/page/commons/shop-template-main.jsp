@@ -37,6 +37,7 @@
 				<ul class="nav navbar-nav nav-right">
 					<li><a href="${ctx}/login">Sign in</a></li>
 					<li><a href="${ctx}/register">Sign up</a></li>
+					<li><a href="${ctx}/shopping-cart">Cart</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

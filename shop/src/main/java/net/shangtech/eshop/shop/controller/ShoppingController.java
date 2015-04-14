@@ -6,9 +6,8 @@ import java.util.List;
 
 import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.eshop.account.service.MemberAddressService;
-import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
-import net.shangtech.eshop.product.service.InventoryService;
+import net.shangtech.eshop.product.enums.SkuStatus;
 import net.shangtech.eshop.product.service.SkuService;
 import net.shangtech.eshop.sales.service.OrderService;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
@@ -24,6 +23,7 @@ import net.shangtech.framework.web.controller.AjaxResponse;
 import net.shangtech.framework.web.controller.validation.RequestValid;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ShoppingController {
 	
 	@Autowired private 	ShoppingCartItemService 			shoppingCartItemService;
-	@Autowired private 	InventoryService 					inventoryService;
 	@Autowired private 	SkuService 							skuService;
 	@Autowired private 	MemberAddressService				memberAddressService;
 	@Autowired private 	OrderService						orderService;
@@ -54,18 +53,16 @@ public class ShoppingController {
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//code是否存在
-		Inventory inventory = inventoryService.findByCode(code);
-		if(inventory == null){
+		Sku sku = skuService.findByCode(code);
+		if(sku == null){
 			ajaxResponse.setMessage("商品不存在");
 			return ajaxResponse;
 		}
-		//库存校验
-		if(inventory.getStock() <= inventory.getSaled()){
-			ajaxResponse.setMessage("商品已售完");
+		//商品状态校验
+		if(!StringUtils.equals(sku.getStatus(), SkuStatus.ON.name())){
+			ajaxResponse.setMessage("该商品已下架");
 			return ajaxResponse;
 		}
-		//商品状态校验
-		Sku sku = skuService.find(inventory.getSkuId());
 		
 		ShoppingCartItemCommand cmd = new ShoppingCartItemCommand();
 		ShoppingCartSkuCommand skuCommand = new ShoppingCartSkuCommand();
@@ -73,9 +70,6 @@ public class ShoppingController {
 		cmd.setSku(skuCommand);
 		cmd.setCode(code);
 		cmd.setQuantity(quantity);
-		cmd.setSize(inventory.getSize());
-		cmd.setColor(sku.getColor());
-		cmd.setAvaliable(inventory.getStock() - inventory.getSaled());
 		shoppingCart.addItem(cmd);
 		
 		//如果是已登录用户,将购物车商品存入数据库
@@ -95,8 +89,8 @@ public class ShoppingController {
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//code是否存在
-		Inventory inventory = inventoryService.findByCode(code);
-		if(inventory == null){
+		Sku sku = skuService.findByCode(code);
+		if(sku == null){
 			ajaxResponse.setMessage("商品不存在");
 			return ajaxResponse;
 		}
@@ -119,8 +113,8 @@ public class ShoppingController {
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//code是否存在
-		Inventory inventory = inventoryService.findByCode(code);
-		if(inventory == null){
+		Sku sku = skuService.findByCode(code);
+		if(sku == null){
 			ajaxResponse.setMessage("商品不存在");
 			return ajaxResponse;
 		}
@@ -141,8 +135,8 @@ public class ShoppingController {
 			, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
 		//code是否存在
-		Inventory inventory = inventoryService.findByCode(code);
-		if(inventory == null){
+		Sku sku = skuService.findByCode(code);
+		if(sku == null){
 			ajaxResponse.setMessage("商品不存在");
 			return ajaxResponse;
 		}

@@ -6,6 +6,8 @@ public class ShoppingCartSkuCommand implements Serializable {
 
     private static final long serialVersionUID = 5976886963693247535L;
 
+    private Long id;
+    
     private String code;
     
     private String name;
@@ -21,6 +23,8 @@ public class ShoppingCartSkuCommand implements Serializable {
     private Double sellPrice;
     
     private String image;
+    
+    private String status;
 
 	public String getCode() {
 		return code;
@@ -84,6 +88,22 @@ public class ShoppingCartSkuCommand implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
     
 }

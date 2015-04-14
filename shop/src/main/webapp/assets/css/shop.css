@@ -39,6 +39,7 @@
 	left:262px;
 	top:0px;
 	width:100%;
+	z-index:10;
 } 
 .category-list .hide-children:hover .category-children{
 	display:block;
@@ -170,7 +171,7 @@
 	width: 150px;
 }
 .sku-props .btn-contant, .sku-props .btn-addcart{
-	margin-top:30px;
+	margin-top:10px;
 	margin-bottom:30px;
 }
 #quantity{
@@ -232,4 +233,19 @@
 }
 .expand .category-children{
 	display:block;
+}
+
+
+.input-group-addon.captcha {
+	width: 90px;
+	padding: 0px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+#error-wrapper{
+	display:none;
+	margin-bottom:0px;
+	padding:6px 18px;
+	border-left:32px solid #9cd096;
 }

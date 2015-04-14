@@ -49,6 +49,7 @@
 			</div>
 			<div class="col-md-6 col-sm-6 sku-details">
 				<h3 class="sku-name">${sku.name}</h3>
+				<form action="${ctx}/add-shopping-cart" id="cart-form" method="post">
 				<table class="sku-props">
 					<tr>
 						<th>Min.Order Quantity:</th><td>10 Piece/Pieces</td>
@@ -82,7 +83,7 @@
 								<span class="input-group-btn">
 									<a class="btn btn-default disabled num-reduce" href="javascript:;"><span class="glyphicon glyphicon-minus"></span></a>
 								</span>
-								<input type="text" class="form-control" id="quantity" value="10">
+								<input readonly type="text" class="form-control" id="quantity" name="quantity" value="10">
 								<span class="input-group-btn">
 									<a class="btn btn-default num-add" href="javascript:;"><span class="glyphicon glyphicon-plus"></span></a>
 								</span>
@@ -90,11 +91,16 @@
 						</td>
 					</tr>
 					<tr>
+						<td colspan="2" class="nopadding">
+							<div id="error-wrapper" class="alert alert-danger"></div>
+						</td>
+					</tr>
+					<tr>
 						<th>
 							<a href="javascript:;" class="btn btn-default btn-contant"><span class="glyphicon glyphicon-envelope"></span> Contact supplier</a>
 						</th>
 						<td>
-							<a href="javascript:;" class="btn btn-default btn-addcart"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a>
+							<button class="btn btn-default btn-addcart"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
 						</td>
 					</tr>
 					<tr>
@@ -102,6 +108,7 @@
 						<td></td>
 					</tr>
 				</table>
+				</form>
 			</div>
 		</div>
 		<div class="row">
