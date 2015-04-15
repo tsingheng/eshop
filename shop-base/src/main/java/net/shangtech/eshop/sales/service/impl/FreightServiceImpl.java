@@ -32,4 +32,18 @@ public class FreightServiceImpl extends BaseService<Freight> implements FreightS
 	    return dao.findByAreaId(areaId);
     }
 	
+	@Override
+	public void save(Freight freight){
+		Freight old = dao.getFreight(freight.getAreaId(), freight.getShippingId());
+		if(old == null){
+			dao.save(freight);
+		}else{
+			old.setAdditionalPrice(freight.getAdditionalPrice());
+			old.setAddtionalUnit(freight.getAddtionalUnit());
+			old.setFirstPrice(freight.getFirstPrice());
+			old.setFirstWeight(freight.getFirstWeight());
+			dao.update(freight);
+		}
+	}
+	
 }
