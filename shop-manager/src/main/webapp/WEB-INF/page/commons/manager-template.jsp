@@ -36,6 +36,15 @@
 							<li><a href="">商品管理</a></li>
 						</ul>
 					</li>
+					<li class="submenu">
+						<a href="javascript:;">
+							<i class="icon icon-th-list"></i><span>运费管理</span>
+						</a>
+						<ul>
+							<li><a href="${ctx}/shipping/area-and-shipping">地区和物流</a></li>
+							<li><a href="">运费设置</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<div id="main-container">

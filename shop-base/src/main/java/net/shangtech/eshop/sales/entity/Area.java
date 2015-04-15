@@ -1,4 +1,4 @@
-package net.shangtech.eshop.account.entity;
+package net.shangtech.eshop.sales.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,6 +6,11 @@ import javax.persistence.Table;
 
 import net.shangtech.framework.orm.dao.support.BaseEntity;
 
+/**
+ * 国家区域
+ * @author tsingheng
+ *
+ */
 @Entity
 @Table(name = "t_area")
 public class Area extends BaseEntity<Long> {

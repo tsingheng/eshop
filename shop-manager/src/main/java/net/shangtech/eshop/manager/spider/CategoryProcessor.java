@@ -24,10 +24,10 @@ import net.shangtech.eshop.product.service.SkuService;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.htmlparser.util.ParserException;
 import org.springframework.util.CollectionUtils;
 
@@ -125,11 +125,10 @@ class CategoryXlsReader{
 		List<CategoryWrapper> list = new LinkedList<CategoryWrapper>();
 		HSSFWorkbook book = new HSSFWorkbook(new FileInputStream(path));
 		HSSFSheet sheet = book.getSheetAt(0);
-		@SuppressWarnings("unchecked")
-        Iterator<HSSFRow> it = sheet.rowIterator();
+        Iterator<Row> it = sheet.rowIterator();
 		it.next();
 		while(it.hasNext()){
-			HSSFRow row = it.next();
+			Row row = it.next();
 			Category category = new Category();
 			category.setName(getString(row, 2));
 			category.setLeaf(BooleanUtils.isTrue(getBoolean(row, 5)));
@@ -155,24 +154,25 @@ class CategoryXlsReader{
 				wrapper.setParent(parentWrapper.getCategory());
 			}
 		}
+		book.close();
 		return list;
 	}
-	private String getString(HSSFRow row, int index){
-		HSSFCell cell = row.getCell(index);
+	private String getString(Row row, int index){
+		Cell cell = row.getCell(index);
 		if(cell == null){
 			return null;
 		}
 		return StringUtils.trim(cell.getRichStringCellValue().toString());
 	}
-	private Long getLong(HSSFRow row, int index){
-		HSSFCell cell = row.getCell(index);
+	private Long getLong(Row row, int index){
+		Cell cell = row.getCell(index);
 		if(cell == null){
 			return null;
 		}
 		return new Double(cell.getNumericCellValue()).longValue();
 	}
-	private Boolean getBoolean(HSSFRow row, int index){
-		HSSFCell cell = row.getCell(index);
+	private Boolean getBoolean(Row row, int index){
+		Cell cell = row.getCell(index);
 		if(cell == null){
 			return null;
 		}
