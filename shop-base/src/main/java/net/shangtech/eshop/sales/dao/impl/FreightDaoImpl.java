@@ -2,6 +2,7 @@ package net.shangtech.eshop.sales.dao.impl;
 
 import java.util.List;
 
+import net.shangtech.eshop.sales.command.FreightTemplate;
 import net.shangtech.eshop.sales.dao.FreightDao;
 import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.framework.orm.dao.hibernate.BaseDao;
@@ -21,8 +22,10 @@ public class FreightDaoImpl extends BaseDao<Freight> implements FreightDao {
     }
 
 	@Override
-    public List<Freight> findByShippingId(Long shippingId) {
-	    return findByProperty("shippingId", shippingId);
+    public List<FreightTemplate> findByShippingId(Long shippingId) {
+		MapHolder<String> holder = new MapHolder<String>();
+		holder.put("shippingId", shippingId);
+	    return super.findBySql("FreightTemplate.findByShippingId", holder, FreightTemplate.class);
     }
 
 	@Override

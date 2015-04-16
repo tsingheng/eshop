@@ -2,6 +2,7 @@ package net.shangtech.eshop.sales.service.impl;
 
 import java.util.List;
 
+import net.shangtech.eshop.sales.command.FreightTemplate;
 import net.shangtech.eshop.sales.dao.FreightDao;
 import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.eshop.sales.service.FreightService;
@@ -23,7 +24,7 @@ public class FreightServiceImpl extends BaseService<Freight> implements FreightS
     }
 
 	@Override
-    public List<Freight> findByShippingId(Long shippingId) {
+    public List<FreightTemplate> findByShippingId(Long shippingId) {
 	    return dao.findByShippingId(shippingId);
     }
 
