@@ -42,7 +42,7 @@
 						</a>
 						<ul>
 							<li><a href="${ctx}/shipping/area-and-shipping">地区和物流</a></li>
-							<li><a href="">运费设置</a></li>
+							<li><a href="${ctx}/shipping/shipping">运费设置</a></li>
 						</ul>
 					</li>
 				</ul>

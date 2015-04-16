@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.fastjson.JSON;
-
 import shop.test.BaseSpringTest;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class SqlQueryTest extends BaseSpringTest {
 
@@ -24,7 +24,7 @@ public class SqlQueryTest extends BaseSpringTest {
 	public void testFreightTemplate(){
 		List<FreightTemplate> templates = freightService.findByShippingId(1L);
 		for(FreightTemplate template : templates){
-			logger.info(JSON.toJSONString(template));
+			logger.info(JSONObject.toJSONString(template));
 		}
 	}
 	

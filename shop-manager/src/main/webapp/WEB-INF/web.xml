@@ -9,6 +9,16 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<!-- 设置一些全局变量 -->
+	<listener>
+		<listener-class>net.shangtech.eshop.manager.listener.ShopStartUpListener</listener-class>
+	</listener>
+	
+	<!-- SpringUtils -->
+	<listener>
+		<listener-class>net.shangtech.framework.web.listener.ApplicationStartupListener</listener-class>
+	</listener>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>

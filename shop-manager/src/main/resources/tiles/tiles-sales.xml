@@ -7,4 +7,7 @@
 	<definition name="manager.area.and.shipping" extends="manager.template">
 		<put-attribute name="content" value="/WEB-INF/page/sales/shipping/area-and-shipping.jsp"/>
 	</definition>
+	<definition name="manager.shipping.freight" extends="manager.template">
+		<put-attribute name="content" value="/WEB-INF/page/sales/shipping/freight.jsp"/>
+	</definition>
 </tiles-definitions>

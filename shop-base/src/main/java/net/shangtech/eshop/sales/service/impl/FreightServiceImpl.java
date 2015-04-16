@@ -40,10 +40,10 @@ public class FreightServiceImpl extends BaseService<Freight> implements FreightS
 			dao.save(freight);
 		}else{
 			old.setAdditionalPrice(freight.getAdditionalPrice());
-			old.setAddtionalUnit(freight.getAddtionalUnit());
+			old.setAdditionalUnit(freight.getAdditionalUnit());
 			old.setFirstPrice(freight.getFirstPrice());
 			old.setFirstWeight(freight.getFirstWeight());
-			dao.update(freight);
+			dao.update(old);
 		}
 	}
 	

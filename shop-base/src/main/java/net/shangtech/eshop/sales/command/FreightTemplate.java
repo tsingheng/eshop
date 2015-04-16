@@ -9,10 +9,10 @@ public class FreightTemplate implements Serializable {
 	private static final long serialVersionUID = -7564006996793633737L;
 	
 	@Column(name = "area_id")
-	private Long areaId;
+	private Number areaId;
 	
 	@Column(name = "freight_id")
-	private Long freightId;
+	private Number freightId;
 	
 	@Column(name = "area_name")
 	private String areaName;
@@ -29,19 +29,19 @@ public class FreightTemplate implements Serializable {
 	@Column(name = "first_weight")
 	private Double firstWeight;
 
-	public Long getAreaId() {
+	public Number getAreaId() {
 		return areaId;
 	}
 
-	public void setAreaId(Long areaId) {
+	public void setAreaId(Number areaId) {
 		this.areaId = areaId;
 	}
 
-	public Long getFreightId() {
+	public Number getFreightId() {
 		return freightId;
 	}
 
-	public void setFreightId(Long freightId) {
+	public void setFreightId(Number freightId) {
 		this.freightId = freightId;
 	}
 

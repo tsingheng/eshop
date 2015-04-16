@@ -2,7 +2,7 @@ package net.shangtech.eshop.manager.controller.sales;
 
 import java.util.List;
 
-import net.shangtech.eshop.manager.controller.sales.command.FreightTemplate;
+import net.shangtech.eshop.sales.command.FreightTemplate;
 import net.shangtech.eshop.sales.entity.Area;
 import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.eshop.sales.entity.Shipping;
@@ -53,9 +53,9 @@ public class ShippingController {
 	 */
 	@RequestMapping("/shipping")
 	public String shipping(Model model){
-		List<Area> areaList = areaService.findAll();
-		model.addAttribute("areaList", areaList);
-		return "manager.area.shipping";
+		List<Shipping> shippingList = shippingService.findAll();
+		model.addAttribute("shippingList", shippingList);
+		return "manager.shipping.freight";
 	}
 	
 	@ResponseBody
@@ -70,11 +70,8 @@ public class ShippingController {
 	@ResponseBody
 	@RequestMapping("/freight-template")
 	public List<FreightTemplate> freightTemplate(Long shippingId){
-		//List<Freight> freightList = freightService.findByShippingId(shippingId);
-		//List<Area> areaList = areaService.findAll();
-		
-		
-		return null;
+		List<FreightTemplate> list = freightService.findByShippingId(shippingId);
+		return list;
 	}
 	
 }

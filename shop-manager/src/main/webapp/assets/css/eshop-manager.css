@@ -146,3 +146,13 @@ body{
 
 .datagrid-header td{padding:6px;}
 .datagrid-body td{padding:10px 6px;}
+
+
+
+#freight-template-wrapper th{
+	width:130px;
+}
+#freight-template-wrapper th, #freight-template-wrapper td{
+	padding: 4px 0px;
+}
+#freight-template-wrapper input{width:100px;}

@@ -43,7 +43,7 @@ public class Freight extends BaseEntity<Long> {
     
     /** 续重单位 */
     @Column(name = "additional_unit")
-    private Double addtionalUnit;
+    private Double additionalUnit;
 
 	public Long getAreaId() {
 		return areaId;
@@ -85,12 +85,12 @@ public class Freight extends BaseEntity<Long> {
 		this.additionalPrice = additionalPrice;
 	}
 
-	public Double getAddtionalUnit() {
-		return addtionalUnit;
+	public Double getAdditionalUnit() {
+		return additionalUnit;
 	}
 
-	public void setAddtionalUnit(Double addtionalUnit) {
-		this.addtionalUnit = addtionalUnit;
+	public void setAdditionalUnit(Double additionalUnit) {
+		this.additionalUnit = additionalUnit;
 	}
     
 }

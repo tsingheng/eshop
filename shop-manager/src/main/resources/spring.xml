@@ -56,6 +56,14 @@
 	<context:component-scan base-package="net.shangtech.eshop.manager.spider"></context:component-scan>
 	<context:component-scan base-package="net.shangtech.eshop.manager.spider.alibaba"></context:component-scan>
 	
+	<bean class="net.shangtech.framework.orm.dao.XmlSqlQueryProvider">
+		<property name="definitions">
+			<list>
+				<value>classpath*:sql/sql-sales.xml</value>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>

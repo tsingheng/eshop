@@ -6,8 +6,9 @@
 	<sql id="FreightTemplate.findByShippingId" template="false">
 		<![CDATA[
 			SELECT a.id as area_id, b.id as freight_id, a.area_name, b.additional_price, b.additional_unit, b.first_price, b.first_weight
-			FROM t_area a LEFT OUTER JOIN t_freight b ON b.area_id=a.id 
-			WHERE b.shipping_id is null or b.shipping_id=:shippingId
+			FROM t_area a LEFT OUTER JOIN (
+				SELECT * FROM t_freight WHERE shipping_id=:shippingId
+			) b ON b.area_id=a.id 
 		]]>
 	</sql>
 </sqls>
