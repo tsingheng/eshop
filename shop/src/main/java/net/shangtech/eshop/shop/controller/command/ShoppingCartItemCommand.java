@@ -19,6 +19,8 @@ public class ShoppingCartItemCommand implements Serializable {
 	
 	/** 库存 */
 	private int avaliable;
+	
+	private Double price;
 
 	public ShoppingCartSkuCommand getSku() {
 		return sku;
@@ -77,6 +79,14 @@ public class ShoppingCartItemCommand implements Serializable {
 
 	public void setAvaliable(int avaliable) {
 		this.avaliable = avaliable;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 	
 }

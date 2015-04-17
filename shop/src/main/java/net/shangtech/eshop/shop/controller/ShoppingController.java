@@ -189,6 +189,7 @@ public class ShoppingController {
 			MemberAddress memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
 			model.addAttribute("memberAddress", memberAddress);
 		}
+		shoppingCart.refreshPrice();
 		model.addAttribute("memberAddressList", memberAddressList);
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("step", 2);

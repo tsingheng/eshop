@@ -96,11 +96,13 @@ public class ShoppingCartCommand implements Serializable {
 			if(StringUtils.equalsIgnoreCase(item.getCode(), cmd.getCode())){
 				hasInShoppingCart = true;
 				item.add(cmd.getQuantity());
+				refreshSkuPrice(item);
 				break;
 			}
 		}
 		if(!hasInShoppingCart){
 			shoppingCartItemList.add(cmd);
+			refreshSkuPrice(cmd);
 		}
 		refreshShoppingCart();
 	}
@@ -133,6 +135,8 @@ public class ShoppingCartCommand implements Serializable {
 				item.reduce(quantity);
 				if(item.getQuantity() == 0){
 					it.remove();
+				}else{
+					refreshSkuPrice(item);
 				}
 				break;
 			}
@@ -147,8 +151,22 @@ public class ShoppingCartCommand implements Serializable {
 			ShoppingCartItemCommand item = it.next();
 			if(StringUtils.equalsIgnoreCase(item.getCode(), code)){
 				item.setQuantity(quantity);
+				refreshSkuPrice(item);
 				break;
 			}
+		}
+		refreshShoppingCart();
+	}
+	
+	private void refreshSkuPrice(ShoppingCartItemCommand item){
+		SkuPriceService skuPriceService = SpringUtils.getBean(SkuPriceService.class);
+		SkuPrice skuPrice = skuPriceService.getPrice(item.getSku().getId(), item.getQuantity());
+		item.setPrice(skuPrice.getPrice());
+	}
+	
+	public void refreshPrice(){
+		for(ShoppingCartItemCommand item : shoppingCartItemList){
+			refreshSkuPrice(item);
 		}
 		refreshShoppingCart();
 	}
@@ -160,12 +178,10 @@ public class ShoppingCartCommand implements Serializable {
 		int quantity = 0;
 		Double originalAmount = 0.0;
 		Double actualAmount = 0.0;
-		SkuPriceService skuPriceService = SpringUtils.getBean(SkuPriceService.class);
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
-			SkuPrice skuPrice = skuPriceService.getPrice(item.getSku().getId(), item.getQuantity());
-			originalAmount = originalAmount + skuPrice.getPrice()*item.getQuantity();
-			actualAmount = actualAmount + skuPrice.getPrice()*item.getQuantity();
+			originalAmount = originalAmount + item.getPrice()*item.getQuantity();
+			actualAmount = actualAmount + item.getPrice()*item.getQuantity();
 		}
 		this.quantity = quantity;
 		this.originalAmount = new BigDecimal(originalAmount);

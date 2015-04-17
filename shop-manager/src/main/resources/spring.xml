@@ -70,6 +70,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="solrService" class="net.shangtech.eshop.solr.SolrService">
-		<property name="url" value="https://solr-shangtecheshop.rhcloud.com/vip/"/>
+		<property name="url" value="${solr.url}"/>
 	</bean>
 </beans>
