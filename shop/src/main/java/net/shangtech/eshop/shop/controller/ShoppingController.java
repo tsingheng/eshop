@@ -67,6 +67,7 @@ public class ShoppingController {
 		ShoppingCartItemCommand cmd = new ShoppingCartItemCommand();
 		ShoppingCartSkuCommand skuCommand = new ShoppingCartSkuCommand();
 		BeanUtils.copyProperties(sku, skuCommand);
+		skuCommand.setId(sku.getId());
 		cmd.setSku(skuCommand);
 		cmd.setCode(code);
 		cmd.setQuantity(quantity);

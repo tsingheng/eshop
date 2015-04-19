@@ -3,12 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.shangtech.net/schema/sqls
 		http://www.shangtech.net/schema/sqls/shangtech-dao-sql.xsd">
-	<sql id="FreightTemplate.findByShippingId" template="false">
+	<sql id="FreightTemplate.findByShippingId">
 		<![CDATA[
 			SELECT a.id as area_id, b.id as freight_id, a.area_name, b.additional_price, b.additional_unit, b.first_price, b.first_weight
 			FROM t_area a LEFT OUTER JOIN (
 				SELECT * FROM t_freight WHERE shipping_id=:shippingId
 			) b ON b.area_id=a.id 
+		]]>
+	</sql>
+	<sql id="SkuPrice.getPrice">
+		<![CDATA[
+			SELECT * FROM t_sku_price WHERE sku_id=:skuId and min<=:quantity and max>=:quantity
 		]]>
 	</sql>
 </sqls>

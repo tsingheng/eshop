@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<div class="heads" style="background: url(${ctx}/assets/img/img02.jpg) center center;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2><span>//</span> Single Item</h2>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="main pr mt20 clear">
 	<c:if test="${shoppingCart.quantity le 0}">
 	<div class="orders order_empty">
