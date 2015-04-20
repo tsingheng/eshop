@@ -61,17 +61,19 @@ public class ProductListController {
 				currentCategory = categoryService.findByCodeAndRootId(categoryCodes[categoryCodes.length-1], currentTopCategory.getId());
 			}
 			model.addAttribute("currentCategory", currentCategory);
-			CategoryMetaInfo metaInfo = categoryMetaInfoService.findByCategoryId(currentCategory.getId());
-			if(metaInfo != null){
-				model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
-				model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
+			if(currentCategory != null){
+				CategoryMetaInfo metaInfo = categoryMetaInfoService.findByCategoryId(currentCategory.getId());
+				if(metaInfo != null){
+					model.addAttribute(ShopConstants.META_INFO_KEYWORDS_KEY, metaInfo.getKeywords());
+					model.addAttribute(ShopConstants.META_INFO_DESCRIPTION_KEY, metaInfo.getDescription());
+				}
+				
+				List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
+				for(Category category : categoryList){
+					category.setChildren(categoryService.findByParentId(category.getId()));
+				}
+				model.addAttribute("categoryList", categoryList);
 			}
-		
-			List<Category> categoryList = categoryService.findByParentId(currentTopCategory.getId());
-			for(Category category : categoryList){
-				category.setChildren(categoryService.findByParentId(category.getId()));
-			}
-			model.addAttribute("categoryList", categoryList);
 		}
 		
 		doLoadPageByCategory(model, pagination, categoryCodes);

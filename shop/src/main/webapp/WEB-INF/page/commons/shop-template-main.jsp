@@ -37,7 +37,22 @@
 				<ul class="nav navbar-nav nav-right">
 					<li><a href="${ctx}/login">Sign in</a></li>
 					<li><a href="${ctx}/register">Sign up</a></li>
-					<li><a href="${ctx}/shopping-cart">Cart</a></li>
+					<li>
+						<a href="${ctx}/shopping-cart" class="cart-nav">
+							<span class="cart-icon">
+								<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="20" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+									<path class="cart-icon-fill" fill="#AAAAAA" d="M10.033,18.75L9.7,20.417H26c0.921,0,1.667,0.746,1.667,1.667c0,0.796-0.559,1.459-1.305,1.625
+									  c-0.703-0.79-1.723-1.292-2.862-1.292c-1.158,0-2.196,0.519-2.9,1.333H11.4c-0.703-0.815-1.741-1.333-2.9-1.333
+									  c-0.8,0-1.543,0.247-2.158,0.668c-0.286-0.379-0.403-0.86-0.309-1.328l1.569-7.848l-2.73-6.826H2.667C1.746,7.083,1,6.337,1,5.417
+									  S1.746,3.75,2.667,3.75H6c0.682,0,1.294,0.415,1.548,1.048l0.914,2.286h20.871c0.553,0,1.07,0.274,1.38,0.732
+									  c0.31,0.458,0.372,1.04,0.167,1.553l-3.333,8.333C27.294,18.335,26.682,18.75,26,18.75H10.033z M8.5,23.75
+									  c-1.381,0-2.5,1.119-2.5,2.5c0,1.381,1.119,2.5,2.5,2.5s2.5-1.119,2.5-2.5C11,24.869,9.881,23.75,8.5,23.75z M23.5,23.75
+									  c-1.381,0-2.5,1.119-2.5,2.5c0,1.381,1.119,2.5,2.5,2.5c1.381,0,2.5-1.119,2.5-2.5C26,24.869,24.881,23.75,23.5,23.75z"></path>
+								</svg>
+							</span>
+							<span class="cart-count">${empty shoppingCart.quantity ? 0 : shoppingCart.quantity}</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
