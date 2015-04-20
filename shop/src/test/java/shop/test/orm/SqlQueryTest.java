@@ -2,6 +2,7 @@ package shop.test.orm;
 
 import java.util.List;
 
+import net.shangtech.eshop.product.dao.CategoryDao;
 import net.shangtech.eshop.sales.command.FreightTemplate;
 import net.shangtech.eshop.sales.service.FreightService;
 
@@ -19,6 +20,7 @@ public class SqlQueryTest extends BaseSpringTest {
 	private static final Logger logger = LoggerFactory.getLogger(SqlQueryTest.class);
 	
 	@Autowired private FreightService freightService;
+	@Autowired private CategoryDao categoryDao;
 	
 	@Test
 	public void testFreightTemplate(){
