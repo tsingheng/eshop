@@ -23,6 +23,12 @@ public class MemberAddress extends BaseEntity<Long> {
 	@Index(name = "idx_member_address_member_id")
 	private Long memberId;
 	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
+	
 	@Column(name = "create_time")
 	private Date createTime;
 	
@@ -32,8 +38,14 @@ public class MemberAddress extends BaseEntity<Long> {
 	@Column(name = "province")
 	private String province;
 	
+	@Column(name = "state")
+	private String state;
+	
 	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "address")
+	private String address;
 	
 	@Column(name = "district")
 	private String district;
@@ -161,6 +173,38 @@ public class MemberAddress extends BaseEntity<Long> {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

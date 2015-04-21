@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Index;
 
+import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.framework.orm.dao.support.BaseEntity;
 
 /**
@@ -166,4 +167,9 @@ public class OrderAddress extends BaseEntity<Long> {
 		this.createTime = createTime;
 	}
     
+	public static OrderAddress build(MemberAddress memberAddress){
+		OrderAddress orderAddress = new OrderAddress();
+		
+		return orderAddress;
+	}
 }

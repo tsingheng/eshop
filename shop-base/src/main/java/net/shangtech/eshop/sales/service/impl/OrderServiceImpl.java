@@ -8,6 +8,7 @@ import net.shangtech.eshop.account.entity.MemberAddress;
 import net.shangtech.eshop.sales.dao.OrderDao;
 import net.shangtech.eshop.sales.dao.OrderItemDao;
 import net.shangtech.eshop.sales.entity.Order;
+import net.shangtech.eshop.sales.entity.OrderAddress;
 import net.shangtech.eshop.sales.entity.OrderItem;
 import net.shangtech.eshop.sales.service.OrderService;
 import net.shangtech.eshop.sales.service.bo.OrderBo;
@@ -35,16 +36,6 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 		Order order = new Order();
 		BeanUtils.copyProperties(bo, order);
 		
-		MemberAddress address = addressDao.find(bo.getMemberAddressId());
-		order.setCountry(address.getCountry());
-		order.setProvince(address.getProvince());
-		order.setCity(address.getCity());
-		order.setDistrict(address.getDistrict());
-		order.setStreet(address.getStreet());
-		order.setContact(address.getContact());
-		order.setPostcode(address.getPostcode());
-		order.setMobile(address.getMobile());
-		
 		order.setCreateTime(new Date());
 		
 		dao.save(order);
@@ -54,6 +45,10 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 			item.setOrderId(order.getId());
 			orderItemDao.save(item);
 		}
+		
+		MemberAddress memberAddress = addressDao.find(bo.getMemberAddressId());
+		OrderAddress orderAddress = OrderAddress.build(memberAddress);
+		orderAddress.setOrderId(order.getId());
 		return order;
 	}
 	@Override

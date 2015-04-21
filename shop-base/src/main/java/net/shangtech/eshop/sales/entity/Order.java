@@ -46,36 +46,6 @@ public class Order extends BaseEntity<Long> {
 	@Column(name = "actual_freight")
 	private Double actualFreight;
 	
-	@Column(name = "country")
-	private String country;
-	
-	@Column(name = "province")
-	private String province;
-	
-	@Column(name = "city")
-	private String city;
-	
-	@Column(name = "district")
-	private String district;
-	
-	@Column(name = "street")
-	private String street;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "mobile")
-	private String mobile;
-	
-	@Column(name = "telephone")
-	private String telephone;
-	
-	@Column(name = "contact")
-	private String contact;
-	
-	@Column(name = "postcode")
-	private String postcode;
-	
 	@Column(name = "message")
 	private String message;
 
@@ -149,86 +119,6 @@ public class Order extends BaseEntity<Long> {
 
 	public void setActualFreight(Double actualFreight) {
 		this.actualFreight = actualFreight;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public String getPostcode() {
-		return postcode;
-	}
-
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
 	}
 
 	public String getMessage() {
