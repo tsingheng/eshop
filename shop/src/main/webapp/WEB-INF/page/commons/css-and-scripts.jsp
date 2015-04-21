@@ -17,6 +17,7 @@
 <script type="text/javascript" src="${ctx}/assets/js/bootstrap.js"></script>
 <script type="text/javascript" src="${ctx}/assets/js/gmap3.js"></script>
 <script type="text/javascript" src="${ctx}/assets/js/script.js"></script>
+<script type="text/javascript" src="${ctx}/assets/js/shop.js"></script>
 <script>
 	var ctx = '${ctx}';
 </script>

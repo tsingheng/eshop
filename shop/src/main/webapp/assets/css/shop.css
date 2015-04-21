@@ -310,3 +310,15 @@
 .panel-cart .panel-heading .continue:hover{
 	background-color:#eaeaea;
 }
+
+.cart-table{
+	width:100%;
+}
+.cart-table th{
+	text-align:center;
+	padding: 6px 0px;
+}
+.cart-table td{
+	padding:6px 0px;
+	border-top:1px solid #ddd;
+}

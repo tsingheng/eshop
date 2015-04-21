@@ -73,10 +73,10 @@ var App = {
 			type: 'POST',
 			dataType: 'json',
 			success: function(cart){
-				$('#cart-summary').html('购物袋 (' + cart.quantity + ') ');
 				if(cart.quantity == 0){
-					$('.bag-tool').addClass('bag-tool-empty').html('<p></span>购物袋还是空荡荡的~</p>');
+					$('.cart-nav .cart-count').html('empty');
 				}else{
+					$('.cart-nav .cart-count').html(cart.quantity);
 					$('.bag-tool').removeClass('bag-tool-empty').html('');
 					var cartUl = $('<ul class="clear"></ul>');
 					var lis = [];

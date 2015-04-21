@@ -62,8 +62,48 @@
 						<c:if test="${shoppingCart.quantity le 0}">
 						While we’re flattered that you’d just give us your money for nothing, you should probably add a few items to your cart to make it worth your while.
 						</c:if>
-						<c:if test="${shoppingCart.quantity le 0}">
-						
+						<c:if test="${shoppingCart.quantity gt 0}">
+						<table class="cart-table">
+							<colgroup>
+								<col width="100"/>
+								<col/>
+								<col width="100"/>
+								<col width="130"/>
+								<col width="100"/>
+								<col width="100"/>
+							</colgroup>
+							<thead>
+								<tr>
+									<th colspan="2">产品</th>
+									<th>单价</th>
+									<th>数量</th>
+									<th>小计</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${shoppingCart.shoppingCartItemList}" var="item">
+								<tr>
+									<td><a href="${ctx}/product/${item.sku.code}" target="_blank"><img src="${item.sku.image}" style="width:80px;"/></a></td>
+									<td><a href="${ctx}/product/${item.sku.code}" target="_blank">${item.sku.name}</a></td>
+									<td class="center">${item.price}</td>
+									<td class="center">
+										<div class="input-group quantity-input-group">
+											<span class="input-group-btn">
+												<a class="btn btn-default disabled num-reduce" href="javascript:;"><span class="glyphicon glyphicon-minus"></span></a>
+											</span>
+											<input type="text" class="form-control" id="quantity" name="quantity" value="${item.quantity}">
+											<span class="input-group-btn">
+												<a class="btn btn-default num-add" href="javascript:;"><span class="glyphicon glyphicon-plus"></span></a>
+											</span>
+										</div>
+									</td>
+									<td class="center">${item.price*item.quantity}</td>
+									<td class="center"><a class="btn btn-danger btn-sm" href="javascript:;">Remove</a></td>
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 						</c:if>
 					</div>
 					<div class="panel-footer">

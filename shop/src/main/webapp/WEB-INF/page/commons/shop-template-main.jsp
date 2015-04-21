@@ -50,7 +50,7 @@
 									  c-1.381,0-2.5,1.119-2.5,2.5c0,1.381,1.119,2.5,2.5,2.5c1.381,0,2.5-1.119,2.5-2.5C26,24.869,24.881,23.75,23.5,23.75z"></path>
 								</svg>
 							</span>
-							<span class="cart-count">${empty shoppingCart.quantity ? 0 : shoppingCart.quantity}</span>
+							<span class="cart-count"></span>
 						</a>
 					</li>
 				</ul>
