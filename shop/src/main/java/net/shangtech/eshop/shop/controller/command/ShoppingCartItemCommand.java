@@ -21,6 +21,13 @@ public class ShoppingCartItemCommand implements Serializable {
 	private int avaliable;
 	
 	private Double price;
+	
+	private Integer min;
+	
+	private Integer max;
+	
+	/** 小计 */
+	private Double amount;
 
 	public ShoppingCartSkuCommand getSku() {
 		return sku;
@@ -87,6 +94,30 @@ public class ShoppingCartItemCommand implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Integer getMin() {
+		return min;
+	}
+
+	public void setMin(Integer min) {
+		this.min = min;
+	}
+
+	public Integer getMax() {
+		return max;
+	}
+
+	public void setMax(Integer max) {
+		this.max = max;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 	
 }

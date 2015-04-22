@@ -83,9 +83,9 @@
 								<span class="input-group-btn">
 									<a class="btn btn-default disabled num-reduce" href="javascript:;"><span class="glyphicon glyphicon-minus"></span></a>
 								</span>
-								<input readonly type="text" class="form-control" id="quantity" name="quantity" value="10">
+								<input type="text" class="form-control" id="quantity" name="quantity" value="${min}" data-min="${min}">
 								<span class="input-group-btn">
-									<a class="btn btn-default num-add" href="javascript:;"><span class="glyphicon glyphicon-plus"></span></a>
+									<a class="btn btn-default num-add ${skuQuantity.max eq 0 ? 'disabled' : ''}" href="javascript:;"><span class="glyphicon glyphicon-plus"></span></a>
 								</span>
 							</div>
 						</td>

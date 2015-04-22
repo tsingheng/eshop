@@ -102,6 +102,9 @@ public class ShoppingCartCommand implements Serializable {
 		}
 		if(!hasInShoppingCart){
 			shoppingCartItemList.add(cmd);
+			SkuPriceService skuPriceService = SpringUtils.getBean(SkuPriceService.class);
+			SkuPrice firstPrice = skuPriceService.getPrice(cmd.getSku().getId(), 0);
+			cmd.setMin(firstPrice.getMin());
 			refreshSkuPrice(cmd);
 		}
 		refreshShoppingCart();
@@ -180,8 +183,10 @@ public class ShoppingCartCommand implements Serializable {
 		Double actualAmount = 0.0;
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
-			originalAmount = originalAmount + item.getPrice()*item.getQuantity();
-			actualAmount = actualAmount + item.getPrice()*item.getQuantity();
+			double amount = item.getPrice()*item.getQuantity();
+			item.setAmount(amount);
+			originalAmount = originalAmount + amount;
+			actualAmount = actualAmount + amount;
 		}
 		this.quantity = quantity;
 		this.originalAmount = new BigDecimal(originalAmount);

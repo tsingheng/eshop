@@ -73,35 +73,41 @@ $(document).ready(function(){
 		avaliable = $this.data('avaliable');
 		$('#J-sizeArea-wrap').removeClass('status-notice');
 	});
+	$('#quantity').blur(function(){
+		var $input = $('#quantity'), min = $input.data('min');
+		if($input.val() < min){
+			$input.val(min);
+		}
+	});
 	$('.num-add').click(function(){
-		var $this = $(this);
+		var $this = $(this), $input = $('#quantity'), min = $input.data('min');
 		if($this.hasClass('disabled')){
 			return;
 		}
-		var num = parseInt($('#quantity').val()) + 1;
-		if(avaliable > -1 && num >= avaliable){
-			$this.addClass('disabled');
-			num = avaliable;
-		}
+		var num = parseInt($input.val()) + 1;
+//		if(num >= max){
+//			$this.addClass('disabled');
+//			num = avaliable;
+//		}
 		$('#quantity').val(num);
-		if(num > 1){
+		if(num > min){
 			$('.num-reduce').removeClass('disabled');
 		}
 	});
 	$('.num-reduce').click(function(){
-		var $this = $(this);
+		var $this = $(this), $input = $('#quantity'), min = $input.data('min');
 		if($this.hasClass('disabled')){
 			return;
 		}
-		var num = parseInt($('#quantity').val()) - 1;
-		if(num <= 1){
+		var num = parseInt($input.val()) - 1;
+		if(num <= min){
 			$this.addClass('disabled');
-			num = 1;
+			num = min;
 		}
 		$('#quantity').val(num);
-		if(avaliable > -1 && num < avaliable){
-			$('.num-add').removeClass('disabled');
-		}
+//		if(num < max){
+//			$('.num-add').removeClass('disabled');
+//		}
 	});
 	
 	$('#cart-form').validate({

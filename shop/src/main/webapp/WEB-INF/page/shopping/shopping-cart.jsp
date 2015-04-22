@@ -83,32 +83,35 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${shoppingCart.shoppingCartItemList}" var="item">
-								<tr>
+								<tr data-code="${item.code}">
 									<td><a href="${ctx}/product/${item.sku.code}" target="_blank"><img src="${item.sku.image}" style="width:80px;"/></a></td>
 									<td><a href="${ctx}/product/${item.sku.code}" target="_blank">${item.sku.name}</a></td>
-									<td class="center">${item.price}</td>
+									<td class="center price">${item.price}</td>
 									<td class="center">
 										<div class="input-group quantity-input-group">
 											<span class="input-group-btn">
 												<a class="btn btn-default disabled num-reduce" href="javascript:;"><span class="glyphicon glyphicon-minus"></span></a>
 											</span>
-											<input type="text" class="form-control" id="quantity" name="quantity" value="${item.quantity}">
+											<input type="text" class="form-control" name="quantity" value="${item.quantity}" data-min="${item.min}">
 											<span class="input-group-btn">
 												<a class="btn btn-default num-add" href="javascript:;"><span class="glyphicon glyphicon-plus"></span></a>
 											</span>
 										</div>
 									</td>
 									<td class="center">${item.price*item.quantity}</td>
-									<td class="center"><a class="btn btn-danger btn-sm" href="javascript:;">Remove</a></td>
+									<td class="center"><a class="btn btn-danger btn-sm remove" href="javascript:;">Remove</a></td>
 								</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						</c:if>
 					</div>
+					<c:if test="${shoppingCart.quantity gt 0}">
 					<div class="panel-footer">
-						Total $${shoppingCart.actualAmount}
+						<span id="cart-total">Total $${shoppingCart.actualAmount}</span>
+						<a class="btn btn-default" href="${ctx}/shopping-checkout"> Checkout </a>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

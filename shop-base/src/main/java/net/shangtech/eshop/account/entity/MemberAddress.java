@@ -70,6 +70,9 @@ public class MemberAddress extends BaseEntity<Long> {
 	
 	@Column(name = "is_default")
 	private Boolean isDefault;
+	
+	@Column(name = "area_id")
+	private Long areaId;
 
 	public Long getMemberId() {
 		return memberId;
@@ -205,6 +208,14 @@ public class MemberAddress extends BaseEntity<Long> {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 	
 }

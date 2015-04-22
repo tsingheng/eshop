@@ -9,7 +9,11 @@ import net.shangtech.eshop.account.service.MemberAddressService;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.enums.SkuStatus;
 import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.eshop.sales.entity.Area;
+import net.shangtech.eshop.sales.service.AreaService;
+import net.shangtech.eshop.sales.service.FreightService;
 import net.shangtech.eshop.sales.service.OrderService;
+import net.shangtech.eshop.sales.service.ShippingService;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
 import net.shangtech.eshop.sales.service.bo.OrderBo;
 import net.shangtech.eshop.sales.service.bo.OrderItemBo;
@@ -45,6 +49,9 @@ public class ShoppingController {
 	@Autowired private 	SkuService 							skuService;
 	@Autowired private 	MemberAddressService				memberAddressService;
 	@Autowired private 	OrderService						orderService;
+	@Autowired private 	AreaService							areaService;
+	@Autowired private 	ShippingService						shippingService;
+	@Autowired private 	FreightService						freightService;
 	
 	@Shopwired
 	@ResponseBody
@@ -189,8 +196,13 @@ public class ShoppingController {
 		if(shoppingCart.getMemberAddressId() != null){
 			MemberAddress memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
 			model.addAttribute("memberAddress", memberAddress);
+			//List<Freight> freightList = freightService.findByAreaId(memberAddress.getAreaId());
 		}
 		shoppingCart.refreshPrice();
+		
+		List<Area> areaList = areaService.findAll();
+		model.addAttribute("areaList", areaList);
+		
 		model.addAttribute("memberAddressList", memberAddressList);
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("step", 2);

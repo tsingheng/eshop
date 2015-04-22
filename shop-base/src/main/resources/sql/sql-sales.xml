@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.shangtech.net/schema/sqls
 		http://www.shangtech.net/schema/sqls/shangtech-dao-sql.xsd">
+	<!-- 获取运费模板 -->
 	<sql id="FreightTemplate.findByShippingId">
 		<![CDATA[
 			SELECT a.id as area_id, b.id as freight_id, a.area_name, b.additional_price, b.additional_unit, b.first_price, b.first_weight
@@ -11,9 +12,11 @@
 			) b ON b.area_id=a.id 
 		]]>
 	</sql>
+	
+	<!-- 获取产品批发价格 -->
 	<sql id="SkuPrice.getPrice">
 		<![CDATA[
-			SELECT * FROM t_sku_price WHERE sku_id=:skuId and min<=:quantity and max>=:quantity
+			SELECT * FROM t_sku_price WHERE sku_id=:skuId and min<=:quantity order by price
 		]]>
 	</sql>
 </sqls>
