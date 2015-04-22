@@ -42,7 +42,7 @@
 										<tr>
 											<td><img src="${item.sku.image}" style="width:70px;"/></td>
 											<td>${item.sku.name}</td>
-											<td>${item.quantity}</td>
+											<td> × ${item.quantity}</td>
 											<td>${item.amount}</td>
 										</tr>
 										</c:forEach>

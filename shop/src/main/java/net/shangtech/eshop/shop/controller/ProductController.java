@@ -18,6 +18,7 @@ import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,14 +44,18 @@ public class ProductController {
 			return "shop.product.error";
 		}
 		model.addAttribute("sku", sku);
-		SkuPrice firstPrice = skuPriceService.getPrice(sku.getId(), 0);
-		int min = firstPrice.getMin();
-		for(ShoppingCartItemCommand item : shoppingCart.getShoppingCartItemList()){
-			if(item.getCode().equals(sku.getCode())){
-				min = Math.max(0, min - item.getQuantity());
+		List<SkuPrice> skuPriceList = skuPriceService.getPriceList(sku.getId());
+		if(!CollectionUtils.isEmpty(skuPriceList)){
+			model.addAttribute("skuPriceList", skuPriceList);
+			SkuPrice firstPrice = skuPriceList.get(0);
+			int min = firstPrice.getMin();
+			for(ShoppingCartItemCommand item : shoppingCart.getShoppingCartItemList()){
+				if(item.getCode().equals(sku.getCode())){
+					min = Math.max(0, min - item.getQuantity());
+				}
 			}
+			model.addAttribute("min", min);
 		}
-		model.addAttribute("min", min);
 		
 		SkuMetaInfo metaInfo = skuMetaInfoService.findBySkuId(sku.getId());
 		if(metaInfo != null){

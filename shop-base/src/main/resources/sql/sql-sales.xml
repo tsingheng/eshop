@@ -19,4 +19,11 @@
 			SELECT * FROM t_sku_price WHERE sku_id=:skuId and min<=:quantity order by price
 		]]>
 	</sql>
+	
+	<!-- 获取产品批发起步价 -->
+	<sql id="SkuPrice.getFirstPrice">
+		<![CDATA[
+			SELECT * FROM t_sku_price WHERE sku_id=:skuId order by price
+		]]>
+	</sql>
 </sqls>

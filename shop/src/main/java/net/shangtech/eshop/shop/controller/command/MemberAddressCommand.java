@@ -2,6 +2,8 @@ package net.shangtech.eshop.shop.controller.command;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import net.shangtech.framework.web.controller.validation.constraints.Mobile;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,21 +14,34 @@ public class MemberAddressCommand implements Serializable {
 	
     private Long id;
     
-    @NotBlank
     private String contact;
+    
+    @NotBlank
+    private String firstName;
+    
+    @NotBlank
+    private String lastName;
+    
+    @NotNull
+    private Long countryId;
+    
+    private String state;
+    
+    @NotBlank
+    private String company;
+    
+    @NotBlank
+    private String address;
     
     private String country;
     
-    @NotBlank
     private String province;
     
     @NotBlank
     private String city;
     
-    @NotBlank
     private String district;
     
-    @NotBlank
     private String street;
     
     @NotBlank
@@ -116,6 +131,54 @@ public class MemberAddressCommand implements Serializable {
 
 	public void setIsDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
     
 }

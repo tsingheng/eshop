@@ -24,5 +24,12 @@ public class SkuPriceDaoImpl extends BaseDao<SkuPrice> implements SkuPriceDao {
     public List<SkuPrice> getPriceList(Long skuId) {
 	    return findByProperty("skuId", skuId);
     }
+
+	@Override
+    public SkuPrice getFirstPrice(Long skuId) {
+		MapHolder<String> holder = new MapHolder<String>();
+		holder.put("skuId", skuId);
+		return findOneBySql("SkuPrice.getFirstPrice", holder);
+    }
 	
 }

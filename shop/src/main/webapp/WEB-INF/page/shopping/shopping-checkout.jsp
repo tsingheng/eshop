@@ -8,54 +8,69 @@
 	</div>
 	<ul class="list-group">
 		<c:if test="${empty memberAddressList}">
+			<li class="list-group-item address-item">
+				<input type="radio" name="memberAddressId" value="" checked="checked"/>
+				<span class="member-address"></span>
+				<a href="javascript:;" class="edit-address">Edit</a>
+			</li>
 			<li class="list-group-item">
-				<form action="${ctx}/save-address" method="post" class="form-horizontal">
+				<form id="address-form" action="${ctx}/save-address" method="post" class="form-horizontal">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Fisrt Name</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="firstName">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Last Name</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="lastName">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Company</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="company">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Address</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="address">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">City</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="city">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Country</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="country">
+						<div class="col-sm-6">
+							<select name="country" class="form-control">
+								<option>country</option>
+								<c:forEach items="${areaList}" var="item">
+								<option value="${item.id}">${item.name}</option>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Postal code</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="postcode">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Mobile</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" name="mobile">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 col-sm-offset-2">
+							<button class="btn btn-default">Save</button>
 						</div>
 					</div>
 				</form>
@@ -63,10 +78,10 @@
 		</c:if>
 		<c:if test="${not empty memberAddressList}">
 		<c:forEach items="${memberAddressList}" var="item">
-			<li class="list-group-item">
-				<input type="radio" name="memberAddressId"/>
+			<li class="list-group-item address-item">
+				<input type="radio" name="memberAddressId" value="${item.id}" checked="checked"/>
 				<span class="member-address">${item.firstName} ${item.lastName} ${item.country} ${item.city}</span>
-				<a class="btn btn-default" href="javascript:;"> Edit </a>
+				<a href="javascript:;" class="edit-address">Edit</a>
 			</li>
 		</c:forEach>
 		</c:if>

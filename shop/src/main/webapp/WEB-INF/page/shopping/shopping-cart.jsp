@@ -108,8 +108,8 @@
 					</div>
 					<c:if test="${shoppingCart.quantity gt 0}">
 					<div class="panel-footer">
-						<span id="cart-total">Total $${shoppingCart.actualAmount}</span>
-						<a class="btn btn-default" href="${ctx}/shopping-checkout"> Checkout </a>
+						<span id="cart-total">Total $ <span class="num">${shoppingCart.actualAmount}</span></span>
+						<a class="btn btn-success" href="${ctx}/shopping-checkout"> Checkout </a>
 					</div>
 					</c:if>
 				</div>

@@ -15,6 +15,7 @@ import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.service.InventoryService;
 import net.shangtech.eshop.product.service.SkuService;
 import net.shangtech.eshop.sales.entity.ShoppingCartItem;
+import net.shangtech.eshop.sales.service.AreaService;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
 import net.shangtech.eshop.shop.constants.ScopConstants.SessionScope;
 import net.shangtech.eshop.shop.controller.annotation.Shopwired;
@@ -48,6 +49,7 @@ public class MemberController {
 	@Autowired private ShoppingCartItemService 		shoppingCartItemService;
 	@Autowired private InventoryService 			inventoryService;
 	@Autowired private SkuService 					skuService;
+	@Autowired private AreaService					areaService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String gotoRegister(){

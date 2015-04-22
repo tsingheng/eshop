@@ -103,7 +103,7 @@ public class ShoppingCartCommand implements Serializable {
 		if(!hasInShoppingCart){
 			shoppingCartItemList.add(cmd);
 			SkuPriceService skuPriceService = SpringUtils.getBean(SkuPriceService.class);
-			SkuPrice firstPrice = skuPriceService.getPrice(cmd.getSku().getId(), 0);
+			SkuPrice firstPrice = skuPriceService.getFirstPrice(cmd.getSku().getId());
 			cmd.setMin(firstPrice.getMin());
 			refreshSkuPrice(cmd);
 		}

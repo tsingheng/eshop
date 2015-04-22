@@ -26,5 +26,10 @@ public class SkuPriceServiceImpl extends BaseService<SkuPrice> implements SkuPri
     public List<SkuPrice> getPriceList(Long skuId) {
 	    return dao.getPriceList(skuId);
     }
+
+	@Override
+    public SkuPrice getFirstPrice(Long skuId) {
+	    return dao.getFirstPrice(skuId);
+    }
 	
 }

@@ -1,13 +1,17 @@
 $(document).ready(function(){
-	$('#addrform').validate({
+	$('#address-form').validate({
 		rules: {
-			contact: {
+			firstName: {
 				required: true
 			},
-			province: 'required',
-			city: 'required',
-			district: 'required',
-			street: {
+			lastName: {
+				required: true
+			},
+			state: 'required',
+			city: {
+				required: true
+			},
+			address: {
 				required: true
 			},
 			mobile: {
@@ -15,16 +19,24 @@ $(document).ready(function(){
 			},
 			postcode: {
 				required: true
+			},
+			countryId: {
+				required: true
+			},
+			company: {
+				required: true
 			}
 		},
 		messages: {
-			contact: {
-				required: '请填写联系人姓名'
+			firstName: {
+				required: ''
 			},
-			province: '请选择省份',
+			lastName: {
+				required: ''
+			},
+			state: '请选择省份',
 			city: '请选择城市',
-			district: '请选择地区',
-			street: {
+			address: {
 				required: '请填写街道地址'
 			},
 			mobile: {
@@ -32,26 +44,29 @@ $(document).ready(function(){
 			},
 			postcode: {
 				required: '请填写邮政编码'
+			},
+			companyId: {
+				required: ''
+			},
+			country: {
+				required: ''
 			}
 		},
-		errorElement: 'p',
-		errorClass: 's13',
+		errorClass: 'has-error',
 		errorPlacement: function(error, ele){
-			if(ele.is('select')){
-				if(ele.parent().find('.s13').length == 0){
-					ele.parent().append(error);
-				}
-			}else{
-				if(!ele.next().hasClass('s13')){
-					error.insertAfter(ele);
-				}
+			var formGroup = ele.closest('.form-group');
+			if(formGroup.find('[id^=-error]').length == 0){
+				formGroup.append(error.addClass('control-label'));
 			}
 		},
 		highlight: function(element, errorClass, validClass){
-			$(element).next('p').hide();
+			$(element).closest('.form-group').addClass(errorClass);
+		},
+		unhighlight: function(element, errorClass, validClass){
+			$(element).closest('.form-group').removeClass(errorClass);
 		},
 		submitHandler: function(form){
-			var validator = $('#addrform').validate();
+			var validator = $('#address-form').validate();
 			$(form).ajaxSubmit({
 				dataType: 'json',
 				success: function(response){
@@ -66,24 +81,6 @@ $(document).ready(function(){
 					doUpdateAddress(response.data);
 				}
 			});
-		}
-	});
-	
-	$province = $('#province'), $city = $('#city'), $district = $('#district');
-	$province.append(findChildrenArea('1'));
-	$province.change(function(){
-		$city.find('option:gt(0)').remove();
-		$district.find('option:gt(0)').remove();
-		var province = $province.find('option:selected').data('code');
-		if(province){
-			$city.append(findChildrenArea(province));
-		}
-	});
-	$city.change(function(){
-		$district.find('option:gt(0)').remove();
-		var city = $city.find('option:selected').data('code');
-		if(city){
-			$district.append(findChildrenArea(city));
 		}
 	});
 	
@@ -157,38 +154,9 @@ $(document).ready(function(){
 	});
 });
 
-function findChildrenArea(parent){
-	var children = [];
-	for(var a in area){
-		if(area[a][1] == parent){
-			children.push('<option data-code="');
-			children.push(a);
-			children.push('" value="');
-			children.push(area[a][0]);
-			children.push('">');
-			children.push(area[a][0]);
-			children.push('</option>');
-		}
-	}
-	return children.join('');
-}
 function doUpdateAddress(address){
-	var $address = $(buildAddressHtml(address));
-	var $old = $('#address-' + address.id);
-	$('#myAddress .cur').removeClass('cur');
-	if(address.isDefault){
-		$('#myAddress .default-add').remove();
-	}
-	if($old.length > 0){
-		$old.html($address.html());
-		$old.addClass('cur');
-	}else if($('#myAddress li').length > 0){
-		$address.insertBefore($('#myAddress li:last'));
-	}else{
-		$('#myAddress').append($address);
-	}
-	$('#addrform').hide();
-	$('#addrform')[0].reset();
+	var $address = $('#address-form').closest('.list-group-item').prev();
+	$address.html(buildAddressHtml(address));
 	onSelectAddress(address);
 }
 function onSelectAddress(address){

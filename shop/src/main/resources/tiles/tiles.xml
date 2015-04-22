@@ -8,6 +8,8 @@
 	
 	<definition name="shop.shopping" template="/WEB-INF/page/commons/shop-template-main.jsp"></definition>
 	
+	<definition name="shop.checkout" template="/WEB-INF/page/commons/shop-template-checkout.jsp"></definition>
+	
 	<definition name="shop.index" extends="shop.main">
 		<put-attribute name="nav" value="/WEB-INF/page/nav/main-nav.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/page/index.jsp"/>
