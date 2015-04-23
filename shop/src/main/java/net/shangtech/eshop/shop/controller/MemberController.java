@@ -173,6 +173,29 @@ public class MemberController {
 	}
 	
 	@Shopwired
+	@ResponseBody
+	@RequestMapping(value = "/load-address")
+	public MemberAddressCommand loadMemberAddress(ShoppingCartCommand shoppingCart, LoginMember loginMember, @RequestParam("memberAddressId") Long memberAddressId){
+		MemberAddressCommand cmd = new MemberAddressCommand();
+		MemberAddress memberAddress;
+		if(loginMember == null){
+			if(shoppingCart.getMemberAddressId() == null){
+				return null;
+			}
+			memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
+			
+		}else{
+			memberAddress = memberAddressService.find(memberAddressId);
+			if(memberAddress == null || memberAddress.getMemberId() != loginMember.getId()){
+				return null;
+			}
+		}
+		BeanUtils.copyProperties(memberAddress, cmd);
+		memberAddress.setId(cmd.getId());
+		return cmd;
+	}
+	
+	@Shopwired
 	@RequestValid
 	@ResponseBody
 	@RequestMapping(value = "/save-address", method = RequestMethod.POST)

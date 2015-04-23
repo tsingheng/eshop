@@ -35,7 +35,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Country</label>
 		<div class="col-sm-6">
-			<select name="country" class="form-control">
+			<select name="countryId" class="form-control">
 				<option>country</option>
 				<c:forEach items="${areaList}" var="item">
 				<option value="${item.id}">${item.name}</option>
@@ -58,6 +58,7 @@
 	<div class="form-group">
 		<div class="col-sm-6 col-sm-offset-2">
 			<button class="btn btn-default">Save</button>
+			<a class="btn btn-default cancel-edit pull-right" href="javascript:;">Cancel</a>
 		</div>
 	</div>
 </form>

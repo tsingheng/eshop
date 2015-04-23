@@ -84,10 +84,31 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#myAddress').on('click', '.add', function(e){
+	$('.address-list').on('click', '.edit-address', function(){
+		$('#address-form')[0].reset();
+		var $this = $(this);
+		$.ajax({
+			url: ctx + '/load-address',
+			data: {
+				memberAddressId: $this.siblings('[name="memberAddressId"]').val()
+			},
+			success: function(address){
+				for(var name in address){
+					var $ele = $('#address-form [name="' + name + '"]');
+					if($ele.is('select')){
+						$ele.children('option[value="' + address[name] + '"]').attr('selected', 'selected');
+					}else{
+						$ele.val(address[name]);
+					}
+				}
+			}
+		});
+		$('.address-form-wrapper').insertAfter($(this).closest('.address-item')).slideDown();
+	});
+	$('.address-list').on('click', '.add', function(e){
 		e.stopPropagation();
-		$('#addrform')[0].reset();
-		$('#addrform').show();
+		$('#address-form')[0].reset();
+		$('.address-form-wrapper').show();
 		$('#addrform .quxiao').show();
 	});
 	$('#myAddress').on('click', 'li[id]', function(){
@@ -111,9 +132,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$('#addrform').on('click', '.quxiao', function(){
-		$('#addrform')[0].reset();
-		$('#addrform').hide();
+	$('.address-list').on('click', '.cancel-edit', function(){
+		$('#address-form')[0].reset();
+		$('.address-form-wrapper').slideUp();
 	});
 	
 	$('.go_pay').click(function(){
@@ -147,7 +168,7 @@ function onSelectAddress(address){
 function buildAddressHtml(address){
 	var html = [];
 	html.push('<input type="radio" name="memberAddressId" value="' + address.id + '" checked="checked"/>');
-	html.push('<span class="member-address">' + address.firstName + ' ' + item.lastName + ' ' + item.country + ' ' + item.city + '</span>');
+	html.push('<span class="member-address">' + address.firstName + ' ' + address.lastName + ' ' + address.country + ' ' + address.city + '</span>');
 	html.push('<a href="javascript:;" class="edit-address">Edit</a>');
 	return html.join('');
 }

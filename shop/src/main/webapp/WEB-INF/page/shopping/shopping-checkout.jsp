@@ -10,10 +10,10 @@
 		<c:if test="${empty memberAddressList}">
 		<li class="list-group-item address-item">
 			<input type="radio" name="memberAddressId" value="" checked="checked"/>
-			<span class="member-address"></span>
+			<span class="member-address">&nbsp;</span>
 			<a href="javascript:;" class="edit-address">Edit</a>
 		</li>
-		<li class="list-group-item">
+		<li class="list-group-item address-form-wrapper">
 			<jsp:include page="address-form.jsp"/>
 		</li>
 		</c:if>
