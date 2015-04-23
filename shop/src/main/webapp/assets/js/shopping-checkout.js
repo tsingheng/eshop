@@ -83,29 +83,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
-	$('#myAddress').on('click', '.modify', function(e){
-		e.stopPropagation();
-		var $address = $(this).closest('li');
-		var address = buildAddressObject($address);
-		$('#addrform input[type="text"]').each(function(){
-			$(this).val(address[$(this).attr('name')]);
-		});
-		$('#addrform').show();
-		$('#id').val(address.id);
-		$province.find('option[value="' + address.province + '"]').attr('selected', 'selected');
-		$province.trigger('change');
-		$city.find('option[value="' + address.city + '"]').attr('selected', 'selected');
-		$city.trigger('change');
-		$district.find('option[value="' + address.district + '"]').attr('selected', 'selected');
-		$district.trigger('change');
-		if(address.isDefault){
-			$('#J_SetDefault').attr('checked', 'checked');
-		}else{
-			$('#J_SetDefault').removeAttr('checked');
-		}
-		$('#addrform .quxiao').show();
-	});
+
 	$('#myAddress').on('click', '.add', function(e){
 		e.stopPropagation();
 		$('#addrform')[0].reset();
@@ -157,6 +135,10 @@ $(document).ready(function(){
 function doUpdateAddress(address){
 	var $address = $('#address-form').closest('.list-group-item').prev();
 	$address.html(buildAddressHtml(address));
+	if($('.add-address').length == 0){
+		$('.address-list').append('<li class="list-group-item add-address">New Address</li>');
+	}
+	$('.address-form-wrapper').hide();
 	onSelectAddress(address);
 }
 function onSelectAddress(address){
@@ -164,41 +146,8 @@ function onSelectAddress(address){
 }
 function buildAddressHtml(address){
 	var html = [];
-	html.push('<li data-id="' + address.id + '" id="address-' + address.id + '" class="cur">');
-	html.push('	<div class="fl">');
-	html.push('		<div class="slice-border">');
-	html.push('			<div class="area-sumary">');
-	html.push('				<span class="area-name name">' + address.contact + '</span>收');
-	html.push('			</div>');
-	html.push('		</div>');
-	html.push('	<div class="mb5">');
-	html.push('		<span class="area-address street">' + address.street + '</span> ');
-	html.push('		<span class="area-postcode">' + address.postcode + '</span>');
-	html.push('	</div>');
-	html.push('	<div class="province" data-province="' + address.province + '" data-city="' + address.city + '" data-district="' + address.district + '">' + address.province + ' ' + address.city + ' ' + address.district + '</div>');
-	html.push('		<div>');
-	html.push('			<span class="area-mobile phone">' + address.mobile + '</span>');
-	html.push('			<a href="javascript:void(0);" class="addr-edit modify">修改</a>');
-	html.push('		</div>');
-	html.push('	</div>');
-	html.push('	<div class="slt-icon"></div>');
-	if(address.isDefault){
-		html.push('	<div class="default-add">默认地址</div>');
-	}
-	html.push('	<div class="slt-icon"></div>');
-	html.push('</li>');
+	html.push('<input type="radio" name="memberAddressId" value="' + address.id + '" checked="checked"/>');
+	html.push('<span class="member-address">' + address.firstName + ' ' + item.lastName + ' ' + item.country + ' ' + item.city + '</span>');
+	html.push('<a href="javascript:;" class="edit-address">Edit</a>');
 	return html.join('');
-}
-function buildAddressObject($address){
-	var address = {};
-	address['contact'] = $.trim($address.find('.name').html());
-	address['street'] = $.trim($address.find('.street').html());
-	address['postcode'] = $.trim($address.find('.area-postcode').html());
-	address['province'] = $.trim($address.find('.province').data('province'));
-	address['city'] = $.trim($address.find('.province').data('city'));
-	address['district'] = $.trim($address.find('.province').data('district'));
-	address['mobile'] = $.trim($address.find('.area-mobile').html());
-	address['isDefault'] = $address.find('.default-add').length > 0;
-	address['id'] = $address.data('id');
-	return address;
 }

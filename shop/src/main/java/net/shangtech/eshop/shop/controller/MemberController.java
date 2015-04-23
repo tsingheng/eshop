@@ -14,6 +14,7 @@ import net.shangtech.eshop.product.entity.Inventory;
 import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.service.InventoryService;
 import net.shangtech.eshop.product.service.SkuService;
+import net.shangtech.eshop.sales.entity.Area;
 import net.shangtech.eshop.sales.entity.ShoppingCartItem;
 import net.shangtech.eshop.sales.service.AreaService;
 import net.shangtech.eshop.sales.service.ShoppingCartItemService;
@@ -177,6 +178,13 @@ public class MemberController {
 	@RequestMapping(value = "/save-address", method = RequestMethod.POST)
 	public AjaxResponse saveMemberAddress(@RequestValid MemberAddressCommand addressCommand, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		
+		Area area = areaService.find(addressCommand.getCountryId());
+		if(area == null){
+			ajaxResponse.addError("countryId", "invalid country");
+			return ajaxResponse;
+		}
+		addressCommand.setCountry(area.getName());
 		
 		MemberAddress memberAddress = new MemberAddress();
 		BeanUtils.copyProperties(addressCommand, memberAddress);
