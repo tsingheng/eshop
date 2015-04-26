@@ -75,7 +75,7 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 	private Integer imageNum;
 	
 	@Column(name = "weight")
-	private String weight;
+	private Double weight;
 
 	public String getName() {
 		return name;
@@ -221,11 +221,11 @@ public class Sku extends BaseEntity<Long> implements Comparable<Sku> {
 		this.imageNum = imageNum;
 	}
 
-	public String getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(String weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 

@@ -11,4 +11,5 @@
 	<definition name="shop.shopping.checkout" extends="shop.checkout">
 		<put-attribute name="content" value="/WEB-INF/page/shopping/shopping-checkout.jsp"/>
 	</definition>
+	<definition name="shop.shopping.address" template="/WEB-INF/page/shopping/address-form.jsp"/>
 </tiles-definitions>

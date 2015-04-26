@@ -23,7 +23,7 @@ public class MemberAddressCommand implements Serializable {
     private String lastName;
     
     @NotNull
-    private Long countryId;
+    private Long areaId;
     
     private String state;
     
@@ -149,12 +149,12 @@ public class MemberAddressCommand implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Long getCountryId() {
-		return countryId;
+	public Long getAreaId() {
+		return areaId;
 	}
 
-	public void setCountryId(Long countryId) {
-		this.countryId = countryId;
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 
 	public String getState() {

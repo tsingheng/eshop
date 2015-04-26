@@ -73,6 +73,9 @@ public class MemberAddress extends BaseEntity<Long> {
 	
 	@Column(name = "area_id")
 	private Long areaId;
+	
+	@Column(name = "company")
+	private String company;
 
 	public Long getMemberId() {
 		return memberId;
@@ -216,6 +219,14 @@ public class MemberAddress extends BaseEntity<Long> {
 
 	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	
 }

@@ -25,6 +25,8 @@ public class ShoppingCartSkuCommand implements Serializable {
     private String image;
     
     private String status;
+    
+    private Double weight;
 
 	public String getCode() {
 		return code;
@@ -104,6 +106,14 @@ public class ShoppingCartSkuCommand implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
 	}
     
 }

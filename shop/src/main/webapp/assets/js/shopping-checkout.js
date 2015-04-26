@@ -1,4 +1,88 @@
 $(document).ready(function(){
+	initAddressFormValidate();
+
+	$('.address-list').on('click', '.edit-address', function(){
+		var $this = $(this);
+		if($this.closest('.address-item').next().hasClass('address-form-wrapper')){
+			return;
+		}
+		$.ajax({
+			url: ctx + '/load-address-for-shopping',
+			data: {
+				memberAddressId: $this.siblings('[name="memberAddressId"]').val()
+			},
+			success: function(form){
+				$('<li class="list-group-item address-form-wrapper"></li>').append(form).insertAfter($this.closest('.address-item')).slideDown();
+				initAddressFormValidate();
+			}
+		});
+	});
+	$('.address-list').on('click', '.add', function(e){
+		e.stopPropagation();
+		$('.address-form-wrapper').show();
+		$('#addrform .quxiao').show();
+	});
+	$('#myAddress').on('click', 'li[id]', function(){
+		var $this = $(this);
+		if($this.hasClass('cur')){
+			return;
+		}
+		var address = buildAddressObject($this);
+		$.ajax({
+			url: ctx + '/select-address',
+			dataType: 'json',
+			data: {
+				addressId: address.id
+			},
+			success: function(response){
+				if(response.success){
+					$('#myAddress li.cur').removeClass('cur');
+					$this.addClass('cur');
+					onSelectAddress(address);
+				}
+			}
+		});
+	});
+	$('.address-list').on('click', '.cancel-edit', function(){
+		$('.address-form-wrapper').slideUp(function(){
+			$('.address-form-wrapper').remove();
+		});
+	});
+	
+	$('.go_pay').click(function(){
+		var $this = $(this);
+		if($this.hasClass('no')){
+			return;
+		}
+		$this.addClass('no');
+		$('#create-order').ajaxSubmit({
+			success: function(response){
+				if(!response.success){
+					$this.removeClass('no');
+				}
+			}
+		});
+	});
+});
+
+function doUpdateAddress(address){
+	var $address = $('#address-form').closest('.list-group-item').prev();
+	$address.html(buildAddressHtml(address));
+	$('.address-form-wrapper').remove();
+	onSelectAddress(address);
+}
+function onSelectAddress(address){
+	$('#selected-address').html(address.province + ' ' + address.city + ' ' + address.district + ' ' + address.street + '<br/>' + address.contact + ' ' + address.mobile);
+}
+function buildAddressHtml(address){
+	var html = [];
+	html.push('<input type="radio" name="memberAddressId" value="' + address.id + '" checked="checked"/>');
+	html.push('<span class="member-address">' + address.firstName + ' ' + address.lastName + ' ' + address.country + ' ' + address.city + '</span>');
+	html.push('<a href="javascript:;" class="edit-address">Edit</a>');
+	return html.join('');
+}
+
+function initAddressFormValidate(){
 	$('#address-form').validate({
 		rules: {
 			firstName: {
@@ -20,7 +104,7 @@ $(document).ready(function(){
 			postcode: {
 				required: true
 			},
-			countryId: {
+			areaId: {
 				required: true
 			},
 			company: {
@@ -48,7 +132,7 @@ $(document).ready(function(){
 			companyId: {
 				required: ''
 			},
-			country: {
+			areaId: {
 				required: ''
 			}
 		},
@@ -83,92 +167,4 @@ $(document).ready(function(){
 			});
 		}
 	});
-
-	$('.address-list').on('click', '.edit-address', function(){
-		$('#address-form')[0].reset();
-		var $this = $(this);
-		$.ajax({
-			url: ctx + '/load-address',
-			data: {
-				memberAddressId: $this.siblings('[name="memberAddressId"]').val()
-			},
-			success: function(address){
-				for(var name in address){
-					var $ele = $('#address-form [name="' + name + '"]');
-					if($ele.is('select')){
-						$ele.children('option[value="' + address[name] + '"]').attr('selected', 'selected');
-					}else{
-						$ele.val(address[name]);
-					}
-				}
-			}
-		});
-		$('.address-form-wrapper').insertAfter($(this).closest('.address-item')).slideDown();
-	});
-	$('.address-list').on('click', '.add', function(e){
-		e.stopPropagation();
-		$('#address-form')[0].reset();
-		$('.address-form-wrapper').show();
-		$('#addrform .quxiao').show();
-	});
-	$('#myAddress').on('click', 'li[id]', function(){
-		var $this = $(this);
-		if($this.hasClass('cur')){
-			return;
-		}
-		var address = buildAddressObject($this);
-		$.ajax({
-			url: ctx + '/select-address',
-			dataType: 'json',
-			data: {
-				addressId: address.id
-			},
-			success: function(response){
-				if(response.success){
-					$('#myAddress li.cur').removeClass('cur');
-					$this.addClass('cur');
-					onSelectAddress(address);
-				}
-			}
-		});
-	});
-	$('.address-list').on('click', '.cancel-edit', function(){
-		$('#address-form')[0].reset();
-		$('.address-form-wrapper').slideUp();
-	});
-	
-	$('.go_pay').click(function(){
-		var $this = $(this);
-		if($this.hasClass('no')){
-			return;
-		}
-		$this.addClass('no');
-		$('#create-order').ajaxSubmit({
-			success: function(response){
-				if(!response.success){
-					$this.removeClass('no');
-				}
-			}
-		});
-	});
-});
-
-function doUpdateAddress(address){
-	var $address = $('#address-form').closest('.list-group-item').prev();
-	$address.html(buildAddressHtml(address));
-	if($('.add-address').length == 0){
-		$('.address-list').append('<li class="list-group-item add-address">New Address</li>');
-	}
-	$('.address-form-wrapper').hide();
-	onSelectAddress(address);
-}
-function onSelectAddress(address){
-	$('#selected-address').html(address.province + ' ' + address.city + ' ' + address.district + ' ' + address.street + '<br/>' + address.contact + ' ' + address.mobile);
-}
-function buildAddressHtml(address){
-	var html = [];
-	html.push('<input type="radio" name="memberAddressId" value="' + address.id + '" checked="checked"/>');
-	html.push('<span class="member-address">' + address.firstName + ' ' + address.lastName + ' ' + address.country + ' ' + address.city + '</span>');
-	html.push('<a href="javascript:;" class="edit-address">Edit</a>');
-	return html.join('');
 }

@@ -27,6 +27,8 @@ public class ShoppingCartCommand implements Serializable {
 	
 	private BigDecimal actualFreight;
 	
+	private Double weight;
+	
 	private Long memberAddressId;
 
 	public List<ShoppingCartItemCommand> getShoppingCartItemList() {
@@ -181,15 +183,27 @@ public class ShoppingCartCommand implements Serializable {
 		int quantity = 0;
 		Double originalAmount = 0.0;
 		Double actualAmount = 0.0;
+		Double weight = 0.0;
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
 			double amount = item.getPrice()*item.getQuantity();
 			item.setAmount(amount);
 			originalAmount = originalAmount + amount;
 			actualAmount = actualAmount + amount;
+			weight = weight + item.getSku().getWeight()*item.getQuantity();
 		}
+		this.weight = weight;
 		this.quantity = quantity;
 		this.originalAmount = new BigDecimal(originalAmount);
 		this.actualAmount = new BigDecimal(actualAmount);
 	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+	
 }

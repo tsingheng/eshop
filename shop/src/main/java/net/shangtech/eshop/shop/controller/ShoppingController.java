@@ -10,6 +10,7 @@ import net.shangtech.eshop.product.entity.Sku;
 import net.shangtech.eshop.product.enums.SkuStatus;
 import net.shangtech.eshop.product.service.SkuService;
 import net.shangtech.eshop.sales.entity.Area;
+import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.eshop.sales.service.AreaService;
 import net.shangtech.eshop.sales.service.FreightService;
 import net.shangtech.eshop.sales.service.OrderService;
@@ -19,6 +20,7 @@ import net.shangtech.eshop.sales.service.bo.OrderBo;
 import net.shangtech.eshop.sales.service.bo.OrderItemBo;
 import net.shangtech.eshop.shop.controller.annotation.Shopwired;
 import net.shangtech.eshop.shop.controller.command.CreateOrderCommand;
+import net.shangtech.eshop.shop.controller.command.FreightCommand;
 import net.shangtech.eshop.shop.controller.command.LoginMember;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartCommand;
 import net.shangtech.eshop.shop.controller.command.ShoppingCartItemCommand;
@@ -196,7 +198,15 @@ public class ShoppingController {
 		if(shoppingCart.getMemberAddressId() != null){
 			MemberAddress memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
 			model.addAttribute("memberAddress", memberAddress);
-			//List<Freight> freightList = freightService.findByAreaId(memberAddress.getAreaId());
+			List<Freight> templatetList = freightService.findByAreaId(memberAddress.getAreaId());
+			List<FreightCommand> freightList = new ArrayList<FreightCommand>(templatetList.size());
+			for(Freight template : templatetList){
+				FreightCommand cmd = new FreightCommand();
+				cmd.setShipping(shippingService.find(template.getShippingId()));
+				cmd.setFreight(FreightCommand.calc(template, shoppingCart.getWeight()));
+				freightList.add(cmd);
+			}
+			model.addAttribute("freightList", freightList);
 		}
 		shoppingCart.refreshPrice();
 		
@@ -227,6 +237,22 @@ public class ShoppingController {
 		
 		ajaxResponse.setSuccess(true);
 		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@RequestMapping(value = "/load-address-for-shopping")
+	public String loadMemberAddress(ShoppingCartCommand shoppingCart, LoginMember loginMember, @RequestParam(value = "memberAddressId", required= false) Long memberAddressId, Model model){
+		MemberAddress memberAddress = null;
+		if(loginMember == null && shoppingCart.getMemberAddressId() != null){
+			memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
+		}else if(memberAddressId != null){
+			memberAddress = memberAddressService.find(memberAddressId);
+		}
+		model.addAttribute("address", memberAddress);
+		
+		List<Area> areaList = areaService.findAll();
+		model.addAttribute("areaList", areaList);
+		return "shop.shopping.address";
 	}
 	
 	@Shopwired

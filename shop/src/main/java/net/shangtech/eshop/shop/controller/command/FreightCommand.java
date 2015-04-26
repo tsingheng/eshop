@@ -2,6 +2,7 @@ package net.shangtech.eshop.shop.controller.command;
 
 import java.io.Serializable;
 
+import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.eshop.sales.entity.Shipping;
 
 public class FreightCommand implements Serializable {
@@ -26,6 +27,18 @@ public class FreightCommand implements Serializable {
 
 	public void setFreight(Double freight) {
 		this.freight = freight;
+	}
+	
+	/**
+	 * 计算运费
+	 */
+	public static double calc(Freight template, Double weight){
+		Double freight = template.getFirstPrice();
+		if(weight > template.getFirstWeight()){
+			double additionalUnits = Math.ceil((weight - template.getFirstWeight())/template.getAdditionalUnit());
+			freight = freight + (template.getAdditionalPrice()*additionalUnits);
+		}
+		return freight;
 	}
 	
 }
