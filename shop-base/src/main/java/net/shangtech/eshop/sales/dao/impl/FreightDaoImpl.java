@@ -33,4 +33,12 @@ public class FreightDaoImpl extends BaseDao<Freight> implements FreightDao {
 	    return findByProperty("areaId", areaId);
     }
 
+	@Override
+    public Freight findByAreaIdAndShippingId(Long areaId, Long shippingId) {
+		MapHolder<String> holder = new MapHolder<String>();
+		holder.put("areaId", areaId);
+		holder.put("shippingId", shippingId);
+	    return findOneByProperties(holder);
+    }
+
 }

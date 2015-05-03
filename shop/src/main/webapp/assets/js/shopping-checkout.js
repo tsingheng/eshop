@@ -73,6 +73,7 @@ function doUpdateAddress(address){
 }
 function onSelectAddress(address){
 	$('#selected-address').html(address.province + ' ' + address.city + ' ' + address.district + ' ' + address.street + '<br/>' + address.contact + ' ' + address.mobile);
+	buildShippingList();
 }
 function buildAddressHtml(address){
 	var html = [];
@@ -165,6 +166,46 @@ function initAddressFormValidate(){
 					doUpdateAddress(response.data);
 				}
 			});
+		}
+	});
+}
+
+/**
+ * 可选物流列表
+ */
+function buildShippingList(){
+	$.ajax({
+		url: ctx + '/load-freight-templates',
+		dataType: 'json',
+		success: function(list){
+			var html = [];
+			if(list.length == 0){
+				html.push('<li class="list-group-item">');
+				html.push('	There are no shipping methods available for your cart or destination. ');
+				html.push('	<a href="javascript:;" class="list-group-item-btn">Contact us</a>');
+				html.push('</li>');
+			}else{
+				html.push('<div class="section-header">');
+				html.push('	<h3>Shipping</h3>');
+				html.push('</div>');
+				html.push('	<ul class="list-group shipping-list">');
+				for(var i in list){
+					var item = list[i];
+					html.push('<li class="list-group-item freight-item selection-item">');
+					html.push('<input type="radio" name="shippingId" id="shipping-' + item.shipping.id + '" value="' + item.shipping.id + '">');
+					html.push('	<label class="selection-label" for="shipping-' + item.shipping.id + '">');
+					html.push('		<span class="shipping-name">' + item.shipping.name + '</span>');
+					html.push('		<span class="shipping-price">' + item.freight + '</span>');
+					html.push('	</label>');
+					html.push('</li>');
+				}
+				html.push('</ul>');
+			}
+			if($('#freight-section').length == 0){
+				$('<div class="checkout-section" id="freight-section">').html(html.join('')).insertAfter($('#address-section'));
+			}else{
+				$('#freight-section').html(html.join(''));
+			}
 		}
 	});
 }

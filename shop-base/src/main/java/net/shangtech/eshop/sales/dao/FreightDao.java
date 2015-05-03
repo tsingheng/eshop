@@ -10,4 +10,6 @@ public interface FreightDao extends IBaseDao<Freight> {
 	Freight getFreight(Long areaId, Long shippingId);
 	List<FreightTemplate> findByShippingId(Long shippingId);
 	List<Freight> findByAreaId(Long areaId);
+	
+	Freight findByAreaIdAndShippingId(Long areaId, Long shippingId);
 }

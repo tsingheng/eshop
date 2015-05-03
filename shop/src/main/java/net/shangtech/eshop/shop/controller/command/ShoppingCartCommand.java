@@ -5,8 +5,12 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
+import net.shangtech.eshop.account.entity.MemberAddress;
+import net.shangtech.eshop.account.service.MemberAddressService;
 import net.shangtech.eshop.product.entity.SkuPrice;
 import net.shangtech.eshop.product.service.SkuPriceService;
+import net.shangtech.eshop.sales.entity.Freight;
+import net.shangtech.eshop.sales.service.FreightService;
 import net.shangtech.framework.util.SpringUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +18,10 @@ import org.apache.commons.lang3.StringUtils;
 public class ShoppingCartCommand implements Serializable {
 
 	private static final long serialVersionUID = -3836762802228075322L;
+	
+	private MemberAddressService memberAddressService;
+	
+	private FreightService freightService;
 
 	private List<ShoppingCartItemCommand> shoppingCartItemList;
 	
@@ -30,6 +38,10 @@ public class ShoppingCartCommand implements Serializable {
 	private Double weight;
 	
 	private Long memberAddressId;
+	
+	private Long shippingId;
+	
+	private BigDecimal subtotal;
 
 	public List<ShoppingCartItemCommand> getShoppingCartItemList() {
 		return shoppingCartItemList;
@@ -183,17 +195,24 @@ public class ShoppingCartCommand implements Serializable {
 		int quantity = 0;
 		Double originalAmount = 0.0;
 		Double actualAmount = 0.0;
+		Double subtotal = 0.0;
 		Double weight = 0.0;
 		for(ShoppingCartItemCommand item : shoppingCartItemList){
 			quantity += item.getQuantity();
 			double amount = item.getPrice()*item.getQuantity();
 			item.setAmount(amount);
-			originalAmount = originalAmount + amount;
-			actualAmount = actualAmount + amount;
+			subtotal = subtotal + amount;
 			weight = weight + item.getSku().getWeight()*item.getQuantity();
 		}
 		this.weight = weight;
 		this.quantity = quantity;
+		if(originalFreight != null){
+			originalAmount += subtotal.doubleValue();
+		}
+		if(actualFreight != null){
+			actualAmount += subtotal.doubleValue();
+		}
+		this.subtotal = new BigDecimal(subtotal);
 		this.originalAmount = new BigDecimal(originalAmount);
 		this.actualAmount = new BigDecimal(actualAmount);
 	}
@@ -204,6 +223,38 @@ public class ShoppingCartCommand implements Serializable {
 
 	public void setWeight(Double weight) {
 		this.weight = weight;
+	}
+
+	public Long getShippingId() {
+		return shippingId;
+	}
+
+	public void setShippingId(Long shippingId) {
+		if(this.getMemberAddressId() != null){
+			MemberAddress memberAddress = memberAddressService.find(this.getMemberAddressId());
+			Freight freightTemplate = freightService.findByAreaIdAndShippingId(memberAddress.getAreaId(), shippingId);
+			if(freightTemplate != null){
+				this.shippingId = shippingId;
+				this.originalFreight = new BigDecimal(FreightCommand.calc(freightTemplate, weight));
+				this.actualFreight = new BigDecimal(originalFreight.doubleValue());
+			}
+		}
+	}
+
+	public void setMemberAddressService(MemberAddressService memberAddressService) {
+		this.memberAddressService = memberAddressService;
+	}
+
+	public void setFreightService(FreightService freightService) {
+		this.freightService = freightService;
+	}
+
+	public BigDecimal getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(BigDecimal subtotal) {
+		this.subtotal = subtotal;
 	}
 	
 }

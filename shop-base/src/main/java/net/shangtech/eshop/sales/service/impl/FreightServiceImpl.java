@@ -46,5 +46,10 @@ public class FreightServiceImpl extends BaseService<Freight> implements FreightS
 			dao.update(old);
 		}
 	}
+
+	@Override
+    public Freight findByAreaIdAndShippingId(Long areaId, Long shippingId) {
+	    return dao.findByAreaIdAndShippingId(areaId, shippingId);
+    }
 	
 }

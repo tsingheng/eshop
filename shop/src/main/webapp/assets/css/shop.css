@@ -437,3 +437,58 @@
 .address-form-wrapper{
 	display:none;
 }
+.list-group-item .list-group-item-btn{
+	display: block;
+	width: 99px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	padding: 10px 0px;
+	text-align: center;
+	text-decoration: none;
+	border-left: 1px solid #ddd;	
+}
+.list-group-item .list-group-item-btn:hover{
+	background:#f5f5f5;
+}
+.payment-method.paypal {
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/offsite-gateway-logos/paypal-5c0a2e4a6f21b4f421344dbc58a9f726.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 70px;
+	display:block;
+	height: 22px;
+}
+.payment-methods{
+	list-style-type:none;
+	position:absolute;
+	right: 20px;
+	top: 50%;
+	margin-top: -12px;
+}
+.payment-methods .payment-method{
+	display:inline-block;
+	background-releat:no-repeat;
+	background-position:center;
+	width:38px;
+	height:24px;
+	backface-visibility:hidden;
+	overflow:hidden;
+	text-indent:100%;
+}
+.payment-method.visa{
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-visa.svg-0369631cb358d3aa1d4373c24796cc4d.png);
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-visa-0369631cb358d3aa1d4373c24796cc4d.svg),none;
+}
+.payment-method.master{
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-master.svg-e863c8931d1917933e0ee8ce4d2da5f0.png);
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-master-e863c8931d1917933e0ee8ce4d2da5f0.svg),none;
+}
+.payment-method.american-express{
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-american-express.svg-3a8c6d415e5e18d7f3ce34c00b8585f7.png);
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-american-express-3a8c6d415e5e18d7f3ce34c00b8585f7.svg),none;
+}
+.payment-method.discover{
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-discover.svg-ed2adc73761b2ae3a89518472c1a2420.png);
+	background-image: url(https://cdn.shopify.com/s/assets/checkout/icons/payment-icon-discover-ed2adc73761b2ae3a89518472c1a2420.svg),none;
+}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<div class="checkout-section">
+<div class="checkout-section" id="address-section">
 	<div class="section-header">
 		<h3>Customer Information</h3>
 	</div>
@@ -34,11 +34,18 @@
 	</ul>
 </div>
 
-<div class="checkout-section">
+<c:if test="${not empty memberAddressList}">
+<div class="checkout-section" id="freight-section">
 	<div class="section-header">
 		<h3>Shipping</h3>
 	</div>
 	<ul class="list-group shipping-list">
+		<c:if test="${empty freightList}">
+		<li class="list-group-item">
+			There are no shipping methods available for your cart or destination. 
+			<a href="javascript:;" class="list-group-item-btn">Contact us</a>
+		</li>
+		</c:if>
 		<c:forEach items="${freightList}" var="item">
 		<li class="list-group-item freight-item selection-item">
 			<input type="radio" name="shippingId" id="shipping-${item.shipping.id}" value="${item.shipping.id}">
@@ -50,17 +57,23 @@
 		</c:forEach>
 	</ul>
 </div>
+</c:if>
 
 <div class="checkout-section">
 	<div class="section-header">
 		<h3>Payment</h3>
 	</div>
 	<ul class="list-group payment-list">
-		<c:forEach items="${paymentList}" var="item">
-		<li class="list-group-item payment-item section-item">
-			<input type="radio" name="payment" id="payment-${item.id}">
+		<li class="list-group-item payment-item selection-item">
+			<input type="radio" name="payment" id="payment-1">
+			<label class="selection-label" for="payment-1"><i class="payment-method paypal"></i></label>
+			<ul class="payment-methods">
+				<li class="payment-method visa">Visa</li>
+				<li class="payment-method master">MasterCard</li>
+				<li class="payment-method american-express">American Express</li>
+				<li class="payment-method discover">Discover</li>
+			</ul>
 		</li>
-		</c:forEach>
 	</ul>
 </div>
 <script type="text/javascript" src="${ctx}/assets/jquery-validation-1.13.1/jquery.validate.js"></script>

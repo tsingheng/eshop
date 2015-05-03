@@ -66,6 +66,13 @@ public class MemberAddressServiceImpl extends BaseService<MemberAddress> impleme
 		old.setPostcode(address.getPostcode());
 		old.setProvince(address.getProvince());
 		old.setStreet(address.getStreet());
+		old.setAddress(address.getAddress());
+		old.setAreaId(address.getAreaId());
+		old.setCompany(address.getCompany());
+		old.setCountry(address.getCountry());
+		old.setFirstName(address.getFirstName());
+		old.setLastName(address.getLastName());
+		old.setState(address.getState());
 		dao.update(old);
 	}
 

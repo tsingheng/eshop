@@ -222,6 +222,24 @@ public class ShoppingController {
 	
 	@Shopwired
 	@ResponseBody
+	@RequestMapping("/load-freight-templates")
+	public List<FreightCommand> loadFreightTempateList(ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		List<FreightCommand> freightList = new ArrayList<FreightCommand>();
+		if(shoppingCart.getMemberAddressId() != null){
+			MemberAddress memberAddress = memberAddressService.find(shoppingCart.getMemberAddressId());
+			List<Freight> templatetList = freightService.findByAreaId(memberAddress.getAreaId());
+			for(Freight template : templatetList){
+				FreightCommand cmd = new FreightCommand();
+				cmd.setShipping(shippingService.find(template.getShippingId()));
+				cmd.setFreight(FreightCommand.calc(template, shoppingCart.getWeight()));
+				freightList.add(cmd);
+			}
+		}
+		return freightList;
+	}
+	
+	@Shopwired
+	@ResponseBody
 	@RequestMapping("/select-address")
 	public AjaxResponse selectAddress(@RequestParam Long addressId, ShoppingCartCommand shoppingCart, LoginMember loginMember){
 		AjaxResponse ajaxResponse = AjaxResponse.instance();
@@ -233,9 +251,21 @@ public class ShoppingController {
 			return ajaxResponse;
 		}
 		shoppingCart.setMemberAddressId(addressId);
-		//计算运费
+		shoppingCart.setOriginalFreight(null);
+		shoppingCart.setActualFreight(null);
 		
 		ajaxResponse.setSuccess(true);
+		return ajaxResponse;
+	}
+	
+	@Shopwired
+	@ResponseBody
+	@RequestMapping("/select-shopping")
+	public AjaxResponse selectShipping(@RequestParam Long shippingId, ShoppingCartCommand shoppingCart, LoginMember loginMember){
+		AjaxResponse ajaxResponse = AjaxResponse.instance();
+		shoppingCart.setShippingId(shippingId);
+		ajaxResponse.setSuccess(true);
+		ajaxResponse.setData(shoppingCart);
 		return ajaxResponse;
 	}
 	

@@ -13,4 +13,6 @@ public interface FreightService extends IBaseService<Freight> {
 	List<FreightTemplate> findByShippingId(Long shippingId);
 	
 	List<Freight> findByAreaId(Long areaId);
+	
+	Freight findByAreaIdAndShippingId(Long areaId, Long shippingId);
 }

@@ -51,7 +51,7 @@
 							</div>
 							<ul class="list-group">
 								<li class="list-group-item">
-									<table class="total-table">
+									<table class="total-table" width="100%">
 										<colgroup>
 											<col/>
 											<col width="50"/>
@@ -59,17 +59,17 @@
 										<tbody>
 											<tr>
 												<td>Subtotal</td>
-												<td></td>
+												<td>${shoppingCart.subtotal}</td>
 											</tr>
 											<tr>
 												<td>Shipping</td>
-												<td></td>
+												<td>${(empty shoppingCart.actualFreight) ? '-' : shoppingCart.actualFreight}</td>
 											</tr>
 										</tbody>
 										<tfoot>
 											<tr>
 												<td>Total</td>
-												<td></td>
+												<td>${shoppingCart.actualAmount}</td>
 											</tr>
 										</tfoot>
 									</table>
