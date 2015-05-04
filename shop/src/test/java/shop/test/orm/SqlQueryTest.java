@@ -30,4 +30,9 @@ public class SqlQueryTest extends BaseSpringTest {
 		}
 	}
 	
+	@Test
+	public void testEntityTransformer(){
+		categoryDao.findAll();
+	}
+	
 }
