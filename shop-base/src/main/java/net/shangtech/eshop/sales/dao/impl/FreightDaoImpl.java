@@ -7,6 +7,7 @@ import net.shangtech.eshop.sales.dao.FreightDao;
 import net.shangtech.eshop.sales.entity.Freight;
 import net.shangtech.framework.orm.dao.hibernate.BaseDao;
 import net.shangtech.framework.orm.dao.support.MapHolder;
+import net.shangtech.framework.orm.dao.support.Pagination;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,8 @@ public class FreightDaoImpl extends BaseDao<Freight> implements FreightDao {
     public List<FreightTemplate> findByShippingId(Long shippingId) {
 		MapHolder<String> holder = new MapHolder<String>();
 		holder.put("shippingId", shippingId);
+		Pagination<FreightTemplate> pagination = new Pagination<FreightTemplate>();
+		super.findBySql("FreightTemplate.findByShippingId", holder, pagination, FreightTemplate.class);
 	    return super.findBySql("FreightTemplate.findByShippingId", holder, FreightTemplate.class);
     }
 

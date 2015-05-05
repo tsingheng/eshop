@@ -24,9 +24,13 @@ public class SqlQueryTest extends BaseSpringTest {
 	
 	@Test
 	public void testFreightTemplate(){
-		List<FreightTemplate> templates = freightService.findByShippingId(1L);
-		for(FreightTemplate template : templates){
-			logger.info(JSONObject.toJSONString(template));
+		try{
+			List<FreightTemplate> templates = freightService.findByShippingId(1L);
+			for(FreightTemplate template : templates){
+				logger.info(JSONObject.toJSONString(template));
+			}
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
 		}
 	}
 	
